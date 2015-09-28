@@ -12,20 +12,20 @@ public:
 	Trial(string);
 	~Trial();
 	string GetSubject();
-	void GainScore(int);
 };
 
 class Test : public Trial
 {
 private:
 	int score;
+	int maxScore;
 public:
 	Test();
 	Test(Test&);
-	Test(string);
+	Test(string, int);
 	~Test();
-	int GetScore();
-	void GainScore();
+	double GetRightness();
+	void GainScore(int);
 };
 
 class Exam : public Trial
@@ -39,7 +39,7 @@ public:
 	Exam(string);
 	~Exam();
 	int GetMark();
-	void SetMark();
+	void SetMark(int);
 	void Passed();
 	bool IsPassed();
 };
@@ -47,16 +47,14 @@ public:
 class FinalExam : public Exam
 {
 private:
-	Exam exams[10];
-	int exams_count;
-	bool isPassed;
+	bool isAccessed;
+	int finalMark;
 public:
 	FinalExam();
 	FinalExam(FinalExam&);
 	FinalExam(string);
 	~FinalExam();
-	void SetExams(Exam exam[], int exams_count);
-	Exam GetExam(int position);
-	int GetExamsCount();
-	void IsPassed();
+	void IsAccessed();
+	void GainAccessed();
+	void SetFinalMark(int);
 };
