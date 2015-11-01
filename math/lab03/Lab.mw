@@ -120,13 +120,13 @@ randomizer := proc (min, max) :: integer:
 end proc:
 
 checkIndex := proc (i) :: boolean:
-	return (i &gt; 0) and (i &lt;= length):
+	return (i &gt; 0) and (i &lt;= LENGTH):
 end proc:
 
 LinalSearch := proc (A, value) :: integer:
 local i:
 	i := 1;
-	for i from 1 to length do
+	for i from 1 to LENGTH do
 		if (A[i] = value) then
 			return i:
 		end if:
@@ -152,11 +152,15 @@ local left, right, i:
 left := 1:
 right := nops(A):
 i := 1:
-while ((left &lt;= right) and (A[i] &lt;&gt; value))
-	and checkIndex(left) and checkIndex(right) do
-	i := ((left + right) / 2):
+while (left &lt;= right) and (A[i] &lt;&gt; value) do
+	i := iquo((left + right), 2):
+	if not(checkIndex(i)) then
+		return 0:
+	end if:
 	if (value &lt; A[i]) then
-		left := i + 1;
+		right := i - 1:
+	else
+		left := i + 1:
 	end if:
 end do:
 if (value = A[i]) then
@@ -167,7 +171,7 @@ end proc:
 
 BinarySearchRecursion := proc (A, left, right, value) :: integer:
 local i:
-	i := ((left + right) / 2):	
+	i := iquo((left + right), 2):	
 	if (left &gt; right) or (A[i] = value) then
 		return i:
 	end if:
@@ -193,31 +197,34 @@ print (&quot;Binary Search Recursion&quot;, BinarySearchRecursion(B, 1, 50, x));
 
 randomizer(0, 1);</EC-CodeEditor>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20attempting%20to%20assign%20to%20%60length%60%20which%20is%20protected.%20%20Try%20declaring%20%60local%20length%60%3B%20see%20%3Fprotect%20for%20details." hyperlink="true"><Font style="HyperlinkError">Error, attempting to assign to `length` which is protected.  Try declaring `local length`; see ?protect for details.</Font></Hyperlink></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIygqIiNEIiNRIiMhKiIjWyIjJSlGJUYkRiMiI2wiI3IiI1AiIzoiIykpIiMqKSIjdiIjYyIjYiIkKyIiIz8iIioiIzUiIykqIiNwIiMqKiIjJSoiI2siI1ZGM0YnIiNDIiIlIiNTIiMiKiIiJ0Y1RjciIzhGQEY7RjkiI2EiI1pGJyIjRkZCIiNMIiNKIiNtIiNV</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiI08iI0UiI0kiI3UiI0EiIz8iIiYiI0MiI3QiIyYpIiMnKUYsIiNaIiMqKiIjOCIjXSIiKCIjayIjJioiI3AiJCsiRjUiI2EiIyEqIiMqKSIiJCIjR0YvIiNKRjQiIyMqRi4iI1giIygpRjEiIyUqIiMnKiIjOkYzRjBGMSIjZUYnRiRGI0YqIiNcRjJGQ0ZE</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiUiIidGJCIiKiIjNUYmIiM4IiM6IiM/RikiI0MiI0RGKyIjRiIjSiIjTCIjUCIjUUYwIiNTIiNVIiNWRjMiI1oiI1tGNUY1IiNhRjYiI2IiI2MiI2siI2wiI20iI3BGPCIjciIjdiIjJSkiIykpIiMqKSIjISoiIyIqIiMlKkZEIiMoKkZFIiMpKiIjKioiJCsi</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiQiIiYiIihGJSIjOEYmIiM6IiM/IiNBRikiI0NGKiIjRUYrIiNHIiNJIiNKIiNPRi8iI1giI1pGMSIjXEYyIiNdRjNGMyIjYSIjZUY1IiNrRjYiI3BGNyIjdCIjdSIjJilGOiIjJykiIygpIiMqKSIjISoiIyMqIiMlKiIjJipGQSIjJyoiIyoqRkMiJCsi</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNE</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNG</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLkxpbmFsflNlYXJjaH42IiIiIw==</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20LinalSearch)%20final%20value%20in%20for%20loop%20must%20be%20numeric%20or%20character" hyperlink="true"><Font style="HyperlinkError">Error, (in LinalSearch) final value in for loop must be numeric or character</Font></Hyperlink></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRROUxpbmFsflNlYXJjaH5SZWN1cnNpb246fjYiIiIj</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20LinalSearchRecursion)%20cannot%20determine%20if%20this%20expression%20is%20true%20or%20false%3A%20not%20(1%20%3C%3D%20length%20and%2050%20%3C%3D%20length)" hyperlink="true"><Font style="HyperlinkError">Error, (in LinalSearchRecursion) cannot determine if this expression is true or false: not (1 &lt;= length and 50 &lt;= length)</Font></Hyperlink></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNE</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20BinarySearch)%20cannot%20determine%20if%20this%20expression%20is%20true%20or%20false%3A%201%20%3C%3D%20length%20and%2050%20%3C%3D%20length" hyperlink="true"><Font style="HyperlinkError">Error, (in BinarySearch) cannot determine if this expression is true or false: 1 &lt;= length and 50 &lt;= length</Font></Hyperlink></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiM3</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20BinarySearchRecursion)%20invalid%20subscript%20selector" hyperlink="true"><Font style="HyperlinkError">Error, (in BinarySearchRecursion) invalid subscript selector</Font></Hyperlink></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRL0JpbmFyeX5TZWFyY2h+NiIiIzc=</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiIh</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRROEJpbmFyeX5TZWFyY2h+UmVjdXJzaW9uNiIiIzc=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiIi</Equation></Text-field>
 </Output></CodeEditor-ExecGroup></Presentation-Block><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L37" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
