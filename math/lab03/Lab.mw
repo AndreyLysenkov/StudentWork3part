@@ -113,30 +113,36 @@
 <Input>
 <Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
-</Group></Presentation-Block><Presentation-Block><CodeEditor-ExecGroup view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="450" pixel-height="430" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">
+</Group></Presentation-Block><Presentation-Block><CodeEditor-ExecGroup view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="450" pixel-height="430" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">LENGTH := 50:
+
 randomizer := proc (min, max) :: integer:
 	return min + (rand() mod (max - min + 1)):
 end proc:
 
+checkIndex := proc (i) :: boolean:
+	return (i &gt; 0) and (i &lt;= length):
+end proc:
+
 LinalSearch := proc (A, value) :: integer:
-local length, i:
-	length := nops(A);
+local i:
 	i := 1;
 	for i from 1 to length do
 		if (A[i] = value) then
 			return i:
 		end if:
 	end do:
-	print(&quot;X not founded&quot;);
 	return 0:
 end proc:
 
 LinalSearchRecursion := proc (A, i, j, value) :: integer:
+	if not (checkIndex(i) and checkIndex(j)) then
+		return 0:
+	end if:
 	if (i &lt;= j) and (A[i] &lt;&gt; value) then
 		return LinalSearchRecursion(A, i + 1, j, value):
 	end if:
 	if (A[i] &lt;&gt; value) then
-		print(&quot;X not founded&quot;);
+		i := 0:
 	end if:
 	return i:
 end proc:
@@ -146,7 +152,8 @@ local left, right, i:
 left := 1:
 right := nops(A):
 i := 1:
-while ((left &lt;= right) and (A[i] &lt;&gt; value)) do
+while ((left &lt;= right) and (A[i] &lt;&gt; value))
+	and checkIndex(left) and checkIndex(right) do
 	i := ((left + right) / 2):
 	if (value &lt; A[i]) then
 		left := i + 1;
@@ -155,7 +162,6 @@ end do:
 if (value = A[i]) then
 	return i:
 end if:
-print (&quot;X not founded&quot;);
 return 0:
 end proc:
 
@@ -163,10 +169,10 @@ BinarySearchRecursion := proc (A, left, right, value) :: integer:
 local i:
 	i := ((left + right) / 2):	
 	if (left &gt; right) or (A[i] = value) then
-		if (A[i] = value) then
-			print(&quot;X not founded&quot;);
-		end if:
 		return i:
+	end if:
+	if not (checkIndex(left) and checkIndex(right)) then
+		return 0:
 	end if:
 	if (value &lt; A[i]) then
 		return BinarySearchRecursion(A, left, i - 1, value):
@@ -174,32 +180,38 @@ local i:
 	return BinarySearchRecursion(A, i + 1, right, value):
 end proc:
 
-
 A := [seq(randomizer(1, 100),i=1..50)];
-
-LinalSearch(A, 27);
-LinalSearchRecursion(A, 1, 50, 27);
-
 B := sort(A);
 
-BinarySearch(A, 27);
-BinarySearchRecursion(A, 1, 50, 27);
+x := readstat();
+
+print (&quot;Linal Search &quot;, LinalSearch(A, x));
+print (&quot;Linal Search Recursion: &quot;, LinalSearchRecursion(A, 1, 50, x));
+
+print (&quot;Binary Search &quot;, BinarySearch(B, x));
+print (&quot;Binary Search Recursion&quot;, BinarySearchRecursion(B, 1, 50, x));
 
 randomizer(0, 1);</EC-CodeEditor>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIyYpIiN4IiMlKSIjdCIjOyIjTyIjZSIjSSIjIyoiI1YiI1wiI28iI2oiI3kiI0YiI2hGMSIjJioiIz9GMiIjPiIiJyIjZyIjW0Y4IiN6IiNsIiNXIiNyIiNgIiNtRjJGKCIjJCkiI3YiI2YiIyEqIiMoKiIjXSIjNkY7RjhGP0Y8RiYiIykqRkMiI3UiI1QiIio=</Equation></Text-field>
+<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20attempting%20to%20assign%20to%20%60length%60%20which%20is%20protected.%20%20Try%20declaring%20%60local%20length%60%3B%20see%20%3Fprotect%20for%20details." hyperlink="true"><Font style="HyperlinkError">Error, attempting to assign to `length` which is protected.  Try declaring `local length`; see ?protect for details.</Font></Hyperlink></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiM6</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiI08iI0UiI0kiI3UiI0EiIz8iIiYiI0MiI3QiIyYpIiMnKUYsIiNaIiMqKiIjOCIjXSIiKCIjayIjJioiI3AiJCsiRjUiI2EiIyEqIiMqKSIiJCIjR0YvIiNKRjQiIyMqRi4iI1giIygpRjEiIyUqIiMnKiIjOkYzRjBGMSIjZUYnRiRGI0YqIiNcRjJGQ0ZE</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20LinalSearchRecursion)%20invalid%20subscript%20selector" hyperlink="true"><Font style="HyperlinkError">Error, (in LinalSearchRecursion) invalid subscript selector</Font></Hyperlink></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiQiIiYiIihGJSIjOEYmIiM6IiM/IiNBRikiI0NGKiIjRUYrIiNHIiNJIiNKIiNPRi8iI1giI1pGMSIjXEYyIiNdRjNGMyIjYSIjZUY1IiNrRjYiI3BGNyIjdCIjdSIjJilGOiIjJykiIygpIiMqKSIjISoiIyMqIiMlKiIjJipGQSIjJyoiIyoqRkMiJCsi</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiciIioiIzYiIzsiIz4iIz8iI0ZGKSIjSSIjT0YrIiNUIiNWIiNXRi4iI1tGL0YvIiNcIiNdIiNgIiNlIiNmIiNnIiNoRjZGNiIjaiIjbCIjbSIjbyIjckY7IiN0RjwiI3UiI3YiI3giI3kiI3oiIyQpRkIiIyUpIiMmKSIjISoiIyMqIiMmKiIjKCpGSCIjKSo=</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNG</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20BinarySearch)%20invalid%20subscript%20selector" hyperlink="true"><Font style="HyperlinkError">Error, (in BinarySearch) invalid subscript selector</Font></Hyperlink></Text-field>
+<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20LinalSearch)%20final%20value%20in%20for%20loop%20must%20be%20numeric%20or%20character" hyperlink="true"><Font style="HyperlinkError">Error, (in LinalSearch) final value in for loop must be numeric or character</Font></Hyperlink></Text-field>
+</Output>
+<Output>
+<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20LinalSearchRecursion)%20cannot%20determine%20if%20this%20expression%20is%20true%20or%20false%3A%20not%20(1%20%3C%3D%20length%20and%2050%20%3C%3D%20length)" hyperlink="true"><Font style="HyperlinkError">Error, (in LinalSearchRecursion) cannot determine if this expression is true or false: not (1 &lt;= length and 50 &lt;= length)</Font></Hyperlink></Text-field>
+</Output>
+<Output>
+<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20BinarySearch)%20cannot%20determine%20if%20this%20expression%20is%20true%20or%20false%3A%201%20%3C%3D%20length%20and%2050%20%3C%3D%20length" hyperlink="true"><Font style="HyperlinkError">Error, (in BinarySearch) cannot determine if this expression is true or false: 1 &lt;= length and 50 &lt;= length</Font></Hyperlink></Text-field>
 </Output>
 <Output>
 <Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20(in%20BinarySearchRecursion)%20invalid%20subscript%20selector" hyperlink="true"><Font style="HyperlinkError">Error, (in BinarySearchRecursion) invalid subscript selector</Font></Hyperlink></Text-field>
