@@ -197,13 +197,13 @@ print (&quot;Binary Search Recursion&quot;, BinarySearchRecursion(B, 1, 50, x));
 
 randomizer(0, 1);</EC-CodeEditor>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIygqIiNEIiNRIiMhKiIjWyIjJSlGJUYkRiMiI2wiI3IiI1AiIzoiIykpIiMqKSIjdiIjYyIjYiIkKyIiIz8iIioiIzUiIykqIiNwIiMqKiIjJSoiI2siI1ZGM0YnIiNDIiIlIiNTIiMiKiIiJ0Y1RjciIzhGQEY7RjkiI2EiI1pGJyIjRkZCIiNMIiNKIiNtIiNV</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiciI1AiIyYpIiNYIiNlIiNJIiNsIiN2IiN4IiNnIiMjKiIjQyIjJSoiIioiI14iI2ZGJCIiJCIjXSIja0YsIiMoKSIjIykiIzYiIzciIz0iI1EiIiZGKyIjOSIjJykiI3IiI0xGMiIiKCIjXyIjWSIjeUYlRjdGOUY+RjwiI2oiI2IiIyEpRiNGQiIjPEY6</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiUiIidGJCIiKiIjNUYmIiM4IiM6IiM/RikiI0MiI0RGKyIjRiIjSiIjTCIjUCIjUUYwIiNTIiNVIiNWRjMiI1oiI1tGNUY1IiNhRjYiI2IiI2MiI2siI2wiI20iI3BGPCIjciIjdiIjJSkiIykpIiMqKSIjISoiIyIqIiMlKkZEIiMoKkZFIiMpKiIjKioiJCsi</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">N1QiIiQiIiZGJCIiJ0YlIiIoIiIqIiM2IiM3RikiIzkiIzwiIz1GLCIjQyIjSSIjTCIjUEYwIiNRIiNYIiNZIiNdIiNeIiNfRjYiI2IiI2UiI2ZGOSIjZ0Y6IiNqIiNrIiNsIiNyIiN2IiN4RkAiI3kiIyEpIiMjKUZDIiMmKUZEIiMnKUZFIiMoKSIjIyoiIyUq</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNE</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNQ</Equation></Text-field>
 </Output>
 <Output>
 <Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLkxpbmFsflNlYXJjaH42IiIiIw==</Equation></Text-field>
@@ -212,19 +212,13 @@ randomizer(0, 1);</EC-CodeEditor>
 <Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRROUxpbmFsflNlYXJjaH5SZWN1cnNpb246fjYiIiIj</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNE</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRL0JpbmFyeX5TZWFyY2h+NiIiIz0=</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiM3</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRROEJpbmFyeX5TZWFyY2h+UmVjdXJzaW9uNiIiIz0=</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRL0JpbmFyeX5TZWFyY2h+NiIiIzc=</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRROEJpbmFyeX5TZWFyY2h+UmVjdXJzaW9uNiIiIzc=</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiIi</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiIh</Equation></Text-field>
 </Output></CodeEditor-ExecGroup></Presentation-Block><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L37" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
