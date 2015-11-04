@@ -1,0 +1,40 @@
+* {
+	font-family: 'Times New Roman';
+}
+section, article, header, .img {
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	/*background-color: #f0f;*/
+}
+
+.img, .addition {
+	text-align: center;
+}
+
+.addition:last-child
+{
+	text-align: left;
+}
+
+header + p {
+	line-height: 2;
+}
+
+code {
+	display: block;
+}
+
+var {
+	color: #00f;
+	font-style: normal;
+}
+
+code, var {
+	font-family: 'Courier New';
+}
+
+digit {
+	color: #0f0;
+}
+
