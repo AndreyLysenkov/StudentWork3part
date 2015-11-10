@@ -33,7 +33,6 @@ class Exam : public Trial
 protected:
 	int mark;
 	bool isPassed;
-	static int PassMark;
 public:
 	Exam();
 	Exam(Exam&);
@@ -55,7 +54,7 @@ public:
 	FinalExam(FinalExam&);
 	FinalExam(string);
 	~FinalExam();
-	void IsAccessed();
+	bool IsAccessed();
 	void GainAccessed();
 	void SetFinalMark(int);
 };
