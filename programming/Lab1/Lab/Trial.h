@@ -12,7 +12,6 @@ public:
 	Trial(string);
 	~Trial();
 	string GetSubject();
-
 };
 
 class Test : public Trial
@@ -25,15 +24,38 @@ public:
 	Test(Test&);
 	Test(string, int);
 	~Test();
-
+	double GetRating();
+	void GainScore(int);
 };
 
 class Exam : public Trial
 {
-
+protected:
+	int mark;
+	bool isPassed;
+	static int PassMark;
+public:
+	Exam();
+	Exam(Exam&);
+	Exam(string);
+	~Exam();
+	int GetMark();
+	void SetMark(int);
+	void Passed();
+	bool IsPassed();
 };
 
 class FinalExam : public Exam
 {
-
+private:
+	bool isAccessed;
+	int finalMark;
+public:
+	FinalExam();
+	FinalExam(FinalExam&);
+	FinalExam(string);
+	~FinalExam();
+	void IsAccessed();
+	void GainAccessed();
+	void SetFinalMark(int);
 };
