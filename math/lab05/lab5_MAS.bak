@@ -104,7 +104,7 @@
 </Input>
 </Group><CodeEditor-ExecGroup view="presentation" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="1090" pixel-height="526" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">N := 20:
 R := rand(9..9 + 25):
-a := [seq(R(),i = 1..N)]:
+a := [seq(R(), i = 1..N)]:
 b := a:
 c := a:
 d := a:
