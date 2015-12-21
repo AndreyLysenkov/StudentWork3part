@@ -104,20 +104,13 @@
 </Input>
 </Group><CodeEditor-ExecGroup view="presentation" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="1090" pixel-height="526" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">N := 20:
 R := rand(9..9 + 25):
-a := [seq(R(),i = 1..N)]:
+a := [seq(R(), i = 1..N)]:
 b := a:
 c := a:
 d := a:
 
-Swap := proc (arr, i, j)
-    local tmp:
-    print(arr):
-    tmp := arr[j]:
-    arr[j] := arr[i]:
-    arr[i] := tmp:
-end proc:
-
 BubbleSort := proc()
+    global d:
     local i, j, tmp, isSort:
     isSort := false:
     i := 1:
@@ -125,8 +118,10 @@ BubbleSort := proc()
         isSort := true:
         for j from 1 to N - i do
             if (d[j] &gt; d[j + 1]) then
-                swap(d, j, j+1):
                 isSort := false:
+                tmp := d[j]:
+    			 d[j] := d[i]:
+    			 d[i] := tmp:
             end if:
         end do:
         i := i + 1:
@@ -229,193 +224,199 @@ MergeSort(1, N):
 print(&quot;quick&quot;):
 QuickSort(1, N):</EC-CodeEditor>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjRiIjSCIjP0YkIiM7IiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
 <Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USdidWJibGU2Ig==</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iI0IiI0ZGJCIjPyIjSCIjO0YlIiM2IiNEIiNNRikiIzhGLEYjRipGKyIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iI00iI0IiI0YiIz9GJSIjOyIjSCIjNiIjREYmRioiIzhGLEYjRitGJCIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iI0IiI01GJSIjPyIjRiIjO0YkIiM2IiNEIiNIRikiIzhGLEYjRipGJyIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iI0IiI00iI0giIz9GJSIjOyIjRiIjNiIjREYkRioiIzhGLEYjRitGKSIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iI0IiIz8iI0hGJCIjTSIjO0YnIiM2IiNGIiNERikiIzhGLEYjRitGKiIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iI00iIz8iI0JGJiIjRCIjOyIjSCIjNkYkIiNGRioiIzhGLEYjRidGKyIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz0iIzsiIz8iI0JGJiIjRCIjRiIjTSIjNiIjSEYpRioiIzhGLEYjRidGKCIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI00iIzsiIz8iI0JGJiIjRCIjPUYjIiM2IiNIIiNGRikiIzhGLEYoRidGKyIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjTSIjPSIjRCIjRkYnIiNIRiMiIzhGLEYoRilGKiIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjTSIjPSIjRCIjRkYnIiNIRiMiIzhGLEYoRilGKiIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjSCIjPSIjRCIjRiIjTUYrRiMiIzhGLEYoRilGKiIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJkYjIiM9IiNEIiNGIiNNRioiI0giIzhGLEYnRihGKSIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0IiIzhGIyIjPSIjRCIjRiIjTUYrIiNIRiZGJ0YoRilGKiIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iIzgiI0JGIyIjPSIjRCIjRiIjTUYrIiNIRidGJkYoRilGKiIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz0iIzgiIz9GI0YlIiNEIiNGIiNNRioiI0giI0JGJkYsRihGKSIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiI0QiIzgiIz9GIyIjPUYlIiNGIiNNRioiI0giI0JGJkYsRihGKSIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiI0YiIzgiIz9GIyIjPSIjREYlIiNNRioiI0giI0JGJkYsRihGKSIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0kiI0EiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiI0YiIzgiIz9GIyIjPSIjREYlIiNNRioiI0giI0JGJkYsRihGKSIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
 <Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USZtZXJnZTYi</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0EiI0kiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjRiIjSCIjP0YkIiM7IiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0EiI0kiI0wiIz8iIzgiIioiIz4iIzZGJyIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjRiIjSCIjP0YkIiM7IiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0EiI0kiI0wiIzgiIz8iIioiIz4iIzZGJiIjNyIjQyIjOkYrRiVGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjRiIjPyIjSEYkIiM7IiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzgiIz8iI0EiI0kiI0wiIioiIz4iIzZGIyIjNyIjQyIjOkYrRidGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz8iI0JGJCIjRiIjSEYlIiM7IiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzgiIz8iI0EiI0kiI0wiIioiIz4iIzZGIyIjNyIjQyIjOkYrRidGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz8iI0JGJCIjRiIjSCIjO0YlIiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzgiIz8iI0EiI0kiI0wiIioiIzYiIz5GIyIjNyIjQyIjOkYrRidGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz8iI0JGJCIjRiIjSCIjO0YlIiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzgiIz8iI0EiI0kiI0wiIioiIzYiIz4iIzdGIyIjQyIjOkYrRidGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz8iI0JGJCIjRiIjSCIjO0YlIiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzgiIz8iI0EiI0kiI0wiIioiIzYiIzdGIyIjPiIjQyIjOkYqRidGKCIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIz8iI0JGJCIjRiIjSCIjNiIjOyIjREYlIiNNRilGJyIjOEYrIiM9RipGLCIjNUYoIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTCIjQyIjOkYlRitGIyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRidGIyIjOEYrIiM9RipGLCIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTCIjOiIjQ0YlRitGIyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiNGJyIjOEYrIiM9RipGLCIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYlIiM6IiNDRitGIyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGJ0YrIiM9RipGLCIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYlIiM6IiNDRiNGKyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGJ0YrIiM9RipGLCIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYjRiUiIzoiI0NGKyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGKyIjPUYnRipGLCIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYjRiUiIzoiI0NGKyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGKyIjPUYnRixGKiIjNUYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYjRiUiIzoiI0NGKyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGKyIjPUYnIiM1RixGKkYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYjRiUiIzoiI0NGKyIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGKyIjPUYnIiM1RixGKkYkIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYjRiUiIzoiI0NGKyIjPSIjRCIjRSIjRiIjSg==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNRiMiIzhGKyIjPUYnIiM1RiRGLCIjR0Yq</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzYiIzciIzhGJiIjPiIjPyIjQSIjSSIjTEYjRiUiIzoiIz0iI0MiI0QiI0UiI0YiI0pGKw==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzsiIz8iI0JGJiIjRCIjRkYoIiNIIiNNIiM1RiMiIzhGLEYkIiM9Ri1GJyIjR0Yq</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0QiI0UiI0YiI0kiI0oiI0xGMg==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ZGKyIjRyIjSCIjTUYu</Equation></Text-field>
 </Output>
 <Output>
 <Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USZxdWljazYi</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiI0EiI0wiIz8iIzhGIyIjPiIjNkYnIiM3IiNDIiM6RipGJSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjOyIjSCIjPyIjRkYkIiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjNUYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzciI0wiIz8iIzhGIyIjPiIjNkYnRiQiI0MiIzoiI0FGJSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjOyIjNSIjPyIjRkYkIiNNIiM2IiNERipGKSIjOEYrIiM9RihGLCIjSEYnIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzdGJCIjPyIjOEYjIiM+IiM2RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjOyIjNSIjPyIjPUYkIiNNIiM2IiNERipGKSIjOEYrRidGKCIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzdGJCIjNiIjOEYjIiM+IiM/RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjOyIjNSIjPyIjPUYkRiciIzYiI0RGKUYoIiM4RioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIioiIzdGJCIjNkYjIiM4IiM+IiM/RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjOyIjNSIjPyIjPUYkRiciIzYiIzgiI0RGKEYpRioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNyIjNkYkIiM4IiM+IiM/RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiI0JGIyIjOyIjNSIjPyIjPUYkRiciIzYiIzhGKUYoIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4IiM+IiM/RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiI0IiIzsiIzUiIz8iIz1GJUYoRiMiIzhGKUYkIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4IiM+IiM/RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzgiIzsiIzUiIz8iIz1GJUYoRiNGJCIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4IiM+IiM/RiYiI0wiI0MiIzoiI0FGKSIjSSIjRCIjRiIjSiIjPSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzgiIzsiIzVGJCIjPUYlRidGIyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4IiM+IiM/RiYiIz0iI0MiIzoiI0EiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzYiIzgiIzsiIzVGJEYjRiUiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4IiM+IiM/RiYiIz0iI0EiIzoiI0MiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzgiIzsiIzZGJEYmRiUiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4IiM+IiM/RiYiIz0iI0EiIzoiI0MiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzYiIztGJCIjOEYmRiUiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIz8iIz4iIz0iI0EiIzoiI0MiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzYiIzhGJCIjO0YlRiYiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz4iIz0iI0EiIz8iI0MiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOCIjO0YlRiYiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iI0EiIz8iI0MiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOCIjO0YlRiYiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0wiI0kiI0QiI0YiI0pGLSIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0QiI0kiI0wiI0YiI0pGLyIjRQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0QiI0UiI0wiI0YiI0pGLyIjSQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI01GKyIjRiIjSEYsIiNH</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0QiI0UiI0YiI0wiI0pGMCIjSQ==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ciI00iI0YiI0hGLUYs</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0QiI0UiI0YiI0kiI0oiI0xGMg==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ciI0ZGLCIjSCIjTUYu</Equation></Text-field>
 </Output>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIipGIyIjNiIjN0YlIiM4RiYiIzoiIz0iIz4iIz8iI0EiI0MiI0QiI0UiI0YiI0kiI0oiI0xGMg==</Equation></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ZGKyIjRyIjSCIjTUYu</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ZGKyIjRyIjSCIjTUYu</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ZGKyIjRyIjSCIjTUYu</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NzYiIzUiIzZGJCIjOEYlIiM7RiYiIz1GJyIjPyIjQkYpIiNERioiI0ZGKyIjRyIjSCIjTUYu</Equation></Text-field>
 </Output></CodeEditor-ExecGroup>
 <Group labelreference="L4" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
