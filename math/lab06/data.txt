@@ -1,0 +1,1 @@
+A:=Matrix(7, 7, [[0,74,17,39,92,6,87],[82,0,infinity,49,14,66,infinity],[81,25,0,infinity,40,35,70],[85,39,14,0,95,32,infinity],[33,82,17,infinity,0,infinity,infinity],[20,75,infinity,21,19,0,9],[97,55,67,infinity,57,70,0]]);
