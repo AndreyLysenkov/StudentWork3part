@@ -1,36 +1,47 @@
-*
-{
-	font-family : "Calibri";
-	font-size : 12pt;
-}
-
 body
 {
+    font-family : "Calibri";
+    font-size : 12pt;
     padding : 0px;
     margin : 0px;
 }
 
-header
+body > header, 
+main, 
+body > footer
 {
     position : relative;
     display : block;
     left : 0px;
     right : 0px;
-    top : 0px;
-    padding : 0px;
     margin : 0px;
+    padding : 0px;
+}
+
+body > header
+{
+    top : 0px;
     background-image : url("logo.png");
     background-repeat : no-repeat no-repeat;    
 }
 
-main
+body > footer
 {
-    
+    padding : 0px;
+    bottom : 0px;
+    background-image : url("footer.png");
+    font-style : 12pt;
 }
 
-footer
+.footer_content
 {
-    
+    position : relative; 
+    display : block;
+    padding : 12pt;
+    left : 0px;
+    right : 0px;
+    top : 0px;
+    background-color : rgba(64, 96, 127, 0.9);
 }
 
 /* Head */
@@ -44,11 +55,24 @@ footer
     padding : 0px;
 }
 
-header nav
+nav
 {
     margin : 0px;
     padding : 0px;
-    background-color : rgba(64, 96, 127, 0.7);
+    background-color : rgba(64, 96, 127, 0.9);
+    font-size : 20pt;
+    color : #fff;
+}
+
+nav li img
+{
+    height : 20pt;
+}
+
+nav li
+{
+    display : inline-block;
+    padding : 10px;
 }
 
 .menu
@@ -58,13 +82,6 @@ header nav
     margin : 0px;
 }
 
-.menu li
-{
-    display : inline-block;
-    padding : 10px;
-    /*border-right : 3px solid #fff;*/
-}
-
 .menu li:last-child
 {
     border-right : none;
@@ -72,44 +89,111 @@ header nav
 
 .menu li:first-child
 {
-    background-color : rgba(0, 0, 0, 0.5);
+    background-color : rgba(255, 255, 255, 0.5);
 }
 
 .menu li:hover
 {
-    background-color : rgba(64, 255, 192, 0.5);
+    background-color : rgba(32, 128, 92, 0.7);
 }
 
-header nav
-{
-    font-size : 16pt;
-    color : #fff;
-}
-
-header nav .menu a
+nav .menu a
 {
     color : #fff;
     text-decoration : none;
 }
 
-header nav .menu a:hover
+nav .menu a:hover
 {
     text-decoration : underline;
 }
 
+.submenu 
+{
+    display : inline;
+    float : right;
+    padding : 0px;
+    margin : 0px;
+}
+
+.submenu li:hover
+{
+    background-color : rgba(255, 255, 255, 0.7);
+}
+
 .search
 {
-    width : 30%;
+    display : inline-block;
+    width : 300px;
     float : right;
     padding : 5px;
 }
 
 
-footer
+/*Content*/
+.block
 {
-    position: fixed;
-    bottom: 0px;
+    display : block;
+    clear : both;
+    margin : 0px;
+    padding : 3%;
+    left : 0px;
+    right : 0px;
 }
+
+.block > *
+{
+    display : inline-block;
+    float : left;
+    width : 32%;
+    margin-left : 2%;
+    margin-top : 2%;
+}
+
+.block > *:first-child
+{
+    position : relative;
+    display : block;
+    clear : both;
+    left : 0px;
+    right : 0px;
+    width : 100%;
+    padding : 10px;
+    font-size : 16pt;
+}
+
+.block > *:first-child + *
+{
+    display : inline-block;
+    margin-left : 0px;
+}
+
+.block .book
+{
+    background-color : rgba(124, 64, 92, 0.7);
+    font-size : 12pt;
+    padding : 12pt;
+}
+
+.book .img
+{
+    display : inline-block;
+    width : 30%;
+    height : 100%;
+    float : left;
+    padding-right : 5%;
+}
+
+.book img
+{
+    max-width : 100%;
+}
+
+.book header
+{
+    font-size : 16pt;
+}
+
 
 
 @media handheld {
