@@ -12,6 +12,7 @@ public:
 	Trial(string);
 	~Trial();
 	string GetSubject();
+	void SetSubject(string subject);
 };
 
 class Test : public Trial

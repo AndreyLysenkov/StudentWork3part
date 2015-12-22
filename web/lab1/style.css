@@ -1,40 +1,66 @@
-* {
-	font-family: 'Times New Roman';
+* 
+{
+	font-family : 'Times New Roman';
 }
+
 section, article, header, .img {
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	/*background-color: #f0f;*/
+	top : 0px;
+	left : 0px;
+	right : 0px;
 }
 
 .img, .addition {
-	text-align: center;
+	text-align : center;
 }
 
 .addition:last-child
 {
-	text-align: left;
+	text-align : left;
+}
+
+.addition
+{
+	font-style : italic;
+}
+
+code.addition
+{
+	font-style : normal;
 }
 
 header + p {
-	line-height: 2;
+	line-height : 2;
+	margin-top : -18pt;
 }
 
 code {
-	display: block;
+	display : block;
 }
 
 var {
-	color: #00f;
-	font-style: normal;
+	color : #008;
+	font-style : normal;
 }
 
 code, var {
-	font-family: 'Courier New';
+	font-family : 'Courier New';
 }
 
-digit {
-	color: #0f0;
+.digit {
+	color : #080;
 }
 
+.red
+{
+	color : #800;
+}
+
+h1
+{
+	font-size : 12pt;
+}
+
+.addition .red, .addition .digit
+{
+	font-style : normal;
+}
