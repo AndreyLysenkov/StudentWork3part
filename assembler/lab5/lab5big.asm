@@ -1,37 +1,41 @@
 .model small
 .stack 100h
 .data 
-	a db 01h
-	b db 06h
-	c db 03h
+	a db -3d
+	b db -4d
+	c db 2d
 .code
 start:
 	mov ax,@data
 	mov ds,ax
-	sub ax,ax
-	
-	mov al, b
+
+	mov ax, 1
+	imul b
 	mov bl, c
-	div bl
+	idiv bl
 	mov bl, 4
-	mul bl
+	imul bl
 	add al, 1
 	mov bl, al
 	; bl = 4 * b / c + 1
-	
-	mov al, 2
-	mov cl, a
+
+	mov ax, 1
+	imul a
+	mov cx, 2
 	add al, cl
-	mov cl, c
-	mul cl
-	mov cl, b
-	sub al, cl
 	mov cl, al
+	mov ax, 1
+	imul c
+	imul cl
+	mov cl, al
+	mov ax, 1
+	imul b
+	sub cl, al
 	; cl = (2 + a)*c - b
-	
+
 	mov al, bl
-	div cl
-	
+	idiv cl
+
 	mov ax,4C00h
 	int 21h
 end start
