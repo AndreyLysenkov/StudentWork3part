@@ -59,33 +59,3 @@ void main()
 	int a;
 	cin >> a;
 }
-
-
-//		cout << country1.getname() << ",  " << country1.getpopulation() << ",  s=" << country1.getarea() << ",  " << country1.gettype() << endl;
-//	}
-//	{
-//		kingdom country1, country2("strana 8", 3333, 14.234, "absolute", "dynasty_name"), country3(country1);
-//		cout << country1.getname() << ",  " << country1.getpopulation() << ",  s=" << country1.getarea() << ",  " << country1.gettype() << ",  " << country1.getdynasty() << endl;
-//		cout << country2.getname() << ",  " << country2.getpopulation() << ",  s=" << country2.getarea() << ",  " << country2.gettype() << ",  " << country2.getdynasty() << endl;
-//		cout << country3.getname() << ",  " << country3.getpopulation() << ",  s=" << country3.getarea() << ",  " << country3.gettype() << ",  " << country3.getdynasty() << endl;
-//		country1.setname("strana7");
-//		country1.setpopulation(2912);
-//		country1.setarea(465.364);
-//		country1.settype("parlament");
-//		country1.setdynasty("d_name");
-//		cout << country1.getname() << ",  " << country1.getpopulation() << ",  s=" << country1.getarea() << ",  " << country1.gettype() << ",  " << country1.getdynasty() << endl;
-//	}
-//	{
-//		republic country1, country2("strana 5", 2222, 23.271, "parlament"), country3(country1);
-//		cout << country1.getname() << ",  " << country1.getpopulation() << ",  s=" << country1.getarea() << ",  " << country1.gettype() << endl;
-//		cout << country2.getname() << ",  " << country2.getpopulation() << ",  s=" << country2.getarea() << ",  " << country2.gettype() << endl;
-//		cout << country3.getname() << ",  " << country3.getpopulation() << ",  s=" << country3.getarea() << ",  " << country3.gettype() << endl;
-//		country1.setname("strana10");
-//		country1.setpopulation(2912);
-//		country1.setarea(465.364);
-//		country1.settype("president");
-//		cout << country1.getname() << ",  " << country1.getpopulation() << ",  s=" << country1.getarea() << ",  " << country1.gettype() << endl;
-//	}
-//	return 0;
-//}
-
