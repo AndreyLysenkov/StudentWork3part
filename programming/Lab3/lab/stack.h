@@ -10,11 +10,11 @@ struct Element
 class Stack
 {
 public:
-	static Element *top;
+	Element *top;
 	Stack();
 	Stack(Trial*);
 	~Stack();
 	void Add(Trial*);
 	Trial *Get();
-	static void Show();
+	void Show();
 };

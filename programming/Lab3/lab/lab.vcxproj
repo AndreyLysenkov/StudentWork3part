@@ -141,6 +141,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="group.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stack.h" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="group.cpp" />
     <ClCompile Include="lab.cpp" />
     <ClCompile Include="objects.cpp" />
     <ClCompile Include="stack.cpp" />
@@ -163,6 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

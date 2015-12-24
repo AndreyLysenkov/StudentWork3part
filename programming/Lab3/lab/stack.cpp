@@ -3,8 +3,6 @@
 #include <iostream>
 using namespace std;
 
-Element *Stack::top = NULL;
-
 Stack::Stack()
 {
 	top = NULL;

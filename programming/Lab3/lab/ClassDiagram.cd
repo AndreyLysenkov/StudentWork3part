@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TrialGroup">
+    <Position X="2" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIACAAAAABAAEAAAAAAgAAAAAEEAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>group.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestGroup">
+    <Position X="4.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAABAAAAAAAAAAAAAAEAAAAAEEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>group.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExamGroup">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAAAAAAAAEEAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>group.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FinalExamGroup">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIAAAAAAAAAAAAAAAAAAAAAAAEEAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>group.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Typedef Name="Method" Collapsed="true">
+    <Position X="6.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>group.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
