@@ -6,36 +6,39 @@ class Trial
 protected:
 	char *subject;
 	char *name;
-	int score;
 public:
 	Trial();
 	Trial(Trial&);
-	Trial(char*, char*, int);
+	Trial(char*, char*);
 	~Trial();
 	void SetSubject(char*);
-	void SetScore(int);
 	void SetName(char*);
 	char *GetSubject();
 	char *GetName();
-	int GetScore();
 	int GainScore(int);
 };
+
 
 class Test : public Trial
 {
 protected:
+	int score;
 	int maxScore;
 	int minScore;
 public:
 	Test();
 	Test(Test&);
 	Test(char *, char*, int, int, int);
-	Test(char *, char*, int, int);
-	Test(char *, char*);
 	~Test();
+	void SetScore(int);
+	int GetScore();
+	int GetMaxScore();
+	int GetMinScore();
 	double GetRating();
-	void GainScore(int);
+	int GainScore(int);
+	double GetMinRating();
 };
+
 
 class Exam : public Trial
 {
@@ -45,11 +48,10 @@ protected:
 public:
 	Exam();
 	Exam(Exam&);
-	Exam(string);
+	Exam(char*, char*);
 	~Exam();
 	int GetMark();
-	void SetMark(int);
-	void Passed();
+	bool SetMark(int);
 	bool IsPassed();
 };
 

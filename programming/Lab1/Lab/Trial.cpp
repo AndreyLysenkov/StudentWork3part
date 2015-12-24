@@ -11,16 +11,14 @@ Trial::Trial()
 {
 	this->name = "";
 	this->subject = "";
-	this->score = 0;
 }
 
-Trial::Trial(char *_name, char *_subject, int _score)
+Trial::Trial(char *_name, char *_subject)
 {
 	this->name = new char[MAX_CHAR_SIZE];
 	strcpy(name, _name);
 	this->subject = new char[MAX_CHAR_SIZE];
 	strcpy(subject, _subject);
-	this->score = _score;
 }
 
 Trial::Trial(Trial &obj)
@@ -29,7 +27,6 @@ Trial::Trial(Trial &obj)
 	strcpy(name, obj.GetName());
 	this->subject = new char[MAX_CHAR_SIZE];
 	strcpy(subject, obj.GetSubject());
-	this->score = obj.GetScore();
 }
 
 Trial::~Trial()
@@ -43,11 +40,6 @@ void Trial::SetSubject(char *_subject)
 {
 	this->subject = new char[MAX_CHAR_SIZE];
 	strcpy(subject, _subject);
-}
-
-void Trial::SetScore(int _score)
-{
-	this->score = _score;
 }
 
 void Trial::SetName(char *_name)
@@ -66,30 +58,23 @@ char *Trial::GetName()
 	return this->name;
 }
 
-int Trial::GetScore()
-{
-	return this->score;
-}
-
-int Trial::GainScore(int add)
-{
-	this->score += add;
-	return this->score;
-}
 
 Test::Test() : Trial()
 {
 	this -> score = 0;
 }
 
-Test::Test(char *_name, char *_subject, int _score = 0, int _maxScore = 100, int _minScore = 0)
-	: Trial(_name, _subject, _score)
+Test::Test(char *_name, char *_subject,
+	int _score = 0, int _maxScore = 100, int _minScore = 0)
+	: Trial(_name, _subject)
 {
-	this -> maxScore = maxScore;
-	this -> score = 0;
+	this->score = _score;
+	this->maxScore = _maxScore;
+	this->minScore = _minScore;
 }
 
-Test::Test(Test &obj) : Trial((Trial)obj)
+Test::Test(Test &obj)
+	: Trial((Trial)obj)
 {
 	this -> maxScore = obj.maxScore;
 	this -> score = obj.score;
@@ -97,7 +82,27 @@ Test::Test(Test &obj) : Trial((Trial)obj)
 
 Test::~Test()
 {
-	cout << "Deleting your test: " << this << endl;
+	cout << "Deleting your Test: " << this << endl;
+}
+
+void Test::SetScore(int _score)
+{
+	this->score = _score;
+}
+
+int Test::GetScore()
+{
+	return this->score;
+}
+
+int Test::GetMaxScore()
+{
+	return this->maxScore;
+}
+
+int Test::GetMinScore()
+{
+	return this->minScore;
 }
 
 double Test::GetRating()
@@ -105,10 +110,18 @@ double Test::GetRating()
 	return score / (double)maxScore;
 }
 
-//void Test::GainScore(int _score)
-//{
-//	this -> score = _score;
-//}
+int Test::GainScore(int add)
+{
+	this->score += add;
+	return this->score;
+}
+
+double Test::GetMinRating()
+{
+	return minScore / (double)maxScore;
+}
+
+
 
 Exam::Exam() : Trial()
 {
@@ -116,7 +129,8 @@ Exam::Exam() : Trial()
 	this -> mark = 0;
 }
 
-Exam::Exam(string subject) : Trial(subject)
+Exam::Exam(char *_name, char *_subject)
+	: Trial(_name, _subject)
 {
 	this -> mark = 0;
 	this -> isPassed = false;
@@ -126,6 +140,10 @@ Exam::Exam(Exam &obj) : Trial((Exam)obj)
 {
 	this -> isPassed = obj.isPassed;
 	this -> mark = obj.mark;
+}
+
+Exam::Exam(char *, char *)
+{
 }
 
 Exam::~Exam()
