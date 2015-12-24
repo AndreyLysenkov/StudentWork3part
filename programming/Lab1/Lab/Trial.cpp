@@ -10,8 +10,8 @@ int MAX_CHAR_SIZE = 100;
 
 Trial::Trial()
 {
-	this->name = "";
-	this->subject = "";
+	this->name = "none";
+	this->subject = "none";
 }
 
 Trial::Trial(char *_name, char *_subject)
@@ -61,8 +61,8 @@ char *Trial::GetName()
 
 void Trial::Print()
 {
-	cout << " Name : " << this->GetSubject() << endl;
-	cout << " Subject : " << this->GetName() << endl;
+	cout << " Subject : " << this->GetSubject() << endl;
+	cout << " Name : " << this->GetName() << endl;
 }
 
 
@@ -158,12 +158,6 @@ Exam::Exam(Exam &obj)
 {
 	this -> isPassed = obj.isPassed;
 	this -> mark = obj.mark;
-}
-
-Exam::Exam(char *_name, char *_subject)
-	: Trial(_name, _subject)
-{
-
 }
 
 Exam::~Exam()
