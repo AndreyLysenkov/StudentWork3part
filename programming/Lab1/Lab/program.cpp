@@ -24,6 +24,7 @@ void main()
 	Exam Exam2("2nd semester 1st module", "Assembler");
 	cout << "dfs \n";
 	Exam Exam3(Exam2);
+	cout << "dfs \n";
 	Exam1.Print();
 	Exam2.Print();
 	Exam3.Print();
