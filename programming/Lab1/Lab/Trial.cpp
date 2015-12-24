@@ -3,44 +3,81 @@
 #include <iostream>
 using namespace std;
 
+int MAX_CHAR_SIZE = 100;
+
 int Test::maxScore = 100;
+
 
 /* Trial */
 
 Trial::Trial()
 {
+	this->name = "";
 	this->subject = "";
 	this->score = 0;
 }
 
-Trial::Trial(char *name, char *_subject, int _score)
+Trial::Trial(char *_name, char *_subject, int _score)
 {
-	this->subject = new char[100];
-	strcpy(this->subject, _subject);
-	this->subject = _subject;
+	this->name = new char[MAX_CHAR_SIZE];
+	strcpy(name, _name);
+	this->subject = new char[MAX_CHAR_SIZE];
+	strcpy(subject, _subject);
 	this->score = _score;
 }
 
 Trial::Trial(Trial &obj)
 {
-	this->subject = obj.subject;
-	this->score = obj.score;
+	this->name = new char[MAX_CHAR_SIZE];
+	strcpy(name, obj.GetName());
+	this->subject = new char[MAX_CHAR_SIZE];
+	strcpy(subject, obj.GetSubject());
+	this->score = obj.GetScore();
 }
 
 Trial::~Trial()
 {
 	cout << "Deleting trial: " << this << endl;
+	delete name;
 	delete subject;
 }
 
 void Trial::SetSubject(char *_subject)
 {
-	this->subject = _subject;
+	this->subject = new char[MAX_CHAR_SIZE];
+	strcpy(subject, _subject);
 }
 
 void Trial::SetScore(int _score)
 {
 	this->score = _score;
+}
+
+void Trial::SetName(char *_name)
+{
+	this->name = new char[MAX_CHAR_SIZE];
+	strcpy(name, _name);
+}
+
+char * Trial::GetSubject()
+{
+	return this->subject;
+}
+
+char * Trial::GetName()
+{
+	return this->name;
+}
+
+int Trial::GetScore()
+{
+	return this->score;
+}
+
+int Trial::GainScore(int add)
+{
+	this->score += add;
+	return this->score;
 }
 
 

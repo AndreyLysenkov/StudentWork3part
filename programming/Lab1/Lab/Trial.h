@@ -19,7 +19,7 @@ public:
 	char *GetSubject();
 	char *GetName();
 	int GetScore();
-	void GainScore(int);
+	int GainScore(int);
 };
 
 class State
