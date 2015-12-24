@@ -20,7 +20,7 @@ Stack::~Stack()
 
 void Stack::Add(Trial *_obj)
 {
-	Element *tmp;
+	Element *tmp = new Element();
 	tmp->obj = _obj;
 	tmp->next = top;
 	top = tmp;
