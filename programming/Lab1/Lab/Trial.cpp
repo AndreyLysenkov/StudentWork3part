@@ -10,8 +10,10 @@ int MAX_CHAR_SIZE = 100;
 
 Trial::Trial()
 {
-	this->name = "none";
-	this->subject = "none";
+	this->name = new char[MAX_CHAR_SIZE];
+	strcpy(name, "none");
+	this->subject = new char[MAX_CHAR_SIZE];
+	strcpy(subject, "none");
 }
 
 Trial::Trial(char *_name, char *_subject)
@@ -61,6 +63,7 @@ char *Trial::GetName()
 
 void Trial::Print()
 {
+	cout << endl << "Object #" << this << endl;
 	cout << " Subject : " << this->GetSubject() << endl;
 	cout << " Name : " << this->GetName() << endl;
 }
@@ -131,7 +134,7 @@ double Test::GetMinRating()
 
 void Test::Print()
 {
-	((Test)*this).Print();
+	((Trial)*this).Print();
 	int score;
 	int maxScore;
 	int minScore;
@@ -140,7 +143,8 @@ void Test::Print()
 }
 
 
-Exam::Exam() : Trial()
+Exam::Exam()
+	: Trial()
 {
 	this -> isPassed = false;
 	this -> mark = 0;
@@ -187,7 +191,7 @@ bool Exam::IsPassed()
 
 void Exam::Print()
 {
-	((Exam)*this).Print();
+	((Trial)*this).Print();
 	cout << " Passed : " << this->IsPassed() << endl;
 	cout << " Mark : " << this->GetMark() << endl;
 }
@@ -235,7 +239,7 @@ void FinalExam::SetFinalMark(int _finalMark, int prevMark[], int marksCount)
 	{
 		average += prevMark[i];
 	}
-	average = (average / marksCount + this->finalMark) / 2;
+	average = (average / marksCount + this->mark) / 2;
 	this->finalMark = (int)average;
 }
 
@@ -246,7 +250,7 @@ int FinalExam::GetFinalMark()
 
 void FinalExam::Print()
 {
-	((FinalExam)*this).Print();
+	((Exam)*this).Print();
 	cout << " Access: " << this->IsAccessed() << endl;
 	cout << " FinalMark: " << this->GetFinalMark() << endl;
 }

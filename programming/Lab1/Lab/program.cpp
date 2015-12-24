@@ -6,10 +6,10 @@ using namespace std;
 
 void main()
 {
-	cout << "Trial -----" << endl;
+	cout << endl << "Trial -----" << endl;
 	Trial Trial1,
 		Trial2("3rd semester", "Math"),
-		Trial3(Trial1);
+		Trial3(Trial2);
 	Trial1.Print();
 	Trial2.Print();
 	Trial3.Print();
@@ -18,13 +18,10 @@ void main()
 	Trial1.Print();
 	Trial3.Print();
 
-	cout << "Exam -----" << endl;
-	Exam Exam1;
-	cout << "dfs \n";
-	Exam Exam2("2nd semester 1st module", "Assembler");
-	cout << "dfs \n";
-	Exam Exam3(Exam2);
-	cout << "dfs \n";
+	cout << endl  << "Exam -----" << endl;
+	Exam Exam1,
+		Exam2("2nd semester 1st module", "Assembler"),
+		Exam3(Exam2);
 	Exam1.Print();
 	Exam2.Print();
 	Exam3.Print();
@@ -34,7 +31,7 @@ void main()
 	Exam1.Print();
 	Exam3.Print();
 
-	cout << "FinalExam -----" << endl;
+	cout << endl << "FinalExam -----" << endl;
 	FinalExam FinalExam1,
 		FinalExam2("2nd semester 1st module", "Assembler"),
 		FinalExam3(FinalExam2);
@@ -47,7 +44,7 @@ void main()
 	FinalExam1.Print();
 	FinalExam3.Print();
 
-	cout << "Test-----" << endl;
+	cout << endl << "Test -----" << endl;
 	Test Test1,
 		Test2("3rd semester", "Math", 55, 100, 60),
 		Test3(Test1);
