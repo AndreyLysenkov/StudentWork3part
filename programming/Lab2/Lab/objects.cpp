@@ -1,10 +1,12 @@
+#include "stdafx.h"
 #define _CRT_SECURE_NO_WARNINGS
-#include "Trial.h"
-#include <string>
+#include "objects.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 int MAX_CHAR_SIZE = 100;
+
 
 /* Trial */
 
@@ -71,7 +73,7 @@ void Trial::Print()
 
 Test::Test() : Trial()
 {
-	this -> score = 0;
+	this->score = 0;
 }
 
 Test::Test(char *_name, char *_subject,
@@ -135,9 +137,6 @@ double Test::GetMinRating()
 void Test::Print()
 {
 	((Trial)*this).Print();
-	int score;
-	int maxScore;
-	int minScore;
 	cout << " Mark : " << this->GetScore() << "/" << this->GetMaxScore()
 		<< "(min : " << this->GetMinScore() << ")" << endl;
 }
@@ -146,22 +145,22 @@ void Test::Print()
 Exam::Exam()
 	: Trial()
 {
-	this -> isPassed = false;
-	this -> mark = 0;
+	this->isPassed = false;
+	this->mark = 0;
 }
 
 Exam::Exam(char *_name, char *_subject)
 	: Trial(_name, _subject)
 {
-	this -> mark = 0;
-	this -> isPassed = false;
+	this->mark = 0;
+	this->isPassed = false;
 }
 
 Exam::Exam(Exam &obj)
 	: Trial(obj.GetName(), obj.GetSubject())
 {
-	this -> isPassed = obj.isPassed;
-	this -> mark = obj.mark;
+	this->isPassed = obj.isPassed;
+	this->mark = obj.mark;
 }
 
 Exam::~Exam()
@@ -180,13 +179,13 @@ bool Exam::SetMark(int _mark)
 	{
 		return false;
 	}
-	this -> mark = _mark;
+	this->mark = _mark;
 	return true;
 }
 
 bool Exam::IsPassed()
 {
-	return this -> isPassed;
+	return this->isPassed;
 }
 
 void Exam::Print()
@@ -199,22 +198,22 @@ void Exam::Print()
 
 FinalExam::FinalExam() : Exam()
 {
-	this -> isAccessed = false;
-	this -> finalMark = 0;
+	this->isAccessed = false;
+	this->finalMark = 0;
 }
 
 FinalExam::FinalExam(char *_name, char *_subject)
 	: Exam(_name, _subject)
 {
-	this -> isAccessed = false;
-	this -> finalMark = 0;
+	this->isAccessed = false;
+	this->finalMark = 0;
 }
 
 FinalExam::FinalExam(FinalExam &obj)
 	: Exam(obj.GetName(), obj.GetSubject())
 {
-	this -> isAccessed = obj.IsAccessed();
-	this -> finalMark = obj.GetFinalMark();
+	this->isAccessed = obj.IsAccessed();
+	this->finalMark = obj.GetFinalMark();
 }
 
 FinalExam::~FinalExam()
@@ -224,7 +223,7 @@ FinalExam::~FinalExam()
 
 bool FinalExam::IsAccessed()
 {
-	return this -> isAccessed;
+	return this->isAccessed;
 }
 
 void FinalExam::GainAccess()

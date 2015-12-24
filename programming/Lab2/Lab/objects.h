@@ -1,5 +1,6 @@
-#pragma once
-using namespace std;
+#ifndef objects
+
+#define objects
 
 class Trial
 {
@@ -71,3 +72,5 @@ public:
 	int GetFinalMark();
 	virtual void Print();
 };
+
+#endif

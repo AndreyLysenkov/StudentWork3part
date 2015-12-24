@@ -1,11 +1,13 @@
+#include "stdafx.h"
 #include "stack.h"
 #include <string>
 #include <iostream>
-using namespace std;
+//using namespace std;
+using namespace System;
 
-
-void main()
+int main()
 {
+	Console::WriteLine(L"Здравствуй, мир!");
 	Stack stash;
 	stash.Add(new Trial());
 	stash.Add(new Test());
@@ -20,4 +22,5 @@ void main()
 	stash.Show();
 	int a;
 	cin >> a;
+	return 0;
 }
