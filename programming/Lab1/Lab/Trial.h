@@ -1,4 +1,3 @@
-#pragma once
 #include <string>
 using namespace std;
 
@@ -22,36 +21,17 @@ public:
 	int GainScore(int);
 };
 
-class State
-{
-protected:
-	char *name;
-	int population;
-	double area;
-public:
-	State();
-	State(char*, int, double);
-	State(State &);
-	~State();
-	void SetName(char*);
-	void SetPopulation(int);
-	void SetArea(double);
-	char* GetName();
-	int GetPopulation();
-	double GetArea();
-};
-
-
-
 class Test : public Trial
 {
 protected:
-	int score;
-	static int maxScore;
+	int maxScore;
+	int minScore;
 public:
 	Test();
 	Test(Test&);
-	Test(string, int);
+	Test(char *, char*, int, int, int);
+	Test(char *, char*, int, int);
+	Test(char *, char*);
 	~Test();
 	double GetRating();
 	void GainScore(int);

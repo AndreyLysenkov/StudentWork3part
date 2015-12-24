@@ -5,9 +5,6 @@ using namespace std;
 
 int MAX_CHAR_SIZE = 100;
 
-int Test::maxScore = 100;
-
-
 /* Trial */
 
 Trial::Trial()
@@ -59,12 +56,12 @@ void Trial::SetName(char *_name)
 	strcpy(name, _name);
 }
 
-char * Trial::GetSubject()
+char *Trial::GetSubject()
 {
 	return this->subject;
 }
 
-char * Trial::GetName()
+char *Trial::GetName()
 {
 	return this->name;
 }
@@ -80,15 +77,13 @@ int Trial::GainScore(int add)
 	return this->score;
 }
 
-
-
-
 Test::Test() : Trial()
 {
 	this -> score = 0;
 }
 
-Test::Test(string subject, int maxScore) : Trial(subject)
+Test::Test(char *_name, char *_subject, int _score = 0, int _maxScore = 100, int _minScore = 0)
+	: Trial(_name, _subject, _score)
 {
 	this -> maxScore = maxScore;
 	this -> score = 0;
