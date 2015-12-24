@@ -4,11 +4,11 @@
 	a dw 0h
 	b dw 0h
 	x dw 0h
-	Aout db 'Enter a = $'
+	Aout db 'Enter a = ', '$'
 	Bout db 'Enter b = ', '$'
-	Xout db 'Answer x =', '$'
+	Xout db 'Answer x = ', '$'
 	minus db '-$'
-	errorNmb db 'Number incorrect'
+	errNmb db 'Number incorrect', '$'
 	buffer  db 6,7 dup (?)
 .code
 
@@ -46,9 +46,9 @@ mPrntStr macro string
 	mPop
 endm
 
-mReadNumb macro value, buffer
+mReadNumb macro value, buffer, errNumb
+local positive, positive2, exit, wrong, getDgt
 	;; Чтение числа
-local positive, positive2, ext, wrong, getDgt
 	mov ah, 0Ah
 	xor di, di
 	mov dx, offset buffer
@@ -56,7 +56,7 @@ local positive, positive2, ext, wrong, getDgt
 	mov dl, 0Ah
 	mov ah, 02h
 	int 21h
-	mov si, offset buff+2
+	mov si, offset buffer+2
 	cmp byte ptr [si], "-"
 	jnz positive
 	mov di, 1
@@ -67,7 +67,7 @@ positive:
 getDgt:
 	mov cl, byte ptr[si]
 	cmp cl, 0Dh
-	jz ext
+	jz exit
 	cmp cl, '0'
 	jl wrong
 	cmp cl, '9'
@@ -78,8 +78,9 @@ getDgt:
 	inc si
 	jmp getDgt	
 wrong:
-	mPrntStr errorNmb
-ext:
+	mPrntStr errNmb
+	jmp exit
+exit:
 	cmp di, 1
 	jnz positive2
 	neg ax
@@ -88,14 +89,14 @@ positive2:
 endm
 
 mPrntNumb macro value
+local positive3, findDigit, gtDgt, prntDgt
 	;; Печать числа
-local positive, findDigit, gtDgt, prntDgt
 	mov ax, value
 	test ax, ax
-	jns positive
+	jns positive3
 	mPrntStr minus
 	neg ax
-positive:
+positive3:
 	xor cx, cx 
 	mov bx, 0Ah
 findDigit:
@@ -133,30 +134,40 @@ start:
 	mov ds,ax
 	xor ax, ax
 	xor dx, dx
+	
 	mClrScr
 	mSetPoint 5, 3
 	mPrntStr Aout
-	mReadNumb a, buffer
+	mReadNumb a, buffer, errNmb
 	mSetPoint 6, 3
-	mReadNumb b, buffer
+	mPrntStr Bout
+	mReadNumb b, buffer, errNmb
+	
 	mov ax,a
 	cmp ax,b
 	je equal
 	jl less
 	jg more
 equal:
-	xor ax, ax
+	mov x, -155d
 	jmp result
 less:
-	xor ax, ax
+	mov ax, 1
+	imul b
+	idiv a
+	sub ax, 4d
+	mov x, ax
 	jmp result
 more:
-	xor ax, ax
+	mov ax, 1
+	imul a
+	imul b
+	sub ax, 9d
+	idiv b
 	jmp result
 
 result:
 	;; Вывод результата
-	xor ax, ax
 	mSetPoint 7, 3
 	mPrntStr Xout
 	mPrntNumb x
