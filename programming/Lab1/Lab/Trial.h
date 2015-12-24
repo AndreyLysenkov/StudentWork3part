@@ -6,14 +6,20 @@ class Trial
 {
 protected:
 	char *subject;
+	char *name;
 	int score;
 public:
 	Trial();
 	Trial(Trial&);
-	Trial(string);
+	Trial(char*, char*, int);
 	~Trial();
-	string GetSubject();
-	void SetSubject(string subject);
+	void SetSubject(char*);
+	void SetScore(int);
+	void SetName(char*);
+	char *GetSubject();
+	char *GetName();
+	int GetScore();
+	void GainScore(int);
 };
 
 class State

@@ -5,35 +5,46 @@ using namespace std;
 
 int Test::maxScore = 100;
 
+/* Trial */
+
 Trial::Trial()
 {
-	this -> subject = "undefinded";
+	this->subject = "";
+	this->score = 0;
 }
 
-Trial::Trial(string _subject)
+Trial::Trial(char *name, char *_subject, int _score)
 {
-	this -> subject = _subject;
+	this->subject = new char[100];
+	strcpy(this->subject, _subject);
+	this->subject = _subject;
+	this->score = _score;
 }
 
 Trial::Trial(Trial &obj)
 {
-	this -> subject = obj.subject;
+	this->subject = obj.subject;
+	this->score = obj.score;
 }
 
 Trial::~Trial()
 {
 	cout << "Deleting trial: " << this << endl;
+	delete subject;
 }
 
-string Trial::GetSubject()
+void Trial::SetSubject(char *_subject)
 {
-	return this -> subject;
+	this->subject = _subject;
 }
 
-void Test::GainScore(int _score)
+void Trial::SetScore(int _score)
 {
-	this -> score = _score;
+	this->score = _score;
 }
+
+
+
 
 Test::Test() : Trial()
 {
