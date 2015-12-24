@@ -1,10 +1,10 @@
 #include "stdafx.h"
+#include "objects.h"
 #include "stack.h"
 #include "group.h"
 #include <string>
 #include <iostream>
 using namespace std;
-using namespace System;
 
 int user = 0;
 

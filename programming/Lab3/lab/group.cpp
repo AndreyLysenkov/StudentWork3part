@@ -1,9 +1,10 @@
 #include "stdafx.h"
-#include "group.h"
 #include "stack.h"
+#include "group.h"
 #include <iostream>
 
 using namespace std;
+
 
 TrialGroup::TrialGroup()
 {
