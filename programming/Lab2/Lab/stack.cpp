@@ -10,8 +10,7 @@ Stack::Stack()
 Stack::Stack(Trial *_obj)
 	:Stack()
 {
-	Element *tmp = new Element(_obj, top);
-	top = tmp;
+	Add(_obj);
 }
 
 Stack::~Stack()
@@ -21,25 +20,27 @@ Stack::~Stack()
 
 void Stack::Add(Trial *_obj)
 {
-	Element *tmp = new Element(_obj, top);
+	Element *tmp;
+	tmp->obj = _obj;
+	tmp->next = top;
 	top = tmp;
 }
 
 Trial *Stack::Get()
 {
-	Trial *tmp = top->GetObj();
-	top = top->GetNext();
+	Trial *tmp = top->obj;
+	top = top->next;
 	return tmp;
 }
 
 void Stack::Show()
 {
 	Element *tmp = top;
-	do
+	while (tmp != NULL)
 	{
 		cout << "Element stack: " << &tmp;
-		tmp->GetObj()->Print();
-		tmp = tmp->GetNext();
-	} while (tmp->isLast());
+		tmp->obj->Print();
+		tmp = tmp->next;
+	}
 	cout << "end" << endl;
 }
