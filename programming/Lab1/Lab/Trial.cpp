@@ -62,10 +62,10 @@ double Test::GetRating()
 	return score / (double)maxScore;
 }
 
-void Test::GainScore(int _score)
-{
-	this -> score = _score;
-}
+//void Test::GainScore(int _score)
+//{
+//	this -> score = _score;
+//}
 
 Exam::Exam() : Trial()
 {

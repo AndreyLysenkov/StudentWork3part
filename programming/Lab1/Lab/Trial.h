@@ -5,7 +5,8 @@ using namespace std;
 class Trial
 {
 protected:
-	string subject;
+	char *subject;
+	int score;
 public:
 	Trial();
 	Trial(Trial&);
@@ -14,6 +15,27 @@ public:
 	string GetSubject();
 	void SetSubject(string subject);
 };
+
+class State
+{
+protected:
+	char *name;
+	int population;
+	double area;
+public:
+	State();
+	State(char*, int, double);
+	State(State &);
+	~State();
+	void SetName(char*);
+	void SetPopulation(int);
+	void SetArea(double);
+	char* GetName();
+	int GetPopulation();
+	double GetArea();
+};
+
+
 
 class Test : public Trial
 {
