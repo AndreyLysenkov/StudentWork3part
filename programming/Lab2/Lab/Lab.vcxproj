@@ -146,11 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Trial.h" />
+    <ClInclude Include="stack.h" />
+    <ClInclude Include="trial.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="program.cpp" />
-    <ClCompile Include="Trial.cpp" />
+    <ClCompile Include="stack.cpp" />
+    <ClCompile Include="trial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

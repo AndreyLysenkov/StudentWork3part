@@ -1,15 +1,17 @@
 #include "stack.h"
+#include <iostream>
+using namespace std;
 
 Stack::Stack()
 {
-	this->top = NULL;
+	top = NULL;
 }
 
 Stack::Stack(Trial *_obj)
 	:Stack()
 {
-	Element *tmp = new Element(_obj, this->top);
-	this->top = tmp;
+	Element *tmp = new Element(_obj, top);
+	top = tmp;
 }
 
 Stack::~Stack()
@@ -19,20 +21,15 @@ Stack::~Stack()
 
 void Stack::Add(Trial *_obj)
 {
-	Element *tmp = new Element(_obj, this->top);
-	this->top = tmp;
+	Element *tmp = new Element(_obj, top);
+	top = tmp;
 }
 
 Trial *Stack::Get()
 {
-	Trial *tmp = this->top->GetObj();
-	this->top = this->top->GetNext();
+	Trial *tmp = top->GetObj();
+	top = top->GetNext();
 	return tmp;
-}
-
-Element *Stack::GetTop()
-{
-	return this->top;
 }
 
 void Stack::Show()
@@ -45,31 +42,4 @@ void Stack::Show()
 		tmp = tmp->GetNext();
 	} while (tmp->isLast());
 	cout << "end" << endl;
-}
-
-
-Element::Element(Trial* _obj, Element* _next)
-{
-	this->obj = _obj;
-	this->next = _next;
-}
-
-Element::~Element()
-{
-
-}
-
-Trial *Element::GetObj()
-{
-	return this->obj;
-}
-
-Element * Element::GetNext()
-{
-	return this->next;
-}
-
-bool Element::isLast()
-{
-	return (this->next == NULL);
 }

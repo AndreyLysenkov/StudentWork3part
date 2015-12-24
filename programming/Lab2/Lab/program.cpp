@@ -1,4 +1,3 @@
-#include "Trial.h"
 #include "stack.h"
 #include <string>
 #include <iostream>
