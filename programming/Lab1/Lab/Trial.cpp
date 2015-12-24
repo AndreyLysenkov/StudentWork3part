@@ -74,10 +74,11 @@ Test::Test(char *_name, char *_subject,
 }
 
 Test::Test(Test &obj)
-	: Trial((Trial)obj)
+	: Trial(obj.GetName(), obj.GetSubject())
 {
-	this -> maxScore = obj.maxScore;
-	this -> score = obj.score;
+	this->maxScore = obj.GetMaxScore();
+	this->score = obj.GetScore();
+	this->minScore = obj.GetMinScore();
 }
 
 Test::~Test()
@@ -122,7 +123,6 @@ double Test::GetMinRating()
 }
 
 
-
 Exam::Exam() : Trial()
 {
 	this -> isPassed = false;
@@ -136,14 +136,17 @@ Exam::Exam(char *_name, char *_subject)
 	this -> isPassed = false;
 }
 
-Exam::Exam(Exam &obj) : Trial((Exam)obj)
+Exam::Exam(Exam &obj)
+	: Trial(obj.GetName(), obj.GetSubject())
 {
 	this -> isPassed = obj.isPassed;
 	this -> mark = obj.mark;
 }
 
-Exam::Exam(char *, char *)
+Exam::Exam(char *_name, char *_subject)
+	: Trial(_name, _subject)
 {
+
 }
 
 Exam::~Exam()
@@ -153,23 +156,24 @@ Exam::~Exam()
 
 int Exam::GetMark()
 {
-	return this -> mark;
+	return this->mark;
 }
 
-void Exam::SetMark(int _mark)
+bool Exam::SetMark(int _mark)
 {
-	this -> mark = mark;
-}
-
-void Exam::Passed()
-{
-	this -> isPassed = true;
+	if (this->IsPassed())
+	{
+		return false;
+	}
+	this -> mark = _mark;
+	return true;
 }
 
 bool Exam::IsPassed()
 {
 	return this -> isPassed;
 }
+
 
 FinalExam::FinalExam() : Exam()
 {
