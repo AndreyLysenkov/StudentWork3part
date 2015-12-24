@@ -2,6 +2,12 @@
 #include "trial.h"
 using namespace std;
 
+struct Element
+{
+	Trial *obj;
+	Element *next;
+};
+
 class Stack
 {
 public:
@@ -12,10 +18,4 @@ public:
 	void Add(Trial*);
 	Trial *Get();
 	static void Show();
-};
-
-struct Element
-{
-	Trial *obj;
-	Element *next;
 };
