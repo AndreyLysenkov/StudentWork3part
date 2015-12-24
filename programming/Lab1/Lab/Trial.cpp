@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "Trial.h"
 #include <string>
 #include <iostream>
@@ -56,6 +57,12 @@ char *Trial::GetSubject()
 char *Trial::GetName()
 {
 	return this->name;
+}
+
+void Trial::Print()
+{
+	cout << " Name : " << this->GetSubject() << endl;
+	cout << " Subject : " << this->GetName() << endl;
 }
 
 
@@ -122,6 +129,16 @@ double Test::GetMinRating()
 	return minScore / (double)maxScore;
 }
 
+void Test::Print()
+{
+	((Test)*this).Print();
+	int score;
+	int maxScore;
+	int minScore;
+	cout << " Mark : " << this->GetScore() << "/" << this->GetMaxScore()
+		<< "(min : " << this->GetMinScore() << ")" << endl;
+}
+
 
 Exam::Exam() : Trial()
 {
@@ -174,6 +191,13 @@ bool Exam::IsPassed()
 	return this -> isPassed;
 }
 
+void Exam::Print()
+{
+	((Exam)*this).Print();
+	cout << " Passed : " << this->IsPassed() << endl;
+	cout << " Mark : " << this->GetMark() << endl;
+}
+
 
 FinalExam::FinalExam() : Exam()
 {
@@ -224,4 +248,11 @@ void FinalExam::SetFinalMark(int _finalMark, int prevMark[], int marksCount)
 int FinalExam::GetFinalMark()
 {
 	return this->finalMark;
+}
+
+void FinalExam::Print()
+{
+	((FinalExam)*this).Print();
+	cout << " Access: " << this->IsAccessed() << endl;
+	cout << " FinalMark: " << this->GetFinalMark() << endl;
 }
