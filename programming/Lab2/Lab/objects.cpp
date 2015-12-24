@@ -36,7 +36,6 @@ Trial::Trial(Trial &obj)
 
 Trial::~Trial()
 {
-	cout << "Deleting trial: " << this << endl;
 	delete name;
 	delete subject;
 }
@@ -74,6 +73,8 @@ void Trial::Print()
 Test::Test() : Trial()
 {
 	this->score = 0;
+	this->maxScore = 0;
+	this->minScore = 0;
 }
 
 Test::Test(char *_name, char *_subject,
@@ -95,7 +96,7 @@ Test::Test(Test &obj)
 
 Test::~Test()
 {
-	cout << "Deleting your Test: " << this << endl;
+	
 }
 
 void Test::SetScore(int _score)
@@ -165,7 +166,7 @@ Exam::Exam(Exam &obj)
 
 Exam::~Exam()
 {
-	cout << "Delete object " << this << endl;
+	
 }
 
 int Exam::GetMark()
@@ -196,7 +197,8 @@ void Exam::Print()
 }
 
 
-FinalExam::FinalExam() : Exam()
+FinalExam::FinalExam()
+	: Exam()
 {
 	this->isAccessed = false;
 	this->finalMark = 0;
@@ -218,7 +220,7 @@ FinalExam::FinalExam(FinalExam &obj)
 
 FinalExam::~FinalExam()
 {
-	cout << "Deleteing final exam: " << this << endl;
+	
 }
 
 bool FinalExam::IsAccessed()

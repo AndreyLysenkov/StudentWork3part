@@ -1,6 +1,5 @@
 #pragma once
 #include "objects.h"
-using namespace std;
 
 struct Element
 {
