@@ -18,7 +18,6 @@ public:
 	int GainScore(int);
 };
 
-
 class Test : public Trial
 {
 protected:
@@ -38,7 +37,6 @@ public:
 	int GainScore(int);
 	double GetMinRating();
 };
-
 
 class Exam : public Trial
 {
@@ -63,9 +61,10 @@ private:
 public:
 	FinalExam();
 	FinalExam(FinalExam&);
-	FinalExam(string);
+	FinalExam(char*, char*);
 	~FinalExam();
 	bool IsAccessed();
-	void GainAccessed();
-	void SetFinalMark(int);
+	void GainAccess();
+	void SetFinalMark(int, int[], int);
+	int GetFinalMark();
 };

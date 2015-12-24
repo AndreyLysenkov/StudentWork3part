@@ -181,16 +181,18 @@ FinalExam::FinalExam() : Exam()
 	this -> finalMark = 0;
 }
 
-FinalExam::FinalExam(string subject) : Exam(subject)
+FinalExam::FinalExam(char *_name, char *_subject)
+	: Exam(_name, _subject)
 {
 	this -> isAccessed = false;
 	this -> finalMark = 0;
 }
 
-FinalExam::FinalExam(FinalExam &obj) : Exam((Exam)obj)
+FinalExam::FinalExam(FinalExam &obj)
+	: Exam(obj.GetName(), obj.GetSubject())
 {
-	this -> isAccessed = obj.isAccessed;
-	this -> finalMark = obj.finalMark;
+	this -> isAccessed = obj.IsAccessed();
+	this -> finalMark = obj.GetFinalMark();
 }
 
 FinalExam::~FinalExam()
@@ -203,12 +205,23 @@ bool FinalExam::IsAccessed()
 	return this -> isAccessed;
 }
 
-void FinalExam::GainAccessed()
+void FinalExam::GainAccess()
 {
-	this -> isAccessed = true;
+	this->isAccessed = true;
 }
 
-void FinalExam::SetFinalMark(int _finalMark)
+void FinalExam::SetFinalMark(int _finalMark, int prevMark[], int marksCount)
 {
-	this -> finalMark = _finalMark;
+	double average = 0;
+	for (int i = 0; i < marksCount; i++)
+	{
+		average += prevMark[i];
+	}
+	average = (average / marksCount + this->finalMark) / 2;
+	this->finalMark = (int)average;
+}
+
+int FinalExam::GetFinalMark()
+{
+	return this->finalMark;
 }
