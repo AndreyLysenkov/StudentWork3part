@@ -6,12 +6,13 @@
 	strTypeArr db 'Type array: $'
 	strError db 'Error :($'
 	minus db '-$'
-	gg db '8$'
 	color db 3ah
 	base dw 10d
 	arr dw 10 dup (?)
-	n db 0d
-	d db 0d
+	n dw 0d
+	d dw 0d
+	tmpB db 0d
+	tmpW dw 0d
 	count db 0d
 	buffer db 10 dup (?)
 .code
@@ -108,15 +109,6 @@ exitMc:
 	xor dx, dx
 endm
 
-mReadString macro
-	mPush
-	mov ah, 0Ah
-	xor di, di
-	mov dx, offset buffer
-	int 21h
-	mPop
-endm
-
 mPrintTest macro
 	mov si, offset buffer+1
 m1:
@@ -133,47 +125,53 @@ exit0:
 	xor ax, ax
 endm
 
-mCheckDigit macro
-local wrong, exit0
-	cmp byte ptr [si], '0'
-	jl wrong
-	cmp byte ptr [si], '9'
-	jg wrong
-	mov dx, 1
-	jmp exit0
-wrong:
-	mov dx, 0
-exit0:
-	mov ax, ax
-endm
-
 mReadNumb macro value
-local m1
-	mReadString
-	mov si, offset buffer+1
-m1:
+local nextDigit, exit0, exit1
+	mov ah, 0Ah
+	xor bx, bx
+	xor dx, dx
+	mov dx, offset buffer
+	int 21h
+	mov bx, 10d
+	mov value, 0d
+	mov si, offset buffer+2
+	cmp byte ptr [si], '-'
+	jnz nextDigit
+	mov tmpB, 1
 	inc si
+nextDigit:
+	xor cx, cx
 	cmp byte ptr [si], '0'
 	jl exit0
 	cmp byte ptr [si], '9'
 	jg exit0
-	cmp dx, 0
-	jnz exit0
-	mov ah, 02h
-	mov dl, byte ptr [si]
-	int 21h
+	mov cl, byte ptr [si]
+	sub cl, '0'
+	mov ax, value
+	mul bx
+	add ax, cx
+	mov value, ax
+	inc si
 	jmp m1
 exit0:
+	cmp tmpB, 0
+	jz exit1
+	neg value
+exit1:
 	xor ax, ax
 endm
 
+
 start:
-	mov   ax,@data
-	mov   ds,ax
+	mov ax, @data
+	mov ds, ax
 	mClrScr
 	mPrintStr strTypeN
 	mPrintNumb -1005d
+	mBr
 	mReadNumb n
+	mBr
+	mPrintNumb n
 	;mSetPoint 3, 0
 	;mPrintNumb -13d
 	;mSetPoint 6, 0
