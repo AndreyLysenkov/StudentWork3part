@@ -4,11 +4,16 @@
 	strTypeN db 'Type n: $'
 	strTypeD db 'Type d: $'
 	strTypeArr db 'Type array: $'
-	color db 1eh
-	arr dw 10 dup(?)
+	strError db 'Error :($'
+	minus db '-$'
+	gg db '8$'
+	color db 3ah
+	base dw 10d
+	arr dw 10 dup (?)
 	n db 0d
 	d db 0d
 	count db 0d
+	buffer db 10 dup (?)
 .code
 
 mPush macro
@@ -16,9 +21,11 @@ mPush macro
 	push bx
 	push cx
 	push dx
+	push si
 endm
 
 mPop macro
+	pop si
 	pop dx
 	pop cx
 	pop bx
@@ -45,6 +52,14 @@ mSetPoint macro row: REQ, column: REQ
 	mPop
 endm
 
+mBr macro
+	mPush
+	mov ah, 02h
+	mov dl, 0Ah
+	int 21h
+	mPop
+endm
+
 mPrintStr macro string
 	mPush
 	mov ah, 09h
@@ -53,42 +68,119 @@ mPrintStr macro string
 	mPop
 endm
 
-mPrintNumb macro value
-	mov eax, value
-	
+mPrintDigit macro value
+	mPush
+	mov ah, 02h
+	mov dl, byte ptr [value]
+	add dl, '0'
+	int 21h
+	mPop
 endm
 
-mPrntNumb macro value
-local positive3, findDigit, gtDgt, prntDgt
-	;; Печать числа
+mPrintNumb macro value
+local positive, nextDigit, printDigit, printD, exitMc
 	mov ax, value
-	test ax, ax
-	jns positive3
-	mPrntStr minus
+	cmp ax, 0
+	jg positive
+	mPrintStr minus
 	neg ax
-positive3:
-	xor cx, cx 
-	mov bx, 0Ah
-findDigit:
-	xor dx, dx 
+positive:
+	xor cx, cx
+	mov bx, base
+nextDigit:
+	xor dx, dx
 	div bx
 	push dx
 	inc cx
-	test ax, ax
-	jnz findDigit
-	mov ah, 02h 
-gtDgt:
+	cmp ax, 0
+	jnz nextDigit
+	mov ah, 02h
+printDigit:
 	pop dx
-	cmp dl, 9d
-	jbe prntDgt
-	add dl,7d
-prntDgt:
+	cmp dx, base
+	jl printD
+	jmp exitMc
+printD:
 	add dl, '0'
-	int 21h 
-	loop gtDgt
-endm 
+	int 21h
+	loop printDigit
+exitMc:
+	xor dx, dx
+endm
+
+mReadString macro
+	mPush
+	mov ah, 0Ah
+	xor di, di
+	mov dx, offset buffer
+	int 21h
+	mPop
+endm
+
+mPrintTest macro
+	mov si, offset buffer+1
+m1:
+	inc si
+	cmp byte ptr [si], '0'
+	jl exit0
+	cmp byte ptr [si], '9'
+	jg exit0
+	mov ah, 02h
+	mov dl, byte ptr [si]
+	int 21h
+	jmp m1
+exit0:
+	xor ax, ax
+endm
+
+mCheckDigit macro
+local wrong, exit0
+	cmp byte ptr [si], '0'
+	jl wrong
+	cmp byte ptr [si], '9'
+	jg wrong
+	mov dx, 1
+	jmp exit0
+wrong:
+	mov dx, 0
+exit0:
+	mov ax, ax
+endm
+
+mReadNumb macro value
+local m1
+	mReadString
+	mov si, offset buffer+1
+m1:
+	inc si
+	cmp byte ptr [si], '0'
+	jl exit0
+	cmp byte ptr [si], '9'
+	jg exit0
+	cmp dx, 0
+	jnz exit0
+	mov ah, 02h
+	mov dl, byte ptr [si]
+	int 21h
+	jmp m1
+exit0:
+	xor ax, ax
+endm
 
 start:
-	
-	
+	mov   ax,@data
+	mov   ds,ax
+	mClrScr
+	mPrintStr strTypeN
+	mPrintNumb -1005d
+	mReadNumb n
+	;mSetPoint 3, 0
+	;mPrintNumb -13d
+	;mSetPoint 6, 0
+
+exit:
+	mov ah,7h
+	int 12h
+	mov ax,4C00h
+	int 21h
 end start
