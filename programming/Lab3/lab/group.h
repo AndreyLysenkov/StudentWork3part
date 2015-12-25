@@ -26,7 +26,6 @@ public:
 	~TestGroup();
 	virtual void Add(Test*);
 	virtual void Delete();
-	void Show();
 };
 
 class ExamGroup : public TrialGroup
@@ -37,7 +36,6 @@ public:
 	~ExamGroup();
 	virtual void Add(Exam*);
 	virtual void Delete();
-	void Show();
 };
 
 class FinalExamGroup : public ExamGroup
@@ -48,5 +46,4 @@ public:
 	~FinalExamGroup();
 	virtual void Add(FinalExam*);
 	virtual void Delete();
-	void Show();
 };

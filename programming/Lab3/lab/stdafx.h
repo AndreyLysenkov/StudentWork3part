@@ -6,3 +6,6 @@
 #pragma once
 
 // TODO: Установите здесь ссылки на дополнительные заголовки, требующиеся для программы
+#include "stack.h"
+#include "objects.h"
+#include "group.h"

@@ -2,13 +2,11 @@
 #include "stack.h"
 #include "group.h"
 #include <iostream>
-
 using namespace std;
-
 
 TrialGroup::TrialGroup()
 {
-	stack = NULL;
+
 }
 
 TrialGroup::TrialGroup(Trial *obj)
@@ -64,7 +62,7 @@ Trial *TrialGroup::GetTop()
 
 TestGroup::TestGroup()
 {
-	stack = NULL;
+
 }
 
 TestGroup::TestGroup(Test *obj)
@@ -96,7 +94,7 @@ void TestGroup::Delete()
 
 ExamGroup::ExamGroup()
 {
-	stack = NULL;
+
 }
 
 ExamGroup::ExamGroup(Exam *obj)
@@ -128,7 +126,7 @@ void ExamGroup::Delete()
 
 FinalExamGroup::FinalExamGroup()
 {
-	stack = NULL;
+
 }
 
 FinalExamGroup::FinalExamGroup(FinalExam *obj)

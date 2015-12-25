@@ -1,7 +1,4 @@
 #include "stdafx.h"
-#include "objects.h"
-#include "stack.h"
-#include "group.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -41,4 +38,5 @@ int main()
 	cout << endl;
 	Method method0 = PrintGreater;
 	group.ForEach(method0);
+	system("pause");
 }
