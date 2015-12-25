@@ -5,8 +5,9 @@
 	strTypeD db 'Type d: $'
 	strTypeArr db 'Type array: $'
 	strError db 'Error :($'
+	strTypeElement db ' >  $'
 	minus db '-$'
-	color db 3ah
+	color db 30h
 	base dw 10d
 	arr dw 10 dup (?)
 	n dw 0d
@@ -109,31 +110,17 @@ exitMc:
 	xor dx, dx
 endm
 
-mPrintTest macro
-	mov si, offset buffer+1
-m1:
-	inc si
-	cmp byte ptr [si], '0'
-	jl exit0
-	cmp byte ptr [si], '9'
-	jg exit0
-	mov ah, 02h
-	mov dl, byte ptr [si]
-	int 21h
-	jmp m1
-exit0:
-	xor ax, ax
-endm
-
 mReadNumb macro value
 local nextDigit, exit0, exit1
-	mov ah, 0Ah
+	mPush
+	xor ax, ax
 	xor bx, bx
+	mov value, bx
 	xor dx, dx
+	mov ah, 0Ah
 	mov dx, offset buffer
 	int 21h
 	mov bx, 10d
-	mov value, 0d
 	mov si, offset buffer+2
 	cmp byte ptr [si], '-'
 	jnz nextDigit
@@ -152,13 +139,15 @@ nextDigit:
 	add ax, cx
 	mov value, ax
 	inc si
-	jmp m1
+	jmp nextDigit
 exit0:
 	cmp tmpB, 0
 	jz exit1
-	neg value
+	mov ax, value
+	neg ax
+	mov value, ax
 exit1:
-	xor ax, ax
+	mPop
 endm
 
 
@@ -166,15 +155,27 @@ start:
 	mov ax, @data
 	mov ds, ax
 	mClrScr
+	mSetPoint 5, 5
 	mPrintStr strTypeN
-	mPrintNumb -1005d
-	mBr
 	mReadNumb n
 	mBr
-	mPrintNumb n
-	;mSetPoint 3, 0
-	;mPrintNumb -13d
-	;mSetPoint 6, 0
+	mPrintStr strTypeArr
+	;mPrintNumb n
+	mBr
+	xor cx, cx
+	mov cx, n
+	xor si, si
+	xor bx, bx
+	mov bx, offset arr
+	;lea bx, arr
+nextElement:
+	mPrintStr strTypeElement
+	mReadNumb [bx][si]
+	mBR
+	inc si
+	inc si
+loop nextElement
+
 
 exit:
 	mov ah,7h
