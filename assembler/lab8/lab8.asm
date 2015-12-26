@@ -144,6 +144,43 @@ mReadln macro
 	pop ax
 endm
 
+p0Matrix proc far
+	mPush
+	mData
+	mClear
+	mClrScr
+	mov cl, 3d
+	mov ch, 3d
+	xor si, si
+	lea bx, matrix
+printNext:
+	mSetPoint cl, ch
+	mov ax, [bx][si]
+	xor ah, ah
+	call pPrintNumb
+	add ch, 5d
+	mov ax, si
+	inc si
+	div m
+	inc ah
+	cmp ah, m
+	jne checkEnd
+	inc cl
+	mov ch, 3d
+checkEnd:
+	inc al
+	cmp al, n
+jl printNext
+	cmp ah, m
+jl printNext
+	mBr
+	mPrintStr msgNext
+	mReadln
+	mPop
+	xor ax, ax
+	retf
+pEnterMatrix endp
+
 pReadNumb proc near
 	mPush
 	mData
@@ -259,8 +296,7 @@ pPrintMatrix proc near
 	mClear
 	mClrScr
 	mov cl, 3d
-	mov ch, 20d
-	mSetPoint cl, ch
+	mov ch, 3d
 	xor si, si
 	lea bx, matrix
 printNext:
@@ -276,14 +312,14 @@ printNext:
 	cmp ah, m
 	jne checkEnd
 	inc cl
-	mov ch, 20d
+	mov ch, 3d
 checkEnd:
 	inc al
 	cmp al, n
 jl printNext
 	cmp ah, m
 jl printNext
-ggg:
+	mBr
 	mPrintStr msgNext
 	mReadln
 	mPop
