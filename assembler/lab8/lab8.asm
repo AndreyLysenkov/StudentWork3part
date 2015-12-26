@@ -1,14 +1,20 @@
+MASM
 .model small
 .stack 100h
 .data
-	color db 30h
 	minus db '-$'
 	value dw 0d
-	base dw 10d
 	buffer db 27 dup (?)
 	tmpB db 0d
 	tmpW db 0d
 .code
+
+mData macro
+	push ax
+	mov ax,@data
+	mov ds,ax
+	pop ax
+endm
 
 mPush macro
 	push bx
@@ -25,7 +31,6 @@ mPop macro
 endm
 
 mClear macro
-	xor ax, ax
 	xor bx, bx
 	xor cx, cx
 	xor dx, dx
@@ -84,32 +89,88 @@ mGetValueStack macro
 	pop bx
 endm
 
-pClrScr proc near
-	mPush
-	mov ax, 0600h
-	mov bh, color
-	mov cx, 0000h
-	mov dx, 184Fh
-	int 10h
-	mPop
-	ret 0
-pClrScr endp
-
 pReadNumb proc near
-	mGetValueStack
-	
+	mPush
+	mData
+	mClear
+	xor ax, ax
+	mov ax, 0A00h
+	lea dx, buffer
+	int 21h
+	xor dx, dx
+	xor ax, ax
+	mov si, offset buffer+2
+	cmp byte ptr [si], '-'
+	jnz nextDigit
+	mov cx, 1
+	inc si
+nextDigit:
+	cmp byte ptr [si], '0'
+	jl notNumb
+	cmp byte ptr [si], '9'
+	jg notNumb
+	xor bx, bx
+	mov bh, byte ptr [si]
+	sub bh, '0'
+	mov bl, 10d
+	mul bl
+	add ax, bx
+	inc si
+jmp nextDigit
+notNumb:
+	cmp cx, 0
+	jz positive
+	neg ax
+positive:
+	mPop
 	ret 0
 pReadNumb endp
 
-
-start:
-	mov ax,@data
-	mov ds,ax
-	call pClrScr
+pPrintNumb proc near
+	mGetValueStack
+	mPush
+	mData
+	mClear
 	mov ax, 5d
-	push ax
-	call pReadNumb
+	mov bx, 10d
+	cmp ax, 0d
+	jge nextDigit2
+	mPrintStr minus
+	neg ax
+nextDigit2:
+	xor dx, dx
+	div bx
+	push dx
+	inc cx
+	cmp ax, 0d
+
 	
+;jnz nextDigit2
+	xor ax, ax
+	mov ax, 0200h
+printDigit:
+	pop dx
+	add dl, '0'
+	int 21h
+loop printDigit
+	mPop
+	ret 0
+pPrintNumb endp
+
+
+main proc near
+	mData
+
+	mov ax, 5d
+	call pPrintNumb
+	mov ax, 0700h
+	int 12h	
 	mov ax, 4C00h
 	int 21h
+main endp
+
+
+
+start:
+	call main
 end start
