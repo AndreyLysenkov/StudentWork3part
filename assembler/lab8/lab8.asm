@@ -2,7 +2,7 @@ MASM
 .model small
 .stack 100h
 .data
-	color db 3Bh ;38h
+	color db 3Eh ;38h
 	minus db '-$'
 	value dw 0d
 	buffer db 27, 1 dup (64)
@@ -16,6 +16,7 @@ MASM
 	msgMatrixSizeRow db ' row> $'
 	msgMatrixSizeCol db ' col> $'
 	msgMatrixElement db '    > $'
+	msgNext db ' --- Press <Enter> ---$'
 	tmpB db 0d
 	tmpW db 0d
 	n db 0d
@@ -73,7 +74,7 @@ mBr macro
 	push dx
 	xor dx, dx
 	mov ax, 0200h
-	mov dl, 000Ah
+	mov dl, 0Ah
 	int 21h
 	pop dx
 	pop ax
@@ -133,6 +134,16 @@ mClrScr macro
 	mPop
 endm
 
+mReadln macro
+	push ax
+	push dx
+	mov ax, 0A00h
+	lea dx, buffer
+	int 21h
+	pop dx
+	pop ax
+endm
+
 pReadNumb proc near
 	mPush
 	mData
@@ -145,7 +156,7 @@ pReadNumb proc near
 	mov si, offset buffer+2
 	cmp byte ptr [si], '-'
 	jnz nextDigit
-	mov cx, 1
+	mov cl, 1d
 	inc si
 nextDigit:
 	cmp byte ptr [si], '0'
@@ -155,27 +166,21 @@ nextDigit:
 	mov bx, 10d
 	mul bx
 	xor bx, bx
-	mov bh, byte ptr [si]
-	sub bh, '0'
+	mov bl, byte ptr [si]
+	sub bl, '0'
 	add ax, bx
 	inc si
 jmp nextDigit
 notNumb:
-	mov bh, ah
-	mov bl, al
-	mov ah, bl
-	mov al, bh
-	cmp cx, 0
-	jz positive
+	cmp cl, 0d
+	je positive
 	neg ax
 positive:
-	mov ax, bx
 	mPop
 	ret 0
 pReadNumb endp
 
 pPrintNumb proc near
-	mGetValueStack
 	mPush
 	mData
 	mClear
@@ -203,7 +208,6 @@ loop printDigit
 pPrintNumb endp
 
 pEnterMatrix proc near
-	mGetValueStack
 	mPush
 	mData
 	mClear
@@ -213,11 +217,11 @@ menuSize:
 	mBr
 	mPrintStr msgMatrixSizeRow
 	call pReadNumb
-	mov n, ah
+	mov n, al
 	mBr
 	mPrintStr msgMatrixSizeCol
 	call pReadNumb
-	mov m, ah
+	mov m, al
 	mBr
 	mov al, n
 	mov ah, m
@@ -242,12 +246,8 @@ enterNext:
 	mPrintStr msgMatrixElement
 	call pReadNumb
 	mov [bx][si], al
-	mov ax, [bx][si]
-	call pPrintNumb
 	inc si
-	dec cx
-	cmp cx, 1d
-jg enterNext
+loop enterNext
 	mPop
 	xor ax, ax
 	ret 0
@@ -257,6 +257,7 @@ pPrintMatrix proc near
 	mPush
 	mData
 	mClear
+	mClrScr
 	mov cl, 3d
 	mov ch, 20d
 	mSetPoint cl, ch
@@ -265,6 +266,7 @@ pPrintMatrix proc near
 printNext:
 	mSetPoint cl, ch
 	mov ax, [bx][si]
+	xor ah, ah
 	call pPrintNumb
 	add ch, 5d
 	mov ax, si
@@ -281,6 +283,9 @@ checkEnd:
 jl printNext
 	cmp ah, m
 jl printNext
+ggg:
+	mPrintStr msgNext
+	mReadln
 	mPop
 	xor ax, ax
 	ret 0
@@ -306,29 +311,26 @@ menu:
 	mBr
 	xor ax, ax
 	call pReadNumb
-	mov al, ah
-	xor ah, ah
-	cmp ax, 0d
+	cmp al, 0d
 	je term0
-	cmp ax, 1d
+	cmp al, 1d
 	je term1
-	cmp ax, 2d
+	cmp al, 2d
 	je term2
-	cmp ax, 3d
+	cmp al, 3d
 	je term3
-	cmp ax, 4d
+	cmp al, 4d
 	je term4
-	cmp ax, 5d
+	cmp al, 5d
 	je term5
-	cmp ax, 6d
+	cmp al, 6d
 	je term6
 jmp menu
 term1:
 	call pEnterMatrix
-	call pPrintMatrix
-	jmp menu
+jmp menu
 term2:
-	xor ax, ax
+	call pPrintMatrix
 jmp menu
 term3:
 	xor ax, ax
@@ -348,7 +350,6 @@ term0:
 	mov ax, 4C00h
 	int 21h
 main endp
-
 
 start:
 	call main
