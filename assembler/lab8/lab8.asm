@@ -9,7 +9,7 @@ MASM
 	buffer db 27, 1 dup (64)
 	menu1MatrixEnter db '   1> Enter Matrix$'
 	menu2MatrixPrint db '   2> Print Matrix$'
-	nenu3MatrixTran db '   3> Trans Matrix'
+	menu3MatrixTran db '   3> Trans Matrix$'
 	menu4TaskA db '   4> TaskA$'
 	menu5TaskB db '   5> TaskB$'
 	menu6TaskC db '   6> TaskC$'
@@ -159,7 +159,7 @@ pTaskA proc far
 	xor cx, cx
 	xor ax, ax
 	xor dx, dx
-	mov counter, ax
+	mov counter, al
 	mov al, m
 	mov cl, n
 	mul cx
@@ -193,7 +193,7 @@ pTaskB proc far
 	mClrScr
 	mClear
 	mov value, ax
-	mov counter, ax
+	mov counter, al
 	mov cl, n
 	mov al, m
 	mul cx
@@ -215,7 +215,7 @@ wrong:
 	inc dh
 	mov dl, 0d
 nxt2:
-	int si
+	inc si
 loop printNext2
 	mBr
 	xor ax, ax
@@ -236,7 +236,7 @@ pTaskC proc far
 	mClrScr
 	mClear
 	mov value, ax
-	mov counter, ax
+	mov counter, al
 	mov cl, n
 	mov al, m
 	mul cx
@@ -255,7 +255,7 @@ printNext3:
 	mov ax, [bx][si]
 	add counter, al
 skip3:
-	int si
+	inc si
 loop printNext3
 	mBr
 	mov ax, value
