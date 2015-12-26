@@ -4,9 +4,11 @@ MASM
 .data
 	minus db '-$'
 	value dw 0d
-	buffer db 27 dup (?)
+	buffer db 27, 1 dup (64)
 	tmpB db 0d
 	tmpW db 0d
+	n db 0d
+	m db 0d
 .code
 
 mData macro
@@ -59,6 +61,23 @@ mBr macro
 	int 21h
 	pop dx
 	pop ax
+endm
+
+mGetIndex macro i: REQ, j: REQ, sz: REQ
+	;NB: sz = 1byte
+	mPush
+	mov ax, i
+	mul sz
+	add j
+	mPop
+endm
+
+mGetIndexes macro n: REQ, sz: REQ
+	mPush
+	mov ax, n
+	div sz
+	
+	mPop
 endm
 
 mPrintStr macro string
@@ -131,7 +150,6 @@ pPrintNumb proc near
 	mPush
 	mData
 	mClear
-	mov ax, 5d
 	mov bx, 10d
 	cmp ax, 0d
 	jge nextDigit2
@@ -143,9 +161,7 @@ nextDigit2:
 	push dx
 	inc cx
 	cmp ax, 0d
-
-	
-;jnz nextDigit2
+jg nextDigit2
 	xor ax, ax
 	mov ax, 0200h
 printDigit:
@@ -157,11 +173,10 @@ loop printDigit
 	ret 0
 pPrintNumb endp
 
-
 main proc near
 	mData
-
-	mov ax, 5d
+	call pReadNumb
+	mBr
 	call pPrintNumb
 	mov ax, 0700h
 	int 12h	
