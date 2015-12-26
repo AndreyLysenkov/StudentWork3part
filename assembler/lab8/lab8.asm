@@ -5,18 +5,21 @@ MASM
 	color db 3Eh ;38h
 	minus db '-$'
 	value dw 0d
+	counter db 0d
 	buffer db 27, 1 dup (64)
 	menu1MatrixEnter db '   1> Enter Matrix$'
 	menu2MatrixPrint db '   2> Print Matrix$'
-	menu3TaskA db '   3> TaskA$'
-	menu4TaskB db '   4> TaskB$'
-	menu5TaskC db '   5> TaskC$'
+	nenu3MatrixTran db '   3> Trans Matrix'
+	menu4TaskA db '   4> TaskA$'
+	menu5TaskB db '   5> TaskB$'
+	menu6TaskC db '   6> TaskC$'
 	menu0Exit db ' 0> Exit$'
 	msgMatrixSize db '   Type matrix size: $'
 	msgMatrixSizeRow db ' row> $'
 	msgMatrixSizeCol db ' col> $'
-	msgMatrixElement db '    > $'
+	msgInput db '    > $'
 	msgNext db ' --- Press <Enter> ---$'
+	msgInputNumber db 'Enter number: $'
 	tmpB db 0d
 	tmpW db 0d
 	n db 0d
@@ -144,7 +147,128 @@ mReadln macro
 	pop ax
 endm
 
-pTMatrix proc far
+pTaskA proc far
+	mPush
+	mData
+	mClear
+	mClrScr
+	mSetPoint 3d, 3d
+	mPrintStr msgInput
+	call pReadNumb
+	mov value, ax
+	xor cx, cx
+	xor ax, ax
+	xor dx, dx
+	mov counter, ax
+	mov al, m
+	mov cl, n
+	mul cx
+	mov cx, ax
+	xor si, si
+	lea bx, matrix
+nxt:
+	mov ax, [bx][si]
+	xor ah, ah
+	cmp ax, value
+	jge more
+	inc dl
+more:
+	inc si
+loop nxt
+	mBr
+	mov ax, ax
+	mov al, dl
+	call pPrintNumb
+	mBr
+	mPrintStr msgNext
+	mReadln
+	mPop
+	xor ax, ax
+	retf
+pTaskA endp
+
+pTaskB proc far
+	mPush
+	mData
+	mClrScr
+	mClear
+	mov value, ax
+	mov counter, ax
+	mov cl, n
+	mov al, m
+	mul cx
+	mov cx, ax
+	xor si, si
+	lea bx, matrix
+printNext2:
+	mov ax, [bx][si]	
+	xor ah, ah
+	cmp ax, 0d
+	jne wrong
+	inc dl
+wrong:
+	xor cx, cx
+	mov cl, m
+	div cx
+	cmp dl, m
+	jne nxt2
+	inc dh
+	mov dl, 0d
+nxt2:
+	int si
+loop printNext2
+	mBr
+	xor ax, ax
+	mov al, dl
+	call pPrintNumb
+	mBr
+	mBr
+	mPrintStr msgNext
+	mReadln
+	mPop
+	xor ax, ax
+	retf
+pTaskB endp
+
+pTaskC proc far
+	mPush
+	mData
+	mClrScr
+	mClear
+	mov value, ax
+	mov counter, ax
+	mov cl, n
+	mov al, m
+	mul cx
+	mov cx, ax
+	xor si, si
+	lea bx, matrix
+printNext3:
+	mov ax, [bx][si]	
+	xor ah, ah
+	mov ax, si
+	xor dx, dx
+	mov dl, m
+	div dx
+	cmp ax, dx
+	jl skip3
+	mov ax, [bx][si]
+	add counter, al
+skip3:
+	int si
+loop printNext3
+	mBr
+	mov ax, value
+	call pPrintNumb
+	mBr
+	mPrintStr msgNext
+	mReadln
+	mPop
+	xor ax, ax
+	retf
+pTaskC endp
+
+pMatrixTrans proc far
 	mPush
 	mData
 	mClear
@@ -179,7 +303,7 @@ jl printNext0
 	mPop
 	xor ax, ax
 	retf
-pTMatrix endp
+pMatrixTrans endp
 
 pReadNumb proc near
 	mPush
@@ -280,7 +404,7 @@ jg menuSize
 	lea bx, matrix
 enterNext:
 	mBr
-	mPrintStr msgMatrixElement
+	mPrintStr msgInput
 	call pReadNumb
 	mov [bx][si], al
 	inc si
@@ -329,7 +453,6 @@ pPrintMatrix endp
 
 main proc near
 	mData
-	mClrScr
 menu:
 	mClrScr
 	mSetPoint 3d, 1d
@@ -337,14 +460,17 @@ menu:
 	mBr
 	mPrintStr menu2MatrixPrint
 	mBr
-	mPrintStr menu3TaskA
+	mPrintStr menu3MatrixTran
 	mBr
-	mPrintStr menu4TaskB
+	mPrintStr menu4TaskA
 	mBr
-	mPrintStr menu5TaskC
+	mPrintStr menu5TaskB
+	mBr
+	mPrintStr menu6TaskC
 	mBr
 	mPrintStr menu0Exit
 	mBr
+	mPrintStr msgInput
 	xor ax, ax
 	call pReadNumb
 	cmp al, 0d
@@ -369,17 +495,16 @@ term2:
 	call pPrintMatrix
 jmp menu
 term3:
-	call far ptr pTMatrix
-	xor ax, ax
+	call far ptr pMatrixTrans
 jmp menu
 term4:
-	xor ax, ax
+	call far ptr pTaskA
 jmp menu
 term5:
-	xor ax, ax
+	call far ptr pTaskB
 jmp menu
 term6:
-	xor ax, ax
+	call far ptr pTaskC
 jmp menu
 term0:
 	mov ax, 0700h
