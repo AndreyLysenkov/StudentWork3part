@@ -7,6 +7,7 @@ data segment
 	buffer db 127 dup ('$')
 	reader db 7,1 dup (?)
 	tmp db 0d
+	lenght0 db 0d
 	menu1StringEnter db '  1 > Enter String $'
 	menu2StringPrint db '   2 > Print String $'
 	menu3TaskA db '   3 > Task A$'
@@ -14,6 +15,7 @@ data segment
 	menu5TaskC db '   5 > Task C$'
 	menu0Exit db ' 0 > Exit$'
 	msgInput db '     > $'
+	msgNext db ' --- Press <Enter> ---$'
 data ends
 
 mPush macro
@@ -107,10 +109,38 @@ endm
 
 code segment
 
+pTask1 proc near
+	mPush
+	mData
+	mBr
+	mClear
+	lea bx, string
+	mov cl, lenght0
+	xor si, si
+nextSymbol:
+	xor dx, dx
+	mov dl, [bx][si]
+	cmp dl, ' '
+	je skip
+	cmp dl, '	'
+	je skip
+	mov ax, 0200h
+	int 21h
+skip:
+	inc si
+loop nextSymbol
+	mBr
+	mPrintStr msgNext
+	call pReadNumb
+	mPop
+	ret 0
+pTask1 endp
+
 pReadString proc
 	mPush
 	mData
 	mClear
+	mPrintStr msgInput
 	mov di, ax
 	cld
 readSymbol:
@@ -166,13 +196,23 @@ positive:
 	ret 0
 pReadNumb endp
 
+pMenuPrintString proc near
+	mData
+	mBr
+	mPrintStr msgInput
+	mPrintStr string
+	mBr
+	mPrintStr msgNext
+	call pReadNumb
+	ret 0
+pMenuPrintString endp
+
+
 main proc near
 	mData
 menu:
 	mClrScr
 	mSetPoint 3d, 1d
-	mPrintStr string
-	mBr
 	mPrintStr menu1StringEnter
 	mBr
 	mPrintStr menu2StringPrint
@@ -202,17 +242,16 @@ menu:
 	je term5
 jmp menu
 term1:
+	mBr
 	mov ax, offset string
 	call pReadString
+	mov lenght0, al
 jmp menu
 term2:
-	mPrintStr string
-	mBr
-	mPrintStr msgInput
-	call pReadNumb
+	call pMenuPrintString
 jmp menu
 term3:
-	
+	call pTask1
 jmp menu
 term4:
 	
