@@ -6,6 +6,7 @@ MASM
 	minus db '-$'
 	value dw 0d
 	counter db 0d
+	counter2 db 0d
 	buffer db 27, 1 dup (64)
 	menu1MatrixEnter db '   1> Enter Matrix$'
 	menu2MatrixPrint db '   2> Print Matrix$'
@@ -194,6 +195,7 @@ pTaskB proc far
 	mClear
 	mov value, ax
 	mov counter, al
+	mov counter2, al
 	mov cl, n
 	mov al, m
 	mul cx
@@ -201,25 +203,32 @@ pTaskB proc far
 	xor si, si
 	lea bx, matrix
 printNext2:
-	mov ax, [bx][si]	
+	mov ax, [bx][si]
 	xor ah, ah
 	cmp ax, 0d
 	jne wrong
-	inc dl
+	inc counter2
 wrong:
+	push cx
+	mov ax, cx
 	xor cx, cx
 	mov cl, m
 	div cx
-	cmp dl, m
+	dec cx
+	cmp counter2, cl
 	jne nxt2
-	inc dh
-	mov dl, 0d
+	inc counter
 nxt2:
+	cmp dl, cl
+	jne wr
+	mov counter2, 0d
+wr:
+	pop cx
 	inc si
 loop printNext2
 	mBr
 	xor ax, ax
-	mov al, dl
+	mov al, counter
 	call pPrintNumb
 	mBr
 	mBr
@@ -282,7 +291,7 @@ printNext0:
 	mov ax, [bx][si]
 	xor ah, ah
 	call pPrintNumb
-	add ch, 5d
+	add ch, 2d
 	mov ax, si
 	inc si
 	div m
@@ -406,7 +415,7 @@ enterNext:
 	mBr
 	mPrintStr msgInput
 	call pReadNumb
-	mov [bx][si], al
+	mov [bx][si], ax
 	inc si
 loop enterNext
 	mPop
