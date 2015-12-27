@@ -3,8 +3,9 @@
 .data
 	strTypeN db 'Type n: $'
 	strTypeD db 'Type d: $'
+	strTypeC db 'Type c: $'
 	strTypeArr db 'Type array: $'
-	strAnswer db 'Answer : $'
+	strAnswer db 'Answer: $'
 	strTypeElement db ' >  $'
 	minus db '-$'
 	color db 30h
@@ -12,6 +13,7 @@
 	arr dw 10 dup (?)
 	n dw 0d
 	d dw 0d
+	cnumb dw 0d
 	tmpB db 0d
 	tmpW dw 0d
 	count dw 0d
@@ -36,6 +38,7 @@ endm
 
 mClrScr macro
 	mPush
+	xor bh, bh
 	mov ax, 0600h
 	mov bh, color
 	mov cx, 0000h
@@ -45,38 +48,49 @@ mClrScr macro
 endm
 
 mSetPoint macro row: REQ, column: REQ
-	mPush
-	mov ah, 02h
+	push ax
+	push bx
+	push dx
+	mov ax, 0200h
 	mov dh, row
 	mov dl, column
 	mov bx, 0
 	int 10h
-	mPop
+	pop dx
+	pop bx
+	pop ax
 endm
 
 mBr macro
-	mPush
-	mov ah, 02h
-	mov dl, 0Ah
+	push ax
+	push dx
+	mov ax, 0200h
+	mov dx, 000Ah
 	int 21h
-	mPop
+	pop dx
+	pop ax
 endm
 
 mPrintStr macro string
-	mPush
-	mov ah, 09h
+	push ax
+	push dx
+	mov ax, 0900h
 	mov dx, offset string
 	int 21h
-	mPop
+	pop dx
+	pop ax
 endm
 
 mPrintDigit macro value
-	mPush
-	mov ah, 02h
+	push ax
+	push dx
+	xor dx, dx
+	mov ax, 0200h
 	mov dl, byte ptr [value]
 	add dl, '0'
 	int 21h
-	mPop
+	pop dx
+	pop ax
 endm
 
 mPrintNumb macro value
@@ -162,6 +176,9 @@ start:
 	mPrintStr strTypeD
 	mReadNumb d
 	mSetPoint 7, 5
+	mPrintStr strTypeC
+	mReadNumb cnumb
+	mSetPoint 8, 5
 	mPrintStr strTypeArr
 	mBr
 	xor cx, cx
@@ -177,27 +194,25 @@ nextElement:
 	inc si
 	inc si
 loop nextElement
-	mov ax, 2
-	mul n
-	mov n, ax
-;next:
-	;mov ax, [bx][si]
-	;inc si
-	;inc si
-	;cmp si, n
-	;je exit3
-	;cmp ax, d
-	;jl next
-	;add count, 1
-;jmp next
-
-exit3:
+	mov cx, 2d
+	mov ax, n
+	mul cx
+	mov cx, ax
+next:
+	mov ax, [bx][si]
+	sub ax, cnumb
+	sub ax, d
+	cmp ax, 0d
+	jl skp
+	add count, 1d
+skp:
+	inc si
+	inc si
+loop next
 	mPrintStr strAnswer
 	mPrintNumb count
-	mBR
-exit:
-	mov ah,7h
+	mov ax, 0700h
 	int 12h
-	mov ax,4C00h
+	mov ax, 4C00h
 	int 21h
 end start
