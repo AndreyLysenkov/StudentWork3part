@@ -159,9 +159,9 @@ count:
 skip:
 		; проверка начала текущего слова
 	cmp dl, ' '
-	je stillWord
+	jne stillWord
 	cmp dl, '	'
-	je stillWord
+	jne stillWord
 	mov bool, 1d
 stillWord:
 	inc si
