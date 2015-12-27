@@ -158,13 +158,8 @@ nextSymbol:
 	jmp skip
 count:
 	inc tmp
-	push dx
-	mov dl, tmp
-	mov ax, 0200h
-	int 21h
-	pop dx
 skip:
-		; проверка начала текущего слова
+	; проверка начала текущего слова
 	cmp dl, ' '
 	je tabulation
 	cmp dl, '	'
