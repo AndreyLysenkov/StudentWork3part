@@ -7,6 +7,7 @@ data segment
 	buffer db 127 dup ('$')
 	reader db 7,1 dup (?)
 	tmp db 0d
+	bool db 0d
 	lenght0 db 0d
 	menu1StringEnter db '  1 > Enter String $'
 	menu2StringPrint db '   2 > Print String $'
@@ -109,6 +110,74 @@ endm
 
 code segment
 
+
+
+
+pTask2 proc near
+	mPush
+	mData
+	mBr
+	mClear
+	mov tmp, bx
+	mov bool, 1d	; хранит: текущий сивол первый в слове?
+	lea bx, string
+	mov cl, lenght0
+	xor si, si
+nextSymbol:
+	xor dx, dx
+	mov dl, [bx][si]
+	cmp bool, 0d
+	je skip
+	mov bool, 0d
+	cmp dl, 'a'
+	je count
+	cmp dl, 'e'
+	je count
+	cmp dl, 'u'
+	je count
+	cmp dl, 'i'
+	je count
+	cmp dl, 'o'
+	je count
+	cmp dl, 'y'
+	je count
+	cmp dl, 'A'
+	je count
+	cmp dl, 'E'
+	je count
+	cmp dl, 'U'
+	je count
+	cmp dl, 'I'
+	je count
+	cmp dl, 'O'
+	je count
+	cmp dl, 'Y'
+	je count
+	jmp skip
+count:
+	inc tmp
+skip:
+		; проверка начала текущего слова
+	cmp dl, ' '
+	je stillWord
+	cmp dl, '	'
+	je stillWord
+	mov bool, 1d
+stillWord:
+	inc si
+loop nextSymbol
+	mBr
+	mPrintStr msgInput
+	xor ax, ax
+	mov al, tmp
+	call pPrintNumb
+	mBr
+	mPrintStr msgNext
+	call pReadNumb
+	mPop
+	ret 0
+pTask2 endp
+
 pTask1 proc near
 	mPush
 	mData
@@ -135,6 +204,33 @@ loop nextSymbol
 	mPop
 	ret 0
 pTask1 endp
+
+pPrintNumb proc near
+	mPush
+	mData
+	mClear
+	mov bx, 10d
+	cmp ax, 0d
+	jge nextDigit2
+	mPrintStr minus
+	neg ax
+nextDigit2:
+	xor dx, dx
+	div bx
+	push dx
+	inc cx
+	cmp ax, 0d
+jg nextDigit2
+	xor ax, ax
+	mov ax, 0200h
+printDigit:
+	pop dx
+	add dl, '0'
+	int 21h
+loop printDigit
+	mPop
+	ret 0
+pPrintNumb endp
 
 pReadString proc
 	mPush
@@ -206,7 +302,6 @@ pMenuPrintString proc near
 	call pReadNumb
 	ret 0
 pMenuPrintString endp
-
 
 main proc near
 	mData
