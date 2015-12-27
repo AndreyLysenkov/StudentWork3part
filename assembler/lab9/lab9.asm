@@ -126,6 +126,8 @@ pTask2 proc near
 nextSymbol:
 	xor dx, dx
 	mov dl, [bx][si]
+	mov ax, 0200h
+	int 21h
 	cmp bool, 0d
 	je skip
 	mov bool, 0d
@@ -156,12 +158,19 @@ nextSymbol:
 	jmp skip
 count:
 	inc tmp
+	push dx
+	mov dl, tmp
+	mov ax, 0200h
+	int 21h
+	pop dx
 skip:
 		; проверка начала текущего слова
 	cmp dl, ' '
-	jne stillWord
+	je tabulation
 	cmp dl, '	'
-	jne stillWord
+	je tabulation
+	jmp stillWord
+tabulation:
 	mov bool, 1d
 stillWord:
 	inc si
