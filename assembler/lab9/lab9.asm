@@ -2,6 +2,7 @@
 .stack 100h
 assume cs: code, ds: data
 data segment
+	minus db '-$'
 	color db 3Eh ;38h
 	string db 127 dup ('$')
 	buffer db 127 dup ('$')
@@ -116,9 +117,8 @@ code segment
 pTask2 proc near
 	mPush
 	mData
-	mBr
 	mClear
-	mov tmp, bx
+	mov tmp, bl
 	mov bool, 1d	; хранит: текущий сивол первый в слове?
 	lea bx, string
 	mov cl, lenght0
@@ -186,18 +186,18 @@ pTask1 proc near
 	lea bx, string
 	mov cl, lenght0
 	xor si, si
-nextSymbol:
+nextSymbol2:
 	xor dx, dx
 	mov dl, [bx][si]
 	cmp dl, ' '
-	je skip
+	je skip2
 	cmp dl, '	'
-	je skip
+	je skip2
 	mov ax, 0200h
 	int 21h
-skip:
+skip2:
 	inc si
-loop nextSymbol
+loop nextSymbol2
 	mBr
 	mPrintStr msgNext
 	call pReadNumb
@@ -349,7 +349,7 @@ term3:
 	call pTask1
 jmp menu
 term4:
-	
+	call pTask2
 jmp menu
 term5:
 	
