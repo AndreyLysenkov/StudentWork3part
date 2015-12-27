@@ -249,8 +249,8 @@ pTaskC proc far
 	mData
 	mClrScr
 	mClear
+	xor ax, ax
 	mov value, ax
-	mov counter, al
 	mov cl, n
 	mov al, m
 	mul cx
@@ -258,18 +258,19 @@ pTaskC proc far
 	xor si, si
 	lea bx, matrix
 nxt3:
+	xor ax, ax
+	xor dx, dx
 	mov ax, si
-	push cx
-	xor cx, cx
-	mov cl, m
-	div cl
+	mov dl, m
+	div dl
 	cmp al, ah
-	jg skip3:
+	jge skip3
 	xor ax, ax
 	mov ax, [bx][si]
-	add value, ax
+	xor ah, ah
+	add ax, value
+	mov value, ax
 skip3:
-	pop cx
 	inc si
 loop nxt3
 	mBr
