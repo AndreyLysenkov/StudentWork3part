@@ -193,6 +193,7 @@ pTaskB proc far
 	mData
 	mClrScr
 	mClear
+	xor ax, ax
 	mov value, ax
 	mov counter, al
 	mov counter2, al
@@ -203,34 +204,38 @@ pTaskB proc far
 	xor si, si
 	lea bx, matrix
 printNext2:
+	xor ax, ax
 	mov ax, [bx][si]
-	xor ah, ah
 	cmp ax, 0d
 	jne wrong
 	inc counter2
 wrong:
 	push cx
 	mov ax, cx
+	dec ax
 	xor cx, cx
 	mov cl, m
 	div cx
-	dec cx
 	cmp counter2, cl
 	jne nxt2
 	inc counter
 nxt2:
+	dec cl
 	cmp dl, cl
 	jne wr
-	mov counter2, 0d
+	xor ax, ax
+	mov counter2, al
 wr:
+	xor cx, cx
 	pop cx
 	inc si
 loop printNext2
 	mBr
 	xor ax, ax
 	mov al, counter
+	sub al, n
+	neg al
 	call pPrintNumb
-	mBr
 	mBr
 	mPrintStr msgNext
 	mReadln
