@@ -257,20 +257,21 @@ pTaskC proc far
 	mov cx, ax
 	xor si, si
 	lea bx, matrix
-printNext3:
-	mov ax, [bx][si]	
-	xor ah, ah
+nxt3:
 	mov ax, si
-	xor dx, dx
-	mov dl, m
-	div dx
-	cmp ax, dx
-	jl skip3
+	push cx
+	xor cx, cx
+	mov cl, m
+	div cl
+	cmp al, ah
+	jg skip3:
+	xor ax, ax
 	mov ax, [bx][si]
-	add counter, al
+	add value, ax
 skip3:
+	pop cx
 	inc si
-loop printNext3
+loop nxt3
 	mBr
 	mov ax, value
 	call pPrintNumb
