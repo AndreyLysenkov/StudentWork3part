@@ -9,10 +9,9 @@ data segment
 	tmp db 0d
 	menu1StringEnter db '  1 > Enter String $'
 	menu2StringPrint db '   2 > Print String $'
-	menu3StringSearch db '   3 > Search String $'
-	menu4TaskA db '   4 > Task A$'
-	menu5TaskB db '   5 > Task B$'
-	menu6TaskC db '   6 > Task C$'
+	menu3TaskA db '   3 > Task A$'
+	menu4TaskB db '   4 > Task B$'
+	menu5TaskC db '   5 > Task C$'
 	menu0Exit db ' 0 > Exit$'
 	msgInput db '     > $'
 data ends
@@ -119,10 +118,6 @@ readSymbol:
 	int 21h			; символ в регистре ah
 	cmp al, 13d		; #13#10 - перенос строки в Windows
 	je stopRead
-	cmp al, ' '		; ищем пробел
-	jne memorize
-	mov al, 0Ah		; вместо пробела вставляем символ #10
-memorize:
 	stosb
 	add tmp, 1
 jmp readSymbol
@@ -173,8 +168,6 @@ pReadNumb endp
 
 main proc near
 	mData
-	mov ax, offset string
-	call pReadString
 menu:
 	mClrScr
 	mSetPoint 3d, 1d
@@ -184,13 +177,11 @@ menu:
 	mBr
 	mPrintStr menu2StringPrint
 	mBr
-	mPrintStr menu3StringSearch
+	mPrintStr menu3TaskA
 	mBr
-	mPrintStr menu4TaskA
+	mPrintStr menu4TaskB
 	mBr
-	mPrintStr menu5TaskB
-	mBr
-	mPrintStr menu6TaskC
+	mPrintStr menu5TaskC
 	mBr
 	mPrintStr menu0Exit
 	mBr
@@ -209,13 +200,15 @@ menu:
 	je term4
 	cmp al, 5d
 	je term5
-	cmp al, 6d
-	je term6
 jmp menu
 term1:
-	
+	mov ax, offset string
+	call pReadString
 jmp menu
 term2:
+	mPrintStr string
+	mBr
+	mPrintStr msgInput
 	call pReadNumb
 jmp menu
 term3:
@@ -225,9 +218,6 @@ term4:
 	
 jmp menu
 term5:
-	
-jmp menu
-term6:
 	
 jmp menu
 term0:
