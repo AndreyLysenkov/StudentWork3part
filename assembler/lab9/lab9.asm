@@ -6,13 +6,15 @@ data segment
 	string db 127 dup ('$')
 	buffer db 127 dup ('$')
 	reader db 7,1 dup (?)
+	tmp db 0d
 	menu1StringEnter db '  1 > Enter String $'
-	menu2StringPrint db '  2 > Print String $'
-	menu3StringSearch db '  3 > Search String $'
+	menu2StringPrint db '   2 > Print String $'
+	menu3StringSearch db '   3 > Search String $'
 	menu4TaskA db '   4 > Task A$'
 	menu5TaskB db '   5 > Task B$'
 	menu6TaskC db '   6 > Task C$'
-	menu0Exit db '  0 > Exit$'
+	menu0Exit db ' 0 > Exit$'
+	msgInput db '     > $'
 data ends
 
 mPush macro
@@ -31,8 +33,9 @@ endm
 
 mData macro
 	push ax
-	mov ax, @data
+	mov ax, data
 	mov ds, ax
+	mov es, ax 
 	pop ax
 endm
 
@@ -105,6 +108,33 @@ endm
 
 code segment
 
+pReadString proc
+	mPush
+	mData
+	mClear
+	mov di, ax
+	cld
+readSymbol:
+	mov ax, 0100h	; функция ввода символа
+	int 21h			; символ в регистре ah
+	cmp al, 13d		; #13#10 - перенос строки в Windows
+	je stopRead
+	cmp al, ' '		; ищем пробел
+	jne memorize
+	mov al, 0Ah		; вместо пробела вставляем символ #10
+memorize:
+	stosb
+	add tmp, 1
+jmp readSymbol
+stopRead:
+	mov al, '$'		; конец строки
+	stosb
+	mPop
+	xor ax, ax
+	mov al, tmp
+	ret 0
+pReadString endp
+
 pReadNumb proc near
 	mPush
 	mData
@@ -143,9 +173,13 @@ pReadNumb endp
 
 main proc near
 	mData
+	mov ax, offset string
+	call pReadString
 menu:
 	mClrScr
 	mSetPoint 3d, 1d
+	mPrintStr string
+	mBr
 	mPrintStr menu1StringEnter
 	mBr
 	mPrintStr menu2StringPrint
@@ -182,7 +216,7 @@ term1:
 	
 jmp menu
 term2:
-	
+	call pReadNumb
 jmp menu
 term3:
 	
@@ -203,7 +237,7 @@ term0:
 	int 21h
 main endp
 
-.start
+start:
 	call main
-end start
 code ends
+end start
