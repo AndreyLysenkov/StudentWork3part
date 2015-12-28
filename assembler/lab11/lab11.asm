@@ -206,7 +206,9 @@ start:
 	mOpenFile file, fileLink
 	mCreateFile file2, fileLink2
 	mReadFile fileLink, content 
+	mPrintStr msgInput
 	mPrintStr content
+	mBr
 	
 	mTask3 macro count,strings	 
 	sub bx,bx
