@@ -12,6 +12,8 @@ data segment
 	content2 db 127, 0, 127 dup ('$')
 	buffer db 127, 0, 127 dup ('$')
 	readBufferSize dw 127d
+	maxLength db 0d
+	count db 0d
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
 	msgErrorLocate db ' Error: Can', 39d, 't locate file$'
@@ -179,42 +181,18 @@ endm
 mLengthString macro string: REQ
 local nextSymbol
 	push si
-	push di
 	push bx
-	push cx
-	cld
-	xor cx, cx
+	xor ax, ax
 	mov si, offset string
-	mov di, offset string
 nextSymbol:
-	lodsb	; в регистр al байт из si, inc si (or dec si)
+	inc si
+	inc ax
 	mov bl, [si]
 	cmp bl, '$'
-	stosb	; из регистра al в di, inc di (or dec di)
 jne nextSymbol
-	mov ax, cx
-	pop cx
 	pop bx
-	pop di
 	pop si
 endm
-
-mov cl,bufferSize
-met1:
-	lodsb
-	cmp al,char
-	jz met2
-	cmp al,'$'
-	je met2
-	stosb
-met2:
-	loop met1
-endm
-
-
-
-
-
 
 mReadFile macro link: REQ, content: REQ
 local success
@@ -268,7 +246,62 @@ mCloseFile macro link: REQ
 	pop ax
 endm
 
-mTask11
+mLength macro link: REQ
+local nextSymbol, done
+	push cx
+	xor ax, ax
+	mov cx, readBufferSize
+	mov si, link
+nextSymbol:
+	lodsb
+	cmp al, ' '
+	je done
+	cmp al, '$'
+	je done
+jmp nextSymbol
+done:
+	mov ax, si
+	sub ax, link
+	pop cx
+endm
+
+mFindMaxLength macro string: REQ
+local nextWord, less
+	cld
+	mov si, offset string
+	mov cx, 0d
+nextWord:
+	mov bx, si
+	mLength bx
+	cmp ax, cx
+	jl less
+	mov cx, bx
+less:
+	inc si
+	lodsb
+	cmp al, '$'
+jne nextWord
+	mov maxLength, cx
+endm
+
+mFindEqualLength macro curLength
+local nextWord, skip
+	cld
+	mov si, offset string
+	mov cx, 0d
+nextWord:
+	mov bx, si
+	mLength bx
+	cmp ax, curLength
+	jne less
+	inc cx
+skip:
+	inc si
+	lodsb
+	cmp al, '$'
+jne nextWord
+	mov count, cx
+endm
 
 code segment
 
@@ -283,9 +316,12 @@ start:
 	mPrintStr msgInput
 	mPrintStr content
 	mBr
-
-
-	
+	mFindMaxLength content
+	mFindEqualLength maxLength
+	mov dl, count
+	add dl, '0'
+	mov ah, 02h
+	int 21h
 	mWriteFile fileLink2, content2
 exit:
 	mCloseFile fileLink
