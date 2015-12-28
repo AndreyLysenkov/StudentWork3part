@@ -112,13 +112,13 @@ mSetPoint macro row: REQ, column: REQ
 	pop ax
 endm
 
-mCopy macro startChar REQ, endChar: REQ
+mCopy macro
 	push cx
-nextChar:
-	mov cx, endChar
-	sub cx, startChar
+	mov cx, 
+	sub cx, di
 	inc cx
-rep movsb
+	cld
+rep movsb 
 	add si, cl
 	pop cx
 endm
@@ -150,7 +150,7 @@ nextSymbol3:
 tabulation3:
 	cmp counter2, 2d
 	jl notCopy
-	mCopy bool, di
+	mCopy
 notCopy:
 	mov counter2, 0d
 	mov bool, si
@@ -410,7 +410,7 @@ term4:
 	call pTask2
 jmp menu
 term5:
-	
+	call pTask3
 jmp menu
 term0:
 	mov ax, 0700h
