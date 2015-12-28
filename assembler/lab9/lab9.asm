@@ -4,15 +4,16 @@ assume cs: code, ds: data
 data segment
 	minus db '-$'
 	color db 3Eh ;38h
-	string db 127 dup ('$')
-	string2 db 127 dup ('$')
-	buffer db 127 dup ('$')
+	string db 127,127 dup ('$')
+	string2 db 127,127 dup ('$')
+	buffer db 127,127 dup ('$')
 	tmp db 0d
 	bool db 0d
 	bool2 db 0d
 	lenght0 db 0d
 	counter db 0d
 	counter2 db 0d
+	value dw 0d
 	menu1StringEnter db '  1 > Enter String $'
 	menu2StringPrint db '   2 > Print String $'
 	menu3TaskA db '   3 > Task A$'
@@ -112,15 +113,29 @@ mSetPoint macro row: REQ, column: REQ
 	pop ax
 endm
 
-mCopy macro
+mCopy macro startChar: REQ, endChar: REQ
 	push cx
-	mov cx, 
-	sub cx, di
+	push si
+	push di
+	mov cx, endChar
+	sub cx, startChar
 	inc cx
 	cld
-rep movsb 
-	add si, cl
+rep movsb
+	add si, cx
+	pop di
+	pop si
 	pop cx
+endm
+
+mRead macro
+	push ax
+	push dx
+	mov ax, 0A00h
+	lea dx, buffer
+	int 21h
+	pop dx
+	pop ax
 endm
 
 code segment
@@ -129,18 +144,20 @@ pTask3 proc near
 	mPush
 	mData
 	mClear
+	mBr
+	mPrintStr msgInput
+	mRead
+	mov al, buffer+2
 	mov tmp, al
 	mov counter, 0d
 	mov counter2, 0d
-	mov bool, 0d	; позиция слова
 	mov bool2, 1d
-	lea di, string
-	lea si, string2
+	mov si, offset string
+	mov di, offset string2
 	mov cl, lenght0
-	xor si, si
 nextSymbol3:
 	xor dx, dx
-	mov dl, [di]
+	mov dl, [si]
 	; проверка начала текущего слова
 	cmp dl, ' '
 	je tabulation3
@@ -150,20 +167,31 @@ nextSymbol3:
 tabulation3:
 	cmp counter2, 2d
 	jl notCopy
-	mCopy
+	push cx
+	push si
+	xor cx, cx
+	mov cl, counter
+	sub si, cx
+	cld
+rep movsb
+	pop si
+	pop cx
 notCopy:
 	mov counter2, 0d
-	mov bool, si
+	mov counter, 0d
 stillWord3:
 	cmp dl, tmp
 	jne notCount
-	inc counter2	
+	add counter2, 1d
 notCount:
-	inc di
+	inc counter
+	inc si
 loop nextSymbol3
 	mBr
 	mPrintStr string2
-	
+	mBr
+	mPrintStr msgNext
+	mReadln
 	mPop
 	ret 0
 pTask3 endp
@@ -172,6 +200,7 @@ pTask2 proc near
 	mPush
 	mData
 	mClear
+	mPrintStr msgInput
 	mov tmp, bl
 	mov bool, 1d	; хранит: текущий сивол первый в слове?
 	lea bx, string
@@ -241,6 +270,7 @@ pTask1 proc near
 	mData
 	mBr
 	mClear
+	mPrintStr msgInput
 	lea bx, string
 	mov cl, lenght0
 	xor si, si
@@ -303,11 +333,12 @@ readSymbol:
 	cmp al, 13d		; #13#10 - перенос строки в Windows
 	je stopRead
 	stosb
-	add tmp, 1
+	inc tmp
 jmp readSymbol
 stopRead:
-	mov al, '$'		; конец строки
+	mov al, ' '
 	stosb
+	inc tmp
 	mPop
 	xor ax, ax
 	mov al, tmp
@@ -410,6 +441,7 @@ term4:
 	call pTask2
 jmp menu
 term5:
+	mBr
 	call pTask3
 jmp menu
 term0:
