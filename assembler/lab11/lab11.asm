@@ -246,12 +246,23 @@ mCloseFile macro link: REQ
 	pop ax
 endm
 
+mPrintDigit macro digit
+	push dx
+	mov dl, digit
+	push ax
+	add dl, '0'
+	mov ah, 02h
+	int 21h
+	mBr
+	pop ax
+	pop dx
+endm
+
 mLength macro link: REQ
 local nextSymbol, done
 	push cx
 	xor ax, ax
 	mov cx, readBufferSize
-	mov si, link
 nextSymbol:
 	lodsb
 	cmp al, ' '
@@ -262,6 +273,7 @@ jmp nextSymbol
 done:
 	mov ax, si
 	sub ax, link
+	inc ax
 	pop cx
 endm
 
@@ -269,6 +281,7 @@ mFindMaxLength macro string: REQ
 local nextWord, less
 	cld
 	mov si, offset string
+	inc si
 	mov cx, 0d
 nextWord:
 	mov bx, si
@@ -288,6 +301,7 @@ mFindEqualLength macro string: REQ, curLength: REQ
 local nextWord, skip
 	cld
 	mov si, offset string
+	inc si
 	mov cx, 0d
 nextWord:
 	mov bx, si
@@ -295,6 +309,49 @@ nextWord:
 	cmp al, curLength
 	jne skip
 	inc cx
+skip:
+	inc si
+	lodsb
+	cmp al, '$'
+jne nextWord
+	mov count, cl
+endm
+
+mWriteWord macro
+local nextSymbol, done
+	push cx
+	xor ax, ax
+	cld
+nextSymbol:
+	lodsb
+	cmp al, ' '
+	je done
+	cmp al, '$'
+	je done
+	stosb
+jmp nextSymbol
+done:
+	stosb
+	pop cx
+endm
+
+mWriteTask macro 
+local nextWord, skip
+	cld
+	mov si, offset content
+	mov di, offset content2
+	
+	inc si
+nextWord:
+	mov bx, si
+	mLength bx
+	cmp al, curLength
+	jne skip
+	push si
+	mov si, cx
+	mWriteTask
+	pop si
+	mov cx, si
 skip:
 	inc si
 	lodsb
@@ -317,16 +374,8 @@ start:
 	mPrintStr content
 	mBr
 	mFindMaxLength content
-	mov dl, maxLength
-	add dl, '0'
-	mov ah, 02h
-	int 21h
-	mBr
 	mFindEqualLength content, maxLength
-	mov dl, count
-	add dl, '0'
-	mov ah, 02h
-	int 21h
+	mWriteTask
 	mWriteFile fileLink2, content2
 exit:
 	mCloseFile fileLink
