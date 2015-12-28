@@ -48,33 +48,15 @@ void main(void)
 				fsqrt
 				fld b
 				faddp st(1), st(0)
-
+				fld a
+				fld const4
+				fdivp st(1), st(0)
+				fsubp st(1), st(0)
+				fild d
+				fimul c
+				fisub const1
+				fdivp st(1), st(0)
 				fstp result
-				
-				
-				
-				
-				//fld b
-
-
-				//fadd st(0), st(1)
-				//fptan
-				//fxch st(1)
-				//fild c
-				//fdiv st(0), st(1)
-				//fild d
-				//fxch st(1)
-				//fsub st(0), st(1)
-				//fild chetire
-				//fdivr st(0), st(2)
-				//fild sorokOdin
-				//fsubr st(1), st(0)
-				//fxch st(2)
-				//fild one
-				//fsub st(2), st(0)
-				//fxch st(2)
-				//fdiv st(0), st(1)
-				//fstp result
 		}
 		cout << "Result Assembly: " << result << endl;
 		cout << "enter 0 to exit: ";
