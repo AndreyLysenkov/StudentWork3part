@@ -9,7 +9,7 @@ data segment
 	fileLink dw 0d
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
-	msgErrorOpen db ' Error: Cant locate file$'
+	msgErrorLocate db ' Error: Can\'t locate file$'
 data ends
 
 mPush macro
@@ -140,7 +140,7 @@ local success
 	int 21h
 	mov link, ax
 	jnc success
-	mError msgErrorOpen
+	mError msgErrorLocate
 success:
 	pop dx
 	pop ax
@@ -151,16 +151,8 @@ code segment
 start:
 	mData
 	mClear
+	mOpenFile data, fileLink
 	
-	
-mov ah,3Dh
-sub al,al 
-mov dx,offset file 
-sub cx,cx 
-int 21h 
-mov filePerem,ax
-jnc step1
-jmp errSearch 
  
 	
 exit:
