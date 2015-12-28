@@ -13,14 +13,14 @@ void main(void)
 	int c, d;
 	float temp;
 	char command;
-	/*do
+	do
 	{
 		cout << "(sqrt(15*a) + b - a/4)/(c*d - 1)" << endl;
 		do
 		{
 			cout << "Type a [float, positive]: ";
 			cin >> a;
-		} while (a >= 0);
+		} while (a < 0);
 		cout << "Type b [float]: ";
 		cin >> b;
 		cout << "Type c [int]: ";
@@ -29,13 +29,8 @@ void main(void)
 		{
 			cout << "Type d [int, d*c<>1]: ";
 			cin >> d;
-		} while (d*c != 1);
+		} while (d*c == 1);
 		cout << "Result C++: " << Calculate(a,b,c,d) << endl;
-		*/
-	a = 2.0;
-	b = 3.0;
-	c = 4;
-	d = 5;
 		float const15 = 15.0;
 		float const4 = 4;
 		int const1 = 1;
@@ -61,5 +56,5 @@ void main(void)
 		cout << "Result Assembly: " << result << endl;
 		cout << "enter 0 to exit: ";
 		cin >> command;
-	//} while (!(command == '0'));
+	} while (!(command == '0'));
 }
