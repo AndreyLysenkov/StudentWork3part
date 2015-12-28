@@ -7,10 +7,16 @@ data segment
 	file db 'data.txt', 0
 	file2 db 'data2.txt', 0	
 	fileLink dw 0d
+	fileLink2 dw 0d
+	content db 127, 0, 127 dup ('$')
+	content2 db 127, 0, 127 dup ('$')
 	buffer db 127, 0, 127 dup ('$')
+	readBufferSize dw 127d
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
 	msgErrorLocate db ' Error: Can', 39d, 't locate file$'
+	msgErrorCreate db ' Error: Can', 39d, 't create file$'
+	msgErrorRead db ' Error: Can', 39d, 't read file$'
 data ends
 
 mPush macro
@@ -136,7 +142,9 @@ endm
 mOpenFile macro filename: REQ, link: REQ
 local success
 	push ax
+	push cx
 	push dx
+	xor cx, cx
 	mov ax, 3D00h
 	mov dx, offset filename
 	int 21h
@@ -145,6 +153,46 @@ local success
 	mError msgErrorLocate
 success:
 	pop dx
+	pop cx
+	pop ax
+endm
+
+mCreateFile macro filename: REQ, link: REQ
+local success
+	push ax
+	push cx
+	push dx
+	xor cx, cx
+	mov dx, offset filename
+	mov ax, 3C00h
+	int 21h
+	mov link, ax
+	jnc success
+	mError msgErrorCreate
+success:
+	pop dx
+	pop cx
+	pop ax
+endm
+
+mReadFile macro link: REQ, content: REQ
+local success
+	push ax
+	push bx
+	push cx
+	push dx
+	mov cx, readBufferSize
+	mov bx, link
+	mov dx, offset content
+	mov ax, 3F00h
+	mov al, 3d
+	int 21h
+	jnc success
+	mError msgErrorRead
+success:
+	pop dx
+	pop cx
+	pop bx
 	pop ax
 endm
 
@@ -155,9 +203,23 @@ start:
 	mClear
 	mClrScr
 	mSetPoint 3d, 3d
-	mOpenFile data, fileLink
+	mOpenFile file, fileLink
+	mCreateFile file2, fileLink2
+	mReadFile fileLink, content 
+	mPrintStr content
+	
+	mTask3 macro count,strings	 
+	sub bx,bx
+	mov bx,count
+	cld	
+	lea si, string+bx
+	lea di, strings
+	sub cx,cx
+	mov cl, bufferSize
+	rep movsb	
+endm
 
- 
+	
 	
 exit:
 	mBr
