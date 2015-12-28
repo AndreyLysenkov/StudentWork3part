@@ -179,18 +179,42 @@ endm
 mLengthString macro string: REQ
 local nextSymbol
 	push si
+	push di
 	push bx
-	xor ax, ax
+	push cx
+	cld
+	xor cx, cx
 	mov si, offset string
+	mov di, offset string
 nextSymbol:
-	inc si
-	inc ax
+	lodsb	; в регистр al байт из si, inc si (or dec si)
 	mov bl, [si]
 	cmp bl, '$'
+	stosb	; из регистра al в di, inc di (or dec di)
 jne nextSymbol
+	mov ax, cx
+	pop cx
 	pop bx
+	pop di
 	pop si
 endm
+
+mov cl,bufferSize
+met1:
+	lodsb
+	cmp al,char
+	jz met2
+	cmp al,'$'
+	je met2
+	stosb
+met2:
+	loop met1
+endm
+
+
+
+
+
 
 mReadFile macro link: REQ, content: REQ
 local success
@@ -259,22 +283,7 @@ start:
 	mPrintStr msgInput
 	mPrintStr content
 	mBr
-	
-	local met1,met2
-mov si,offset string
-mov di,si
-sub cx,cx
-mov cl,bufferSize
-met1:
-	lodsb
-	cmp al,char
-	jz met2
-	cmp al,'$'
-	je met2
-	stosb
-met2:
-	loop met1
-endm
+
 
 	
 	mWriteFile fileLink2, content2
