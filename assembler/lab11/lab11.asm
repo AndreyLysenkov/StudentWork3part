@@ -275,16 +275,16 @@ nextWord:
 	mLength bx
 	cmp ax, cx
 	jl less
-	mov cx, bx
+	mov cx, ax
 less:
 	inc si
 	lodsb
 	cmp al, '$'
 jne nextWord
-	mov maxLength, cx
+	mov maxLength, cl
 endm
 
-mFindEqualLength macro curLength
+mFindEqualLength macro string: REQ, curLength: REQ
 local nextWord, skip
 	cld
 	mov si, offset string
@@ -292,15 +292,15 @@ local nextWord, skip
 nextWord:
 	mov bx, si
 	mLength bx
-	cmp ax, curLength
-	jne less
+	cmp al, curLength
+	jne skip
 	inc cx
 skip:
 	inc si
 	lodsb
 	cmp al, '$'
 jne nextWord
-	mov count, cx
+	mov count, cl
 endm
 
 code segment
@@ -317,7 +317,12 @@ start:
 	mPrintStr content
 	mBr
 	mFindMaxLength content
-	mFindEqualLength maxLength
+	mov dl, maxLength
+	add dl, '0'
+	mov ah, 02h
+	int 21h
+	mBr
+	mFindEqualLength content, maxLength
 	mov dl, count
 	add dl, '0'
 	mov ah, 02h
