@@ -6,8 +6,10 @@ data segment
 	color db 3Eh ;38h
 	file db 'data.txt','0'
 	file2 db 'data2.txt','0'	
+	fileLink dw 0d
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
+	msgErrorOpen db ' Error: Cant locate file$'
 data ends
 
 mPush macro
@@ -114,6 +116,11 @@ rep movsb
 	pop cx
 endm
 
+mError macro msg: REQ
+	mPrintStr msg
+	jmp exit
+endm
+
 mRead macro
 	push ax
 	push dx
@@ -124,15 +131,16 @@ mRead macro
 	pop ax
 endm
 
-mOpenFile macro filename: REQ, string: REQ
+mOpenFile macro filename: REQ, link: REQ
 local success
 	push ax
 	push dx
 	mov ax, 3D00h
 	mov dx, offset filename
 	int 21h
+	mov link, ax
 	jnc success
-	
+	mError msgErrorOpen
 success:
 	pop dx
 	pop ax
@@ -155,7 +163,7 @@ jnc step1
 jmp errSearch 
  
 	
-	
+exit:
 	mBr
 	mPrintStr msgNext
 	mReadln
