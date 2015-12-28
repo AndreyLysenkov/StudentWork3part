@@ -178,21 +178,18 @@ endm
 
 mLengthString macro string: REQ
 local nextSymbol
-	push di
-	push cx
+	push si
 	push bx
-	xor cx, cx
+	xor ax, ax
 	mov si, offset string
 nextSymbol:
-	inc cx
 	inc si
+	inc ax
 	mov bl, [si]
 	cmp bl, '$'
 jne nextSymbol
-	mov ax, cx
 	pop bx
-	pop cx
-	pop di
+	pop si
 endm
 
 mReadFile macro link: REQ, content: REQ
@@ -247,6 +244,8 @@ mCloseFile macro link: REQ
 	pop ax
 endm
 
+mTask11
+
 code segment
 
 start:
@@ -260,9 +259,25 @@ start:
 	mPrintStr msgInput
 	mPrintStr content
 	mBr
-	mWriteFile fileLink2, content
 	
+	local met1,met2
+mov si,offset string
+mov di,si
+sub cx,cx
+mov cl,bufferSize
+met1:
+	lodsb
+	cmp al,char
+	jz met2
+	cmp al,'$'
+	je met2
+	stosb
+met2:
+	loop met1
+endm
+
 	
+	mWriteFile fileLink2, content2
 exit:
 	mCloseFile fileLink
 	mCloseFile fileLink2
