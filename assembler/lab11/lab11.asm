@@ -124,11 +124,16 @@ mRead macro
 	pop ax
 endm
 
-mOpen macro filename: REQ, string: REQ
+mOpenFile macro filename: REQ, string: REQ
+local success
 	push ax
 	push dx
 	mov ax, 3D00h
-	mov dx, offset string
+	mov dx, offset filename
+	int 21h
+	jnc success
+	
+success:
 	pop dx
 	pop ax
 endm
