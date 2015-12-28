@@ -5,11 +5,14 @@ data segment
 	minus db '-$'
 	color db 3Eh ;38h
 	string db 127 dup ('$')
+	string2 db 127 dup ('$')
 	buffer db 127 dup ('$')
-	reader db 7,1 dup (?)
 	tmp db 0d
 	bool db 0d
+	bool2 db 0d
 	lenght0 db 0d
+	counter db 0d
+	counter2 db 0d
 	menu1StringEnter db '  1 > Enter String $'
 	menu2StringPrint db '   2 > Print String $'
 	menu3TaskA db '   3 > Task A$'
@@ -109,10 +112,61 @@ mSetPoint macro row: REQ, column: REQ
 	pop ax
 endm
 
+mCopy macro startChar REQ, endChar: REQ
+	push cx
+nextChar:
+	mov cx, endChar
+	sub cx, startChar
+	inc cx
+rep movsb
+	add si, cl
+	pop cx
+endm
+
 code segment
 
-
-
+pTask3 proc near
+	mPush
+	mData
+	mClear
+	mov tmp, al
+	mov counter, 0d
+	mov counter2, 0d
+	mov bool, 0d	; позиция слова
+	mov bool2, 1d
+	lea di, string
+	lea si, string2
+	mov cl, lenght0
+	xor si, si
+nextSymbol3:
+	xor dx, dx
+	mov dl, [di]
+	; проверка начала текущего слова
+	cmp dl, ' '
+	je tabulation3
+	cmp dl, '	'
+	je tabulation3
+	jmp stillWord3
+tabulation3:
+	cmp counter2, 2d
+	jl notCopy
+	mCopy bool, di
+notCopy:
+	mov counter2, 0d
+	mov bool, si
+stillWord3:
+	cmp dl, tmp
+	jne notCount
+	inc counter2	
+notCount:
+	inc di
+loop nextSymbol3
+	mBr
+	mPrintStr string2
+	
+	mPop
+	ret 0
+pTask3 endp
 
 pTask2 proc near
 	mPush
