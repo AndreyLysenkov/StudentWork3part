@@ -4,22 +4,8 @@ assume cs: code, ds: data
 data segment
 	minus db '-$'
 	color db 3Eh ;38h
-	string db 127,127 dup ('$')
-	string2 db 127,127 dup ('$')
-	buffer db 127,127 dup ('$')
-	tmp db 0d
-	bool db 0d
-	bool2 db 0d
-	lenght0 db 0d
-	counter db 0d
-	counter2 db 0d
-	value dw 0d
-	menu1StringEnter db '  1 > Enter String $'
-	menu2StringPrint db '   2 > Print String $'
-	menu3TaskA db '   3 > Task A$'
-	menu4TaskB db '   4 > Task B$'
-	menu5TaskC db '   5 > Task C$'
-	menu0Exit db ' 0 > Exit$'
+	file db 'data.txt','0'
+	file2 db 'data2.txt','0'	
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
 data ends
@@ -138,72 +124,39 @@ mRead macro
 	pop ax
 endm
 
+mOpen macro filename: REQ, string: REQ
+	push ax
+	push dx
+	mov ax, 3D00h
+	mov dx, offset string
+	pop dx
+	pop ax
+endm
+
 code segment
 
-
-
-
-
-main proc near
+start:
 	mData
-menu:
-	mClrScr
-	mSetPoint 3d, 1d
-	mPrintStr menu1StringEnter
+	mClear
+	
+	
+mov ah,3Dh
+sub al,al 
+mov dx,offset file 
+sub cx,cx 
+int 21h 
+mov filePerem,ax
+jnc step1
+jmp errSearch 
+ 
+	
+	
 	mBr
-	mPrintStr menu2StringPrint
-	mBr
-	mPrintStr menu3TaskA
-	mBr
-	mPrintStr menu4TaskB
-	mBr
-	mPrintStr menu5TaskC
-	mBr
-	mPrintStr menu0Exit
-	mBr
-	mPrintStr msgInput
-	xor ax, ax
-	call pReadNumb
-	cmp al, 0d
-	je term0
-	cmp al, 1d
-	je term1
-	cmp al, 2d
-	je term2
-	cmp al, 3d
-	je term3
-	cmp al, 4d
-	je term4
-	cmp al, 5d
-	je term5
-jmp menu
-term1:
-	mBr
-	mov ax, offset string
-	call pReadString
-	mov lenght0, al
-jmp menu
-term2:
-	call pMenuPrintString
-jmp menu
-term3:
-	call pTask1
-jmp menu
-term4:
-	call pTask2
-jmp menu
-term5:
-	mBr
-	call pTask3
-jmp menu
-term0:
+	mPrintStr msgNext
+	mReadln
 	mov ax, 0700h
 	int 12h
 	mov ax, 4C00h
 	int 21h
-main endp
-
-start:
-	call main
 code ends
 end start
