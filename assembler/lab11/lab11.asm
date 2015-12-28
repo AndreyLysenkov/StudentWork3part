@@ -8,7 +8,7 @@ data segment
 	file2 db 'data2.txt', 0	
 	fileLink dw 0d
 	fileLink2 dw 0d
-	content db 127, 0, 127 dup ('$')
+	content db 0, 0, 127 dup ('$')
 	content2 db 127, 0, 127 dup ('$')
 	buffer db 127, 0, 127 dup ('$')
 	readBufferSize dw 127d
@@ -17,6 +17,7 @@ data segment
 	msgErrorLocate db ' Error: Can', 39d, 't locate file$'
 	msgErrorCreate db ' Error: Can', 39d, 't create file$'
 	msgErrorRead db ' Error: Can', 39d, 't read file$'
+	msgErrorWrite db ' Error: Can', 39d, 't write in file$'
 data ends
 
 mPush macro
@@ -175,6 +176,25 @@ success:
 	pop ax
 endm
 
+mLengthString macro string: REQ
+local nextSymbol
+	push di
+	push cx
+	push bx
+	xor cx, cx
+	mov si, offset string
+nextSymbol:
+	inc cx
+	inc si
+	mov bl, [si]
+	cmp bl, '$'
+jne nextSymbol
+	mov ax, cx
+	pop bx
+	pop cx
+	pop di
+endm
+
 mReadFile macro link: REQ, content: REQ
 local success
 	push ax
@@ -185,7 +205,6 @@ local success
 	mov bx, link
 	mov dx, offset content
 	mov ax, 3F00h
-	mov al, 3d
 	int 21h
 	jnc success
 	mError msgErrorRead
@@ -196,34 +215,57 @@ success:
 	pop ax
 endm
 
+mWriteFile macro link: REQ, content
+local success
+	push ax
+	push bx
+	push cx
+	push dx
+	mov bx, link
+	xor cx, cx
+	mLengthString content
+	mov cx, ax
+	mov dx, offset content
+	mov ax, 4000h
+	int 21h
+	jnc success
+	mError msgErrorWrite
+success:
+	pop dx
+	pop cx
+	pop bx
+	pop ax
+endm
+
+mCloseFile macro link: REQ
+	push ax
+	push bx
+	mov bx, link
+	mov ax, 3E00h
+	int 21h
+	pop bx
+	pop ax
+endm
+
 code segment
 
 start:
 	mData
 	mClear
 	mClrScr
-	mSetPoint 3d, 3d
+	mSetPoint 3d, 0d
 	mOpenFile file, fileLink
 	mCreateFile file2, fileLink2
 	mReadFile fileLink, content 
 	mPrintStr msgInput
 	mPrintStr content
 	mBr
-	
-	mTask3 macro count,strings	 
-	sub bx,bx
-	mov bx,count
-	cld	
-	lea si, string+bx
-	lea di, strings
-	sub cx,cx
-	mov cl, bufferSize
-	rep movsb	
-endm
-
+	mWriteFile fileLink2, content
 	
 	
 exit:
+	mCloseFile fileLink
+	mCloseFile fileLink2
 	mBr
 	mPrintStr msgNext
 	mReadln
