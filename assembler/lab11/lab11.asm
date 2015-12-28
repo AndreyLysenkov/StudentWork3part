@@ -1,4 +1,4 @@
-.model small
+.model medium
 .stack 100h
 assume cs: code, ds: data
 data segment
@@ -6,20 +6,20 @@ data segment
 	color db 3Eh ;38h
 	file db 'data.txt', 0
 	file2 db 'data2.txt', 0	
-	fileLink dw 0d
-	fileLink2 dw 0d
-	content db 0, 0, 127 dup ('$')
-	content2 db 127, 0, 127 dup ('$')
-	buffer db 127, 0, 127 dup ('$')
-	readBufferSize dw 127d
+	link dw 0d
+	link2 dw 0d
+	content db 62, 0, 62 dup ('$')
+	content2 db 62, 0, 62 dup ('$')
+	buffer db 1, 0, 1 dup ('$')
+	readBufferSize dw 62d
 	maxLength db 0d
 	count db 0d
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
-	msgErrorLocate db ' Error: Can', 39d, 't locate file$'
-	msgErrorCreate db ' Error: Can', 39d, 't create file$'
-	msgErrorRead db ' Error: Can', 39d, 't read file$'
-	msgErrorWrite db ' Error: Can', 39d, 't write in file$'
+	msgErrLocate db ' Error: Can', 39d, 't locate file$'
+	msgErrCreate db ' Error: Can', 39d, 't create file$'
+	msgErrRead db ' Error: Can', 39d, 't read file$'
+	msgErrWrite db ' Error: Can', 39d, 't write in file$'
 data ends
 
 mPush macro
@@ -153,7 +153,7 @@ local success
 	int 21h
 	mov link, ax
 	jnc success
-	mError msgErrorLocate
+	mError msgErrLocate
 success:
 	pop dx
 	pop cx
@@ -171,7 +171,7 @@ local success
 	int 21h
 	mov link, ax
 	jnc success
-	mError msgErrorCreate
+	mError msgErrCreate
 success:
 	pop dx
 	pop cx
@@ -206,7 +206,7 @@ local success
 	mov ax, 3F00h
 	int 21h
 	jnc success
-	mError msgErrorRead
+	mError msgErrRead
 success:
 	pop dx
 	pop cx
@@ -228,7 +228,7 @@ local success
 	mov ax, 4000h
 	int 21h
 	jnc success
-	mError msgErrorWrite
+	mError msgErrWrite
 success:
 	pop dx
 	pop cx
@@ -367,7 +367,7 @@ start:
 	mClear
 	mClrScr
 	mSetPoint 3d, 0d
-	mOpenFile file, fileLink
+	mOpenFile file, link
 	mCreateFile file2, fileLink2
 	mReadFile fileLink, content 
 	mPrintStr msgInput
