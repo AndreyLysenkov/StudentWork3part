@@ -7,9 +7,10 @@ data segment
 	file db 'data.txt','0'
 	file2 db 'data2.txt','0'	
 	fileLink dw 0d
+	buffer db 127, 0, 127 dup ('$')
 	msgInput db '     > $'
 	msgNext db ' --- Press <Enter> ---$'
-	msgErrorLocate db ' Error: Can\'t locate file$'
+	msgErrorLocate db ' Error: Can', 39d, 't locate file$'
 data ends
 
 mPush macro
@@ -117,6 +118,7 @@ rep movsb
 endm
 
 mError macro msg: REQ
+	mPrintStr msgInput
 	mPrintStr msg
 	jmp exit
 endm
@@ -151,8 +153,10 @@ code segment
 start:
 	mData
 	mClear
+	mClrScr
+	mSetPoint 3d, 3d
 	mOpenFile data, fileLink
-	
+
  
 	
 exit:
