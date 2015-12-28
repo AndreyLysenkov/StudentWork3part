@@ -4,8 +4,8 @@ assume cs: code, ds: data
 data segment
 	minus db '-$'
 	color db 3Eh ;38h
-	file db 'data.txt','0'
-	file2 db 'data2.txt','0'	
+	file db 'data.txt', 0
+	file2 db 'data2.txt', 0	
 	fileLink dw 0d
 	buffer db 127, 0, 127 dup ('$')
 	msgInput db '     > $'
