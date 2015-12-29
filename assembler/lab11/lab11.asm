@@ -114,7 +114,7 @@ mCloseFile macro link
 	int 21h
 endm
 
-mLength macro link: REQ
+mLength macro
 local nextSymbol, done
 	push cx
 	push dx
@@ -131,6 +131,14 @@ done:
 	mov ax, 62d
 	sub ax, cx
 	inc ax
+	
+	push ax
+	mov dl, al
+	add dl, '0'
+	mov ah, 02h
+	int 21h
+	pop ax
+	
 	pop dx
 	pop cx
 endm
@@ -163,9 +171,10 @@ endm
 mWriteWord macro
 local nextSymbol, done
 	push cx
-	xor ax, ax
 	mov cx, 62d
 	cld
+	stosb
+	xor ax, ax
 nextSymbol:
 	lodsb
 	cmp al, ' '
@@ -183,19 +192,20 @@ mWriteTask macro
 local nextWord, skip
 	mov si, offset content
 	;mov di, offset content2
-	inc si
+	cld
+	lodsb
 nextWord:
-	mov bx, si
-	mLength bx
-	cmp al, curLength
-	jne skip
+	push ax
 	push si
-	mov si, cx
-	mWriteWord
+	mLength
 	pop si
-	mov cx, si
+	cmp al, maxLength
+	pop ax
+	jne skip
+	mWriteWord
 skip:
-	inc si
+	lodsb
+	cmp al, '$'
 jne nextWord
 	mov count, cl
 endm
@@ -251,6 +261,7 @@ start:
 	mov al, count
 	mov di, offset content2
 	mStringNumb
+	mWriteTask
 	mWriteFile link2, content2
 exit:
 	mCloseFile link
