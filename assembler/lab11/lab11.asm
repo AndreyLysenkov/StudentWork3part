@@ -18,6 +18,8 @@ data segment
 	msgErrCreate db ' Error: Can', 39d, 't create file$'
 	msgErrRead db ' Error: Can', 39d, 't read file$'
 	msgErrWrite db ' Error: Can', 39d, 't write in file$'
+	msgMaxLength db ' Max length: $'
+	msgCount db ' Max length count: $'
 data ends
 
 code segment
@@ -82,7 +84,7 @@ endm
 
 mReadFile macro link: REQ, content: REQ
 local success
-	mov cx, readBufferSize
+	mov cx, 62d
 	mov bx, link
 	mov dx, offset content
 	mov ax, 3F00h
@@ -115,46 +117,46 @@ endm
 mLength macro link: REQ
 local nextSymbol, done
 	push cx
+	push dx
 	xor ax, ax
-	mov cx, readBufferSize
+	mov cx, 62d
 nextSymbol:
 	lodsb
 	cmp al, ' '
 	je done
 	cmp al, '$'
 	je done
-jmp nextSymbol
+loop nextSymbol
 done:
-	mov ax, si
-	sub ax, link
+	mov ax, 62d
+	sub ax, cx
 	inc ax
+	pop dx
 	pop cx
 endm
 
 mFindMaxLength macro string: REQ
 local nextWord, less, addThat
-	cld
 	mov si, offset string
 	inc si
-	mov cx, 0d
-	mov dx, 0d
+	mov cl, 0d
+	mov count, 0d
 nextWord:
+	xor ax, ax
 	mov bx, si
 	mLength bx
-	cmp ax, cx
+	cmp al, cl
 	je addThat
 	jl less
-	mov cx, ax
-	mov dx, 0d
-	jmp less
-addThat:
-	inc dx
+	mov cl, al
+	pop dx
+	mov count, 0
+addThat:	
+	add count, 1
 less:
-	inc si
 	lodsb
 	cmp al, '$'
 jne nextWord
-	mov count, dl
 	mov maxLength, cl
 endm
 
@@ -162,6 +164,7 @@ mWriteWord macro
 local nextSymbol, done
 	push cx
 	xor ax, ax
+	mov cx, 62d
 	cld
 nextSymbol:
 	lodsb
@@ -170,7 +173,7 @@ nextSymbol:
 	cmp al, '$'
 	je done
 	stosb
-jmp nextSymbol
+loop nextSymbol
 done:
 	stosb
 	pop cx
@@ -178,9 +181,8 @@ endm
 
 mWriteTask macro 
 local nextWord, skip
-	cld
 	mov si, offset content
-	mov di, offset content2
+	;mov di, offset content2
 	inc si
 nextWord:
 	mov bx, si
@@ -189,35 +191,66 @@ nextWord:
 	jne skip
 	push si
 	mov si, cx
-	mWriteTask
+	mWriteWord
 	pop si
 	mov cx, si
 skip:
 	inc si
-	lodsb
-	cmp al, '$'
 jne nextWord
 	mov count, cl
+endm
+
+mStringNumb macro
+local nextDigit2, printDigit
+	cld
+	xor cx, cx
+	mov bx, 10d
+nextDigit2:
+	xor dx, dx
+	div bx
+	push dx
+	inc cx
+	cmp ax, 0d
+jg nextDigit2
+	xor ax, ax
+	mov ax, 0200h
+printDigit:
+	pop ax
+	add ax, '0'
+	stosb
+loop printDigit
+	xor ax, ax
+	mov al, ' '
+	stosb
 endm
 
 start:
 	mov ax, data
 	mov ds, ax
 	mov es, ax
-	mov ax, 0600h
-	mov bh, color
-	mov cx, 0000h
-	mov dx, 184Fh
-	int 10h
 	mOpenFile file, link
 	mCreateFile file2, link2
 	mReadFile link, content 
 	mFindMaxLength content
+	mBr
+	mPrintStr msgCount
+	xor dx, dx
 	mov dl, count
 	add dl, '0'
 	mov ah, 02h
 	int 21h
-	mWriteTask
+	mBr
+	mPrintStr msgMaxLength
+	xor dx, dx
+	mov dl, maxLength
+	add dl, '0'
+	mov ah, 02h
+	int 21h
+	mBr
+	xor ax, ax
+	mov al, count
+	mov di, offset content2
+	mStringNumb
 	mWriteFile link2, content2
 exit:
 	mCloseFile link
