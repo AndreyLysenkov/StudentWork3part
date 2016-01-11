@@ -151,6 +151,35 @@ mReadln macro
 	pop ax
 endm
 
+pPrintLine proc near
+	mPush
+	mData
+	mClear
+	mClrScr
+	xor si, si
+	lea bx, matrix
+	mov cl, al
+	imul m
+	add si, ax
+	mov cl, m
+	mov ch, 3d
+printNext9:
+	mSetPoint 3d, ch
+	mov ax, [bx][si]
+	xor ah, ah
+	call pPrintNumb
+	add ch, 5d
+	inc si
+	dec cl
+	cmp cl, 0d
+jg printNext9
+	mBr
+	mPrintStr msgNext
+	mReadln
+	mPop
+	xor ax, ax
+	ret 0
+pPrintLine endp
 
 pTask0 proc far
 	mPush
@@ -182,12 +211,12 @@ wrong0:
 	div cx
 	cmp counter2, cl
 	jne nxt0
-	pop cx
-	mov answer0, cl
-	mov cl, n
-	div cl
-	mov answer0, al
-	push cx
+	pop bx
+	mov answer0, bl
+	mov bl, n
+	div bl
+	mov answer0, bl
+	push bx
 nxt0:
 	dec cl
 	cmp dl, cl
@@ -201,7 +230,7 @@ wr0:
 loop printNext0
 	mBr
 	xor ax, ax
-	mov al, counter
+	mov al, answer0
 	sub al, n
 	neg al
 	call pPrintNumb
@@ -416,7 +445,7 @@ jmp nextDigit
 notNumb:
 	cmp cl, 0d
 	je positive
-	neg ax
+	neg al
 positive:
 	mPop
 	ret 0
@@ -426,17 +455,20 @@ pPrintNumb proc near
 	mPush
 	mData
 	mClear
-	mov bx, 10d
-	cmp ax, 0d
-	jge nextDigit2
+	mov bl, 10d
+	;cmp al, 0d
+	;ja nextDigit2
+	push ax
+	test al, al
+	jns nextDigit2
 	mPrintStr minus
-	neg ax
+	neg al
 nextDigit2:
-	xor dx, dx
-	div bx
-	push dx
+	xor ah, ah
+	div bl
+	push ax
 	inc cx
-	cmp ax, 0d
+	cmp al, 0d
 jg nextDigit2
 	xor ax, ax
 	mov ax, 0200h
@@ -555,6 +587,9 @@ menu:
 	mBr
 	mPrintStr msgInput
 	xor ax, ax
+	mov al, -5d
+	call pPrintNumb
+	xor ax, ax
 	call pReadNumb
 	cmp al, 0d
 	je term0
@@ -580,7 +615,9 @@ term2:
 	call pPrintMatrix
 jmp menu
 term3:
-	call far ptr pMatrixTrans
+	;call far ptr pMatrixTrans
+	mov ax, 2d
+	call pPrintLine
 jmp menu
 term4:
 	call far ptr pTaskA
