@@ -458,11 +458,11 @@ pPrintNumb proc near
 	mov bl, 10d
 	;cmp al, 0d
 	;ja nextDigit2
-	push ax
 	test al, al
 	jns nextDigit2
 	mPrintStr minus
 	neg al
+	xor cx, cx
 nextDigit2:
 	xor ah, ah
 	div bl
@@ -472,11 +472,12 @@ nextDigit2:
 jg nextDigit2
 	xor ax, ax
 	mov ax, 0200h
-printDigit:
+printDigit2:
 	pop dx
+	xor dh, dh
 	add dl, '0'
 	int 21h
-loop printDigit
+loop printDigit2
 	mPop
 	ret 0
 pPrintNumb endp
