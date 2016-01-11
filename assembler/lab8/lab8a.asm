@@ -14,7 +14,7 @@ MASM
 	menu4TaskA db '   4> TaskA$'
 	menu5TaskB db '   5> TaskB$'
 	menu6TaskC db '   6> TaskC$'
-	menu6Task0 db '   7> Task0$'
+	menu7Task0 db '   7> Task0$'
 	menu0Exit db ' 0> Exit$'
 	msgMatrixSize db '   Type matrix size: $'
 	msgMatrixSizeRow db ' row> $'
@@ -548,6 +548,8 @@ menu:
 	mPrintStr menu5TaskB
 	mBr
 	mPrintStr menu6TaskC
+	mBr
+	mPrintStr menu7Task0
 	mBr
 	mPrintStr menu0Exit
 	mBr
