@@ -158,8 +158,10 @@ pPrintLine proc near
 	mClrScr
 	xor si, si
 	lea bx, matrix
-	mov cl, al
-	imul m
+	xor ah, ah
+	mov al, answer0
+	dec al
+	mul m
 	add si, ax
 	mov cl, m
 	mov ch, 3d
@@ -173,9 +175,6 @@ printNext9:
 	dec cl
 	cmp cl, 0d
 jg printNext9
-	mBr
-	mPrintStr msgNext
-	mReadln
 	mPop
 	xor ax, ax
 	ret 0
@@ -228,12 +227,11 @@ wr0:
 	pop cx
 	inc si
 loop printNext0
-	mBr
 	xor ax, ax
 	mov al, answer0
-	sub al, n
-	neg al
 	call pPrintNumb
+	mBr
+	call pPrintLine
 	mBr
 	mPrintStr msgNext
 	mReadln
@@ -587,9 +585,6 @@ menu:
 	mBr
 	mPrintStr msgInput
 	xor ax, ax
-	mov al, -5d
-	call pPrintNumb
-	xor ax, ax
 	call pReadNumb
 	cmp al, 0d
 	je term0
@@ -615,9 +610,7 @@ term2:
 	call pPrintMatrix
 jmp menu
 term3:
-	;call far ptr pMatrixTrans
-	mov ax, 2d
-	call pPrintLine
+	call far ptr pMatrixTrans
 jmp menu
 term4:
 	call far ptr pTaskA
