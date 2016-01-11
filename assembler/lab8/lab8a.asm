@@ -348,18 +348,16 @@ pTaskC proc far
 	mov cx, ax
 	xor si, si
 	lea bx, matrix
-	xor bx, bx
 nxt3:
 	xor ax, ax
 	xor dx, dx
-	mov ax, counter
+	mov al, counter
 	mov dl, m
 	div dl
 	cmp al, ah
-	jge skip3
+	jle skip3
 	xor ax, ax
 	mov ax, [bx][si]
-	xor ah, ah
 	add ax, value
 	mov value, ax
 skip3:
