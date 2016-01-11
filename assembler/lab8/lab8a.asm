@@ -160,7 +160,6 @@ pPrintLine proc near
 	lea bx, matrix
 	xor ah, ah
 	mov al, answer0
-	dec al
 	mul m
 	add si, ax
 	mov cl, m
@@ -186,7 +185,6 @@ pTask0 proc far
 	mClrScr
 	mClear
 	xor ax, ax
-	mov value, ax
 	mov counter, al
 	mov counter2, al
 	mov cl, n
@@ -198,8 +196,8 @@ pTask0 proc far
 printNext0:
 	xor ax, ax
 	mov ax, [bx][si]
-	cmp ax, 0d
-	jb wrong0
+	cmp al, 0d
+	jbe wrong0
 	inc counter2
 wrong0:
 	push cx
@@ -210,12 +208,12 @@ wrong0:
 	div cx
 	cmp counter2, cl
 	jne nxt0
-	pop bx
-	mov answer0, bl
-	mov bl, n
-	div bl
-	mov answer0, bl
-	push bx
+	pop cx
+	mov al, cl
+	mov cl, n
+	div cl
+	mov answer0, al
+	push cx
 nxt0:
 	dec cl
 	cmp dl, cl
@@ -228,8 +226,8 @@ wr0:
 	inc si
 loop printNext0
 	xor ax, ax
-	mov al, answer0
-	call pPrintNumb
+	;mov al, answer0
+	;call pPrintNumb
 	mBr
 	call pPrintLine
 	mBr
@@ -343,16 +341,18 @@ pTaskC proc far
 	mClear
 	xor ax, ax
 	mov value, ax
+	mov counter, al
 	mov cl, n
 	mov al, m
 	mul cx
 	mov cx, ax
 	xor si, si
 	lea bx, matrix
+	xor bx, bx
 nxt3:
 	xor ax, ax
 	xor dx, dx
-	mov ax, si
+	mov ax, counter
 	mov dl, m
 	div dl
 	cmp al, ah
@@ -363,6 +363,7 @@ nxt3:
 	add ax, value
 	mov value, ax
 skip3:
+	inc counter
 	inc si
 loop nxt3
 	mBr
