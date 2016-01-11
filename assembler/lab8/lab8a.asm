@@ -457,12 +457,11 @@ pPrintNumb proc near
 	mClear
 	mov bl, 10d
 	;cmp al, 0d
-	;ja nextDigit2
+	;jae nextDigit2
 	test al, al
 	jns nextDigit2
 	mPrintStr minus
 	neg al
-	xor cx, cx
 nextDigit2:
 	xor ah, ah
 	div bl
@@ -470,10 +469,10 @@ nextDigit2:
 	inc cx
 	cmp al, 0d
 jg nextDigit2
-	xor ax, ax
 	mov ax, 0200h
 printDigit2:
 	pop dx
+	mov dl, dh
 	xor dh, dh
 	add dl, '0'
 	int 21h
