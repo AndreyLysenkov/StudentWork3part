@@ -273,23 +273,26 @@ end proc:
 Summ := proc(setNumber, length)
 	local i:
 	answer := 0:
-	from i := 1 to length do
+	from i from 1 to length do
 		answer := answer + setNumber[i]:
 	end do:
 	return answer:
 end proc:
 
 SetOfBase := proc(number, max)
-	local basePowered, i:
+	local i, tmp:
 	basePowered := [seq(1, i = 1..max+1)]:
-	tmp := number:
-	for i from 2 to max do
-		basePowered[i] := basePowered[i - 1] * 2;
+	i := 2:
+	while (i &lt;= max) do
+		tmp := basePowered[i - 1]:
+		basePowered[i] := tmp  * 2:
+		i = i + 1:
 	end do:
 	answer := [seq(0, i = 1..max+1)]:
+	tmp := number:
 	i := max + 1:
 	while (i &gt; 0) do
-		if tmp &gt;= basePowered[i] then
+		if (tmp &gt;= basePowered[i]) then
 			tmp := tmp - basePowered[i]:
 			answer[i] := 1:
 		end if:
@@ -333,7 +336,7 @@ print(&quot;My calculation: n po k &quot;):
 FindAllCombines2(S, K, N):
 FindMinPath():</EC-CodeEditor>
 <Output>
-<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20%60%3A%3D%60%20unexpected" hyperlink="true"><Font style="HyperlinkError">Error, `:=` unexpected</Font></Hyperlink></Text-field>
+<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20repeated%20from%20part" hyperlink="true"><Font style="HyperlinkError">Error, repeated from part</Font></Hyperlink></Text-field>
 </Output></CodeEditor-ExecGroup></Presentation-Block><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L35" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
