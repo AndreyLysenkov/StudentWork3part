@@ -250,7 +250,7 @@ WideSearch := proc(A)
     print(v):
     return T:
 end proc:
-
+A;
 Deep := DeepSearch(A):
 G := Graph(Deep):
 print(&quot;Depth search graph:&quot;):
