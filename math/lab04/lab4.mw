@@ -93,16 +93,16 @@
 <Metadata-table>
     <Metadata-category name="&lt;default&gt;"/>
     <Metadata-tag id="0" category="&lt;default&gt;" name="Document Properties">
-        <Metadata-attribute name="Active" value="true"/>
         <Metadata-attribute name="TaskProtect" value="true"/>
+        <Metadata-attribute name="Active" value="true"/>
         <Metadata-attribute name="Keyword" value="Calculus,Help,New Document,New Worksheet,What's New?"/>
         <Metadata-attribute name="Alias" value="Start"/>
         <Metadata-attribute name="Subject" value="&lt;default&gt;"/>
-        <Metadata-attribute name="Author" value="Maplesoft"/>
         <Metadata-attribute name="Topic" value="Start"/>
+        <Metadata-attribute name="Author" value="Maplesoft"/>
         <Metadata-attribute name="Item List" value="true"/>
-        <Metadata-attribute name="Title" value="Start"/>
         <Metadata-attribute name="Keywords" value="&lt;default&gt;"/>
+        <Metadata-attribute name="Title" value="Start"/>
     </Metadata-tag>
 </Metadata-table>
 <Task-table>
@@ -111,9 +111,9 @@
 <Task/><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L32" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
-<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
+<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">JSFH</Equation></Text-field>
 </Input>
-</Group></Presentation-Block><Presentation-Block><CodeEditor-ExecGroup view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="486" pixel-height="272" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">read &quot;data.txt&quot;:
+</Group></Presentation-Block><Presentation-Block><CodeEditor-ExecGroup view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="451" pixel-height="297" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">read &quot;data.txt&quot;:
 
 ArrToStr := proc(word, alphabet)
 	local str, i:
@@ -231,7 +231,7 @@ FindAllCombines := proc(str, length, itemsNumb)
 		&quot;print(word):&quot;:
 		word := GetNext(word, length, itemsNumb):
 	end do:
-	print(&quot;Words &quot; + i):
+	print(i):
 end proc:
 
 CalculateWeight := proc (path)
@@ -266,67 +266,78 @@ FindMinPath := proc()
 			end if:
 		end if:
 	end do:
-	print(&quot;Calculated...&quot;):
-	print(min_path):
-	print(min_weight):
+	print(&quot;Minimal path: &quot;, min_path):
+	print(&quot;Minimal weight: &quot;, min_weight):
 end proc:
 
-print(N):
-print(K):
-print(S):
-print(A):
+Summ := proc(setNumber, length)
+	local i:
+	answer := 0:
+	from i := 1 to length do
+		answer := answer + setNumber[i]:
+	end do:
+	return answer:
+end proc:
+
+SetOfBase := proc(number, max)
+	local basePowered, i:
+	basePowered := [seq(1, i = 1..max+1)]:
+	tmp := number:
+	for i from 2 to max do
+		basePowered[i] := basePowered[i - 1] * 2;
+	end do:
+	answer := [seq(0, i = 1..max+1)]:
+	i := max + 1:
+	while (i &gt; 0) do
+		if tmp &gt;= basePowered[i] then
+			tmp := tmp - basePowered[i]:
+			answer[i] := 1:
+		end if:
+		i := i - 1:
+	end do:
+	return answer:
+end proc:
+
+FindAllCombines2 := proc(str, length, itemsNumb)
+	local word, i, max, tmp, tmp2, tmp3, answer:
+	i := 0:
+	word := 0:
+	max := 1:
+	answer := 0:
+	from i := 1 to length+1 do
+		max := max * 2:
+	end do:
+	from i := 0 to max do
+		tmp := summ(setOfBase(i, length+1), length+1):
+		if tmp = itemsNumb then
+			tmp2 := setOfBase(i, length+1):
+			tmp3 := ArrToStr(tmp2, S):
+			print(tmp3):
+			answer = answer + 1:
+		end if:
+	end do:
+	print(answer):
+end proc:
+
+print(&quot;Number n: &quot;, N):
+print(&quot;Number k: &quot;, K):
+print(&quot;String s: &quot;, S):
+print(&quot;Mtrix A: &quot;, A):
 
 with(combinat):
-print(numbperm(N)):
+print(&quot;Maple calculation: n po n &quot;, numbperm(N)):
+print(&quot;My calculation: n po n &quot;):
 FindAllCombines(S, N, N):
-FindAllCombines(S, K, N):
-print(numbperm(N, K)):
-print(numbcomb(N, K)):
-FindMinPath():
-
-
-&quot;numbperm(N)&quot;:
-&quot;word := GetStartValue(GetSetOfNumber(word, 7), 3, 7);&quot;:
-&quot;word := GetNext(word, 3, 7):&quot;:</EC-CodeEditor>
+print(&quot;Maple calculation: n po k &quot;, numbcomb(N, K)):
+print(&quot;My calculation: n po k &quot;):
+FindAllCombines2(S, K, N):
+FindMinPath():</EC-CodeEditor>
 <Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiIo</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiIl</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">UShHQVdVTFFZNiI=</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUkobWFjdGlvbkc2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkobWZlbmNlZEdGJDYoLUklbXJvd0dGJDYmLUknbXRhYmxlR0YkNjstSSRtdHJHRiQ2LC1JJG10ZEdGJDYoLUkjbW5HRiQ2JFEjNTlGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRicvJSlyb3dhbGlnbkdRIUYnLyUsY29sdW1uYWxpZ25HRkMvJStncm91cGFsaWduR0ZDLyUocm93c3BhbkdRIjFGJy8lK2NvbHVtbnNwYW5HRkotRjg2KC1GOzYkUSM2NkYnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjNjNGJ0Y+RkFGREZGRkhGSy1GODYoLUY7NiRRIzYxRidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM3MkYnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjNjRGJ0Y+RkFGREZGRkhGSy1GODYoLUY7NiRRIzU2RidGPkZBRkRGRkZIRktGQUZERkYtRjU2LC1GODYoLUY7NiRRIzU0RidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM3NUYnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjNjhGJ0Y+RkFGREZGRkhGSy1GODYoLUY7NiRRIzUyRidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM5N0YnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjNjVGJ0Y+RkFGREZGRkhGSy1GODYoLUY7NiRRIzY5RidGPkZBRkRGRkZIRktGQUZERkYtRjU2LC1GODYoLUY7NiRRIzkwRidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM3OUYnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjOTNGJ0Y+RkFGREZGRkhGS0ZbcS1GODYoLUY7NiRRIzcwRidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM4MkYnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjODdGJ0Y+RkFGREZGRkhGS0ZBRkRGRi1GNTYsLUY4NigtRjs2JFEjOTFGJ0Y+RkFGREZGRkhGSy1GODYoLUY7NiRRIzc0RidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM1MEYnRj5GQUZERkZGSEZLLUY4NigtRjs2JFEjOTVGJ0Y+RkFGREZGRkhGS0ZmcC1GODYoLUY7NiRRIzg2RidGPkZBRkRGRkZIRktGXHBGQUZERkYtRjU2LC1GODYoLUY7NiRRIzk2RidGPkZBRkRGRkZIRktGZnItRjg2KC1GOzYkUSM4NEYnRj5GQUZERkZGSEZLRltzLUY4NigtRjs2JFEjNThGJ0Y+RkFGREZGRkhGS0ZgdUZgc0ZBRkRGRi1GNTYsRlx2LUY4NigtRjs2JFEjNjdGJ0Y+RkFGREZGRkhGSy1GODYoLUY7NiRRIzczRidGPkZBRkRGRkZIRktGUi1GODYoLUY7NiRRIzk0RidGPkZBRkRGRkZIRkstRjg2KC1GOzYkUSM1MUYnRj5GQUZERkZGSEZLRl13RkFGREZGLUY1NixGYHVGZ3VGYXQtRjg2KC1GOzYkUSM4MEYnRj5GQUZERkZGSEZLRmBzRmd3RltvRkFGREZGLyUmYWxpZ25HUSVheGlzRicvRkJRKWJhc2VsaW5lRicvRkVRJnJpZ2h0RicvRkdRJ3xmcmxlZnR8aHJGJy8lL2FsaWdubWVudHNjb3BlR1EldHJ1ZUYnLyUsY29sdW1ud2lkdGhHUSVhdXRvRicvJSZ3aWR0aEdGYXkvJStyb3dzcGFjaW5nR1EmMS4wZXhGJy8lLmNvbHVtbnNwYWNpbmdHUSYwLjhlbUYnLyUpcm93bGluZXNHUSVub25lRicvJSxjb2x1bW5saW5lc0dGXHovJSZmcmFtZUdGXHovJS1mcmFtZXNwYWNpbmdHUSwwLjRlbX4wLjVleEYnLyUqZXF1YWxyb3dzR1EmZmFsc2VGJy8lLWVxdWFsY29sdW1uc0dGZnovJS1kaXNwbGF5c3R5bGVHRmZ6LyUlc2lkZUdGaXgvJTBtaW5sYWJlbHNwYWNpbmdHRml5LyUrZm9yZWdyb3VuZEdRKFswLDAsMF1GJy8lKXJlYWRvbmx5R0ZmekY+Rj4vSSttc2VtYW50aWNzR0YkUSdNYXRyaXhGJy8lJW9wZW5HUSJbRicvJSZjbG9zZUdRIl1GJ0ZkW2wvJSthY3Rpb250eXBlR1EucnRhYmxlYWRkcmVzc0YnLyUpcnRhYmxlaWRHUTUxODQ0Njc0NDA3MzkxODU0OTM5OEYn">LUknTWF0cml4RzYkJSpwcm90ZWN0ZWRHSShfc3lzbGliRzYiNiMvSSQlaWRHRiciNSlSXCY9UjJXblc9</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiVTXQ==</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbXNHRiQ2I1EnV29yZHN+RictSSNtb0dGJDYtUSIrRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y4LyUpc3RyZXRjaHlHRjgvJSpzeW1tZXRyaWNHRjgvJShsYXJnZW9wR0Y4LyUubW92YWJsZWxpbWl0c0dGOC8lJ2FjY2VudEdGOC8lJ2xzcGFjZUdRLDAuMjIyMjIyMmVtRicvJSdyc3BhY2VHRkctSSNtbkdGJDYkUSU1MDQwRidGM0Yz">LCZRJ1dvcmRzfjYiIiIiIiVTXUYl</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYmLUkjbXNHRiQ2I1EnV29yZHN+RictSSNtb0dGJDYtUSIrRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYnLyUmZmVuY2VHUSZmYWxzZUYnLyUqc2VwYXJhdG9yR0Y4LyUpc3RyZXRjaHlHRjgvJSpzeW1tZXRyaWNHRjgvJShsYXJnZW9wR0Y4LyUubW92YWJsZWxpbWl0c0dGOC8lJ2FjY2VudEdGOC8lJ2xzcGFjZUdRLDAuMjIyMjIyMmVtRicvJSdyc3BhY2VHRkctSSNtbkdGJDYkUSQ4NDBGJ0YzRjM=">LCZRJ1dvcmRzfjYiIiIiIiRTKUYl</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiRTKQ==</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiNO</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">US5DYWxjdWxhdGVkLi4uNiI=</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NykiIiIiIiUiIiQiIiYiIigiIiciIiM=</Equation></Text-field>
-</Output>
-<Output>
-<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">IiROJQ==</Equation></Text-field>
+<Text-field style="HyperlinkError" layout="HyperlinkError"><Hyperlink linktarget="http://www.maplesoft.com/support/help/errors/view.aspx?path=Error,%20%60%3A%3D%60%20unexpected" hyperlink="true"><Font style="HyperlinkError">Error, `:=` unexpected</Font></Hyperlink></Text-field>
 </Output></CodeEditor-ExecGroup></Presentation-Block><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L35" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
-<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
+<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">JSFH</Equation></Text-field>
 </Input>
-</Group></Presentation-Block><RTable handle="18446744073918549398">TTdSMApJQVJUQUJMRV9TQVZFLzE4NDQ2NzQ0MDczOTE4NTQ5Mzk4WCwlKWFueXRoaW5nRzYiRiVbZ2whIiUhISEjUiIoIigiI2YiI2EiIyEqIiMiKiIjJyoiIyUpIiMnKSIjbSIjdiIjeiIjdSIjJCoiI25GKiIjaiIjb0YxIiNdRisiI3RGMCIjaCIjXyIjKCoiIyYqIiNxRjMiIyEpIiNzRjlGO0Y4IiNlIiMlKiIjIykiI2siI2xGQEYsRiwiI15GQyIjYyIjcCIjKClGLkZARjZGQUYl</RTable>
+</Group></Presentation-Block>
 </Worksheet>
