@@ -102,73 +102,71 @@
 <Input>
 <Text-field prompt="&gt; " style="Maple Input" layout="Normal"><Equation executable="true" style="2D Input" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYlLUkjbWlHRiQ2I1EhRicvJStleGVjdXRhYmxlR1EmZmFsc2VGJy8lLG1hdGh2YXJpYW50R1Enbm9ybWFsRic=">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
-</Group><CodeEditor-ExecGroup view="presentation" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="1145" pixel-height="493" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">FloydWarshall := proc(n)
-    global B;
-    local k, i, j;
+</Group><CodeEditor-ExecGroup view="presentation" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="1145" pixel-height="493" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">FloydMarshall := proc(n)
+    global PinkFloydMatrix:
+    local k, i, j:
     for k from 1 to n do
 	for i from 1 to n do
 	    for j from 1 to n do
-		 if (B[i, k] + B[k, j] &lt; B[i, j]) then
-		     B[i, j] := B[i, k] + B[k, j];
-		 end if;
-	    end do;
-	end do;
-    end do;
+		 if (PinkFloydMatrix[i, k] + PinkFloydMatrix[k, j] &lt; PinkFloydMatrix[i, j]) then
+		     PinkFloydMatrix[i, j] := PinkFloydMatrix[i, k] + PinkFloydMatrix[k, j]:
+		 end if:
+	    end do:
+	end do:
+    end do:
 end proc:
-
 
 Dijkstra := proc(n, s, t)
     global DijkstraMatrix:
-    local C, x, parent, i, v, index, min:
-    C := [seq(infinity, i = 1..n)];
-    isPassed := [seq(0, i = 1..n)];
-    parent := [seq(0, i = 1..n)];
-    C[s] := 0;
+    local minPath, isPassed, path, i, j, index, min:
+    minPath := [seq(infinity, i = 1..n)]:
+    isPassed := [seq(0, i = 1..n)]:
+    path := [seq(0, i = 1..n)]:
+    minPath[s] := 0:
     
-    for i from 1 to n - 1 do	
-	min := infinity;
-	for v from 1 to n do
-	    if ((x[v] = 0) and (C[v] &lt; min)) then
-		min := C[v];
-		index := v;
+for i from 1 to n - 1 do
+
+    	min := infinity:
+	for j from 1 to n do
+	 if ((isPassed[j] = 0) and (minPath[j] &lt; min)) then
+	  min := minPath[j]:
+	  index := j:
+	 end if:
+     end do:
+	
+	for j from 1 to n do
+	    if ((isPassed[j] = 0) and 
+((minPath[index] + DijkstraMatrix[index, j]) &lt; minPath[j])) then
+		minPath[j] := minPath[index] + DijkstraMatrix[index, j]:
+		path[j] := index:
 	    end if:
 	end do:
-	
-	for v from 1 to n do
-	    if ((x[v] = 0) and ((C[index] + DijkstraMatrix[index, v]) &lt; C[v])) then
-		C[v] := C[index] + DijkstraMatrix[index, v];
-		parent[v] := index;
-	    end if;
-	end do;
-	x[index] := 1;				
-    end do;
+	isPassed[index] := 1:			
+
+end do:
     
-    printf(&quot;Length of shortest route from %a to %a = %3d&quot;, s, t, C[t]);
-    printf(&quot;\134tThis route is: &quot;);
-    v := t;
-    while (v &lt;&gt; s) do
-	printf(&quot;%d &lt;- &quot;, v);
-	v := parent[v];
-    end do;
-    printf(&quot;%a\134n&quot;, v);
+    print(&quot;Min path from &quot;, s, &quot; to &quot;, t, &quot; is &quot;, minPath[t]):
+    print(&quot;Path is: &quot;):
+    j := t:
+    while (j &lt;&gt; s) do
+	print (&quot;go to: &quot;, j):
+	j := path[j]:
+    end do:
+    print(&quot;end up in: &quot;, j):
 end proc:
-
-
-
-
 
 read &quot;data.txt&quot;:
 with(GraphTheory):
 n := sqrt(ArrayNumElems(A)):
-tmp := copy(A):
+B := copy(A):
 for i from 1 to n do
     for j from 1 to n do
-	if (tmp[i, j] = infinity) then
-	     tmp[i, j] := 0:
+	if (B[i, j] = infinity) then
+	     B[i, j] := 0:
 	end if:
     end do:
 end do:
-G := Graph(tmp):
+G := Graph(B):
 DrawGraph(G):
 
 DijkstraMatrix := copy(A):
@@ -178,7 +176,7 @@ for i from 2 to n do
 end do:
 
 PinkFloydMatrix := copy(A):
-FloydWarshall(n):
+FloydMarshall(n):
 print(&quot;FloydMarshal algorithm: mine&quot;):
 for i from 2 to n do
     print(&quot;Min path 1 to &quot;, i, &quot; is &quot;, PinkFloydMatrix[1, i]):
@@ -196,7 +194,154 @@ for i from 2 to n do
 end do:
 </EC-CodeEditor>
 <Output>
-<Text-field style="Maple Plot" layout="Maple Plot"></Text-field>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">UTlEaWprc3RyYX5hbGdvcml0aG06fm1pbmU2Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NihRL01pbn5wYXRofmZyb21+NiIiIiJRJX50b35GJCIiI1ElfmlzfkYkIiNV</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USpQYXRofmlzOn42Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiIw==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLGVuZH51cH5pbjp+NiIiIiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NihRL01pbn5wYXRofmZyb21+NiIiIiJRJX50b35GJCIiJFElfmlzfkYkIiM8</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USpQYXRofmlzOn42Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLGVuZH51cH5pbjp+NiIiIiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NihRL01pbn5wYXRofmZyb21+NiIiIiJRJX50b35GJCIiJVElfmlzfkYkIiNG</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USpQYXRofmlzOn42Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJQ==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJw==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLGVuZH51cH5pbjp+NiIiIiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NihRL01pbn5wYXRofmZyb21+NiIiIiJRJX50b35GJCIiJlElfmlzfkYkIiNE</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USpQYXRofmlzOn42Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJg==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJw==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLGVuZH51cH5pbjp+NiIiIiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NihRL01pbn5wYXRofmZyb21+NiIiIiJRJX50b35GJCIiJ1ElfmlzfkYkRic=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USpQYXRofmlzOn42Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJw==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLGVuZH51cH5pbjp+NiIiIiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NihRL01pbn5wYXRofmZyb21+NiIiIiJRJX50b35GJCIiKFElfmlzfkYkIiM6</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">USpQYXRofmlzOn42Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiKA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRKGdvfnRvOn42IiIiJw==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiRRLGVuZH51cH5pbjp+NiIiIiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">UT1GbG95ZE1hcnNoYWx+YWxnb3JpdGhtOn5taW5lNiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiNRJX5pc35GJCIjVQ==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiRRJX5pc35GJCIjPA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiVRJX5pc35GJCIjRg==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiZRJX5pc35GJCIjRA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIidRJX5pc35GJEYl</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIihRJX5pc35GJCIjOg==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">UTpEaWprc3RyYX5hbGdvcml0aG06fm1hcGxlNiI=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiNRJX5pc35GJDckNyUiIiIiIiRGJSIjVQ==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiRRJX5pc35GJDckNyQiIiJGJSIjPA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiVRJX5pc35GJDckNyUiIiIiIidGJSIjRg==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiZRJX5pc35GJDckNyUiIiIiIidGJSIjRA==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIidRJX5pc35GJDckNyQiIiJGJUYl</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIihRJX5pc35GJDckNyUiIiIiIidGJSIjOg==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">UT9GbG95ZE1hcnNoYWxsfmFsZ29yaXRobTp+bWFwbGU2Ig==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiNRI2lzRiQiI1U=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiRRI2lzRiQiIzw=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiVRI2lzRiQiI0Y=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIiZRI2lzRiQiI0Q=</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIidRI2lzRiRGJQ==</Equation></Text-field>
+</Output>
+<Output>
+<Text-field style="2D Output" layout="Maple Output"><Equation executable="false" style="2D Output">NiZRL01pbn5wYXRofjF+dG9+NiIiIihRI2lzRiQiIzo=</Equation></Text-field>
 </Output></CodeEditor-ExecGroup>
 <Group labelreference="L4" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
