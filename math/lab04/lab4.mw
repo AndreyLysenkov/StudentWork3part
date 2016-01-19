@@ -93,16 +93,16 @@
 <Metadata-table>
     <Metadata-category name="&lt;default&gt;"/>
     <Metadata-tag id="0" category="&lt;default&gt;" name="Document Properties">
-        <Metadata-attribute name="TaskProtect" value="true"/>
         <Metadata-attribute name="Active" value="true"/>
+        <Metadata-attribute name="TaskProtect" value="true"/>
         <Metadata-attribute name="Keyword" value="Calculus,Help,New Document,New Worksheet,What's New?"/>
         <Metadata-attribute name="Alias" value="Start"/>
         <Metadata-attribute name="Subject" value="&lt;default&gt;"/>
-        <Metadata-attribute name="Topic" value="Start"/>
         <Metadata-attribute name="Author" value="Maplesoft"/>
+        <Metadata-attribute name="Topic" value="Start"/>
         <Metadata-attribute name="Item List" value="true"/>
-        <Metadata-attribute name="Keywords" value="&lt;default&gt;"/>
         <Metadata-attribute name="Title" value="Start"/>
+        <Metadata-attribute name="Keywords" value="&lt;default&gt;"/>
     </Metadata-tag>
 </Metadata-table>
 <Task-table>
@@ -111,7 +111,7 @@
 <Task/><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L32" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
-<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">JSFH</Equation></Text-field>
+<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
 </Group></Presentation-Block><Presentation-Block><CodeEditor-ExecGroup view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L3" applyint="true" applyrational="true" display="code"><EC-CodeEditor id="CodeEditRegion0" visible="true" pixel-width="451" pixel-height="297" code-language="text/maple" autoexpand="false" wrapping="false" show-border="true" code-line-numbers="true">read &quot;data.txt&quot;:
 
@@ -279,18 +279,19 @@ Summ := proc(setNumber, length)
 	return answer:
 end proc:
 
-SetOfBase := proc(number, max)
-	local i, tmp:
-	basePowered := [seq(1, i = 1..max+1)]:
+SetOfBase := proc(number, lng)
+	local i, tmp, basePowered, answer, size:
+	basePowered := [seq(1, i = 1..lng)]:
 	i := 2:
-	while (i &lt;= max) do
+	
+	while (i &lt;= lng) do
 		tmp := basePowered[i - 1]:
 		basePowered[i] := tmp  * 2:
-		i = i + 1:
+		i := i + 1:
 	end do:
-	answer := [seq(0, i = 1..max+1)]:
+	answer := [seq(0, i = 1..lng)]:
 	tmp := number:
-	i := max + 1:
+	i := lng:
 	while (i &gt; 0) do
 		if (tmp &gt;= basePowered[i]) then
 			tmp := tmp - basePowered[i]:
@@ -310,10 +311,10 @@ FindAllCombines2 := proc(str, length, itemsNumb)
 	from i := 1 to length+1 do
 		max := max * 2:
 	end do:
-	from i := 0 to max do
-		tmp := summ(setOfBase(i, length+1), length+1):
+	from i := 0 to max-1 do
+		tmp := summ(setOfBase(i, length), length):
 		if tmp = itemsNumb then
-			tmp2 := setOfBase(i, length+1):
+			tmp2 := setOfBase(i, length):
 			tmp3 := ArrToStr(tmp2, S):
 			print(tmp3):
 			answer = answer + 1:
@@ -340,7 +341,7 @@ FindMinPath():</EC-CodeEditor>
 </Output></CodeEditor-ExecGroup></Presentation-Block><Presentation-Block>
 <Group view="presentation" hide-input="false" hide-output="true" inline-output="false" labelreference="L35" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input>
-<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">JSFH</Equation></Text-field>
+<Text-field style="Text" layout="Normal"><Equation executable="false" style="2D Math" input-equation="" display="LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYkLUkjbWlHRiQ2I1EhRicvJSxtYXRodmFyaWFudEdRJ25vcm1hbEYn">LUklbXJvd0c2Iy9JK21vZHVsZW5hbWVHNiJJLFR5cGVzZXR0aW5nR0koX3N5c2xpYkdGJzYjLUkjbWlHRiQ2I1EhRic=</Equation></Text-field>
 </Input>
 </Group></Presentation-Block>
 </Worksheet>
