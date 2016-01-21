@@ -45,11 +45,11 @@ namespace lab
         static void PrintFunction(BooleanFunction func)
         {
             bool a = false, b = false, c = false;
-            WriteLine("  A    B    C     Result");
+            WriteLine("   A      B      C      Result");
             for (int i = 0; i < 8; i++)
             {
                 SetOfTwo(i, ref a, ref b, ref c);
-                WriteLine(String.Format("{0} {1} {2} - {3}", a, b, c, func(a, b, c)));
+                WriteLine(String.Format("{0,6} {1,6} {2,6} - {3,6}", a, b, c, func(a, b, c)));
             }
         }
 
