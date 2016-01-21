@@ -213,40 +213,141 @@ namespace lab
         {
 
             static int[][] matrix;
-            static int sizeCol = 0;
-            static int sizeRow = 0;
+            static Point size = new Point(0, 0);
 
-            static bool IsMinimal(int i, int j)
+            class Point
+            {
+                int i;
+                int j;
+
+                public Point(int _i, int _j)
+                {
+                    this.i = _i;
+                    this.j = _j;
+                }
+
+                public int Row
+                {
+                    get { return i; }
+                }
+
+                public int Column
+                {
+                    get { return j; }
+                }
+            }
+
+            public static void Run()
+            {
+                EnterMatrix();
+                FindMinColRow();
+                Taskb();
+            }
+
+            static int EnterNumb()
+            {
+                return Convert.ToInt32(Console.ReadLine());
+            }
+
+            static void EnterArray(ref int[] array, int size)
+            {
+                array = new int[size];
+                for (int i = 0; i < size; i++)
+                {
+                    WriteLine(String.Format("Enter element #{0} :", i));
+                    array[i] = EnterNumb();
+                }
+            }
+
+            static void EnterMatrix()
+            {
+                WriteLine("Enter sizes of array (rows x columns): ");
+                size = new Point(EnterNumb(), EnterNumb());
+                matrix = new int[size.Row][];
+                for (int i = 0; i < size.Row; i++)
+                {
+                    EnterArray(ref matrix[i], size.Column);
+                }
+            }
+
+            static void FindMinColRow()
+            {
+                bool[] columns = new bool[size.Column];
+                bool[] rows = new bool[size.Row];
+                for (int i = 0; i < size.Row; i++)
+                {
+                    for (int j = 0; j < size.Column; j++)
+                    {
+                        if (IsMinimal(new Point(i, j)))
+                        {
+                            columns[j] = true;
+                            rows[i] = true;
+                        }
+                    }
+                }
+                WriteLine("Rows are: ");
+                for (int i = 0; i < size.Row; i++)
+                {
+                    if (rows[i])
+                    {
+                        Console.Write("{0}, ", i);
+                    }
+                }
+                WriteLine("Columns are: ");
+                for(int i = 0; i < size.Column; i++)
+                {
+                    if (columns[i])
+                    {
+                        Console.Write("{0}, ", i);
+                    }
+                }
+            }
+
+            static bool IsMinimal(Point element)
             {
                 bool result = true;
+                int i = element.Row;
+                int j = element.Column;
                 int numb = matrix[i][j];
-                for (int k = 0; result && k < sizeCol; k++)
+                for (int k = 0; result && k < size.Column; k++)
                 {
                     result &= (matrix[k][j] >= numb);
                 }
-                for (int k = 0; result && k < sizeRow; k++)
+                for (int k = 0; result && k < size.Row; k++)
                 {
                     result &= (matrix[i][k] >= numb);
                 }
                 return result;
             }
 
-            public static void Run()
+            static void Taskb()
             {
-
+                int subMain = FindSumSubMain();
+                int main = FindSumMain();
+                WriteLine(String.Format("Taskb: minimal is {0}", Math.Min(subMain, main)));
             }
 
-            //Дана целочисленная прямоугольная матрица.
-            //Определить:
-            //    а) номера строк и столбцов всех седловых
-            //    точек матрицы;
-            //    б) минимум среди сумм модулей элементов
-            //    диагоналей, параллельных побочной
-            //    диагонали матрицы.
-            //Примечание: Матрица А имеет седловую точку
-            //    аij, если является минимальным
-            //    элементом в i-той строке и 
-            //    в j-том столбце.
+            static int FindSumSubMain()
+            {
+                int result = 0;
+                int length = Math.Min(size.Column, size.Row);
+                for (int i = 0; i < length; i++)
+                {
+                    result += Math.Abs(matrix[i][length - 1 - i]);
+                }
+                return result;
+            }
+
+            static int FindSumMain()
+            {
+                int result = 0;
+                int length = Math.Min(size.Column, size.Row);
+                for (int i = 0; i < length; i++)
+                {
+                    result += Math.Abs(matrix[i][i]);
+                }
+                return result;
+            }
 
         }
     }
