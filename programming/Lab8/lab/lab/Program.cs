@@ -26,6 +26,8 @@ namespace lab
             Task2.Run();
             WriteLine("Task3");
             Task3.Run();
+            WriteLine("Task4");
+            Task4.Run();
             Console.ReadLine();
         }
 
@@ -90,7 +92,7 @@ namespace lab
 
             static int[] array2;
 
-            static public void Run()
+            public static void Run()
             {
                 WriteLine("Enter array1:");
                 EnterArray(ref array1);
@@ -101,12 +103,7 @@ namespace lab
                 WriteLine(String.Format("Summ of two numbers is {0}", numb1 + numb2));
             }
 
-            static bool IsDigit(int numb)
-            {
-                return (numb <= 9) && (numb >= 0);
-            }
-
-            static int EnterNumb(string message)
+            public static int EnterNumb(string message)
             {
                 int result = 0;
                 do
@@ -115,6 +112,11 @@ namespace lab
                     result = Console.Read();
                 } while (IsDigit(result));
                 return result;
+            }
+
+            static bool IsDigit(int numb)
+            {
+                return (numb <= 9) && (numb >= 0);
             }
 
             static void EnterArray(ref int[] array)
@@ -138,11 +140,47 @@ namespace lab
                 return result;
             }
 
-            //Напишите программу, которая вводит 
-            //c клавиатуры два непустых массива целых
-            //чисел в диапазоне от 0 до 9 и, 
-            //считая эти массивы десятичным представлением
-            //двух чисел, печатает их сумму.
+        }
+
+        static public class Task4
+        {
+            public static void Run()
+            {
+                int N = Task3.EnterNumb("Enter N :");
+                for (int i = 0; i < N; i++)
+                {
+                    if (MultiplyArray(NumbToArray(i)) == N)
+                    {
+                        WriteLine(String.Format("Number is {0} ", i));
+                        i = N;
+                    }
+                }
+            }
+
+            public static int[] NumbToArray (Int64 numb, int basis = 10)
+            {
+                int[] result = new int[0];
+                for (int i = 0; numb > 0; i++, numb /= basis)
+                {
+                    Array.Resize(ref result, i + 1);
+                    result[i] = Convert.ToInt32(numb % basis);
+                }
+                return result;
+            }
+
+            public static Int64 MultiplyArray(int[] array)
+            {
+                Int64 result = 1;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    result *= array[i];
+                }
+                return result;
+            }
+
+            //Найти минимальное положительное число Q
+            //такое, что произведение цифр числа Q в
+            //точности равняется N.
         }
     }
 }
