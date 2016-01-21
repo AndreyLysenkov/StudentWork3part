@@ -21,6 +21,8 @@ namespace lab
         {
             WriteLine("Program Lab Walpy");
             Task1();
+
+            Console.ReadLine();
         }
 
         static void Task1()
@@ -47,7 +49,7 @@ namespace lab
             for (int i = 0; i < 8; i++)
             {
                 SetOfTwo(i, ref a, ref b, ref c);
-                WriteLine(String.Format("{1:4} {2:4} {3:4} - {4:4}", a, b, c, func(a, b, c)));
+                WriteLine(String.Format("{0} {1} {2} - {3}", a, b, c, func(a, b, c)));
             }
         }
 
