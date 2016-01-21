@@ -109,8 +109,8 @@ namespace lab
                 do
                 {
                     WriteLine(message);
-                    result = Console.Read();
-                } while (IsDigit(result));
+                    result = Convert.ToInt32(Console.ReadLine());
+                } while (!IsDigit(result));
                 return result;
             }
 
