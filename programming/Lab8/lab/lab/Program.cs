@@ -40,6 +40,12 @@ namespace lab
                     case (4):
                         Task4.Run();
                         break;
+                    case (5):
+                        Task5.Run();
+                        break;
+                    default:
+                        WriteLine("Wrong menu number");
+                        break;
                 }
                 WriteLine("--- Press 'Enter' ---");
                 Console.ReadLine();
@@ -201,6 +207,47 @@ namespace lab
                 result = Convert.ToInt32(Console.ReadLine());
                 return result;
             }
+        }
+
+        static public class Task5
+        {
+
+            static int[][] matrix;
+            static int sizeCol = 0;
+            static int sizeRow = 0;
+
+            static bool IsMinimal(int i, int j)
+            {
+                bool result = true;
+                int numb = matrix[i][j];
+                for (int k = 0; result && k < sizeCol; k++)
+                {
+                    result &= (matrix[k][j] >= numb);
+                }
+                for (int k = 0; result && k < sizeRow; k++)
+                {
+                    result &= (matrix[i][k] >= numb);
+                }
+                return result;
+            }
+
+            public static void Run()
+            {
+
+            }
+
+            //Дана целочисленная прямоугольная матрица.
+            //Определить:
+            //    а) номера строк и столбцов всех седловых
+            //    точек матрицы;
+            //    б) минимум среди сумм модулей элементов
+            //    диагоналей, параллельных побочной
+            //    диагонали матрицы.
+            //Примечание: Матрица А имеет седловую точку
+            //    аij, если является минимальным
+            //    элементом в i-той строке и 
+            //    в j-том столбце.
+
         }
     }
 }
