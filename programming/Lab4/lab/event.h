@@ -11,7 +11,7 @@ class Event
 	int command;
 	bool isValid;
 public:
-	MethodList *method;
+	MethodList *methodList;
 	Event();
 	int GetCommand();
 	bool IsValid();
