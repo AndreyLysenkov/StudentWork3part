@@ -162,12 +162,13 @@ namespace lab
             public static void Run()
             {
                 int N = EnterNumb("Enter N :");
-                for (int i = 0; i < N; i++)
+                bool isFounded = false;
+                for (int i = 0; !isFounded; i++)
                 {
                     if (MultiplyArray(NumbToArray(i)) == N)
                     {
                         WriteLine(String.Format("Number is {0} ", i));
-                        i = N;
+                        isFounded = true;
                     }
                 }
             }
