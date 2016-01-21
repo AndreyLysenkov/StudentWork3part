@@ -20,15 +20,30 @@ namespace lab
         static void Main(string[] args)
         {
             WriteLine("Program Lab Walpy");
-            WriteLine("Task1");
-            Task1.Run();
-            WriteLine("Task2");
-            Task2.Run();
-            WriteLine("Task3");
-            Task3.Run();
-            WriteLine("Task4");
-            Task4.Run();
-            Console.ReadLine();
+            int menu = 0;
+            do
+            {
+                WriteLine("Enter task(1-5) or 0 to exit:");
+                menu = Convert.ToInt32(Console.ReadLine());
+                WriteLine(String.Format("Task #{0}", menu));
+                switch (menu)
+                {
+                    case (1):
+                        Task1.Run();
+                        break;
+                    case (2):
+                        Task2.Run();
+                        break;
+                    case (3):
+                        Task3.Run();
+                        break;
+                    case (4):
+                        Task4.Run();
+                        break;
+                }
+                WriteLine("--- Press 'Enter' ---");
+                Console.ReadLine();
+            } while (menu != 0);
         }
 
         static public class Task1
@@ -146,7 +161,7 @@ namespace lab
         {
             public static void Run()
             {
-                int N = Task3.EnterNumb("Enter N :");
+                int N = EnterNumb("Enter N :");
                 for (int i = 0; i < N; i++)
                 {
                     if (MultiplyArray(NumbToArray(i)) == N)
@@ -178,9 +193,13 @@ namespace lab
                 return result;
             }
 
-            //Найти минимальное положительное число Q
-            //такое, что произведение цифр числа Q в
-            //точности равняется N.
+            public static int EnterNumb(string message)
+            {
+                int result = 0;
+                WriteLine(message);
+                result = Convert.ToInt32(Console.ReadLine());
+                return result;
+            }
         }
     }
 }
