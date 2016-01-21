@@ -1,8 +1,9 @@
 #pragma once
+#include "group.h"
 
 struct MethodList
 {
-	Method method;
+	Method *method;
 	MethodList *next;
 };
 
@@ -16,6 +17,26 @@ public:
 	int GetCommand();
 	bool IsValid();
 	void Clear();
-	void Add();
+	void Add(Method*);
 	void Get();
+};
+
+class Constant
+{
+public:
+	enum Group
+	{
+		Trial = 0,
+		Exam = 1,
+		FinalExam = 2,
+		Test = 3
+	};
+	enum Command
+	{
+		Exit = 0,
+		Print = 1,
+		Add = 2,
+		Delete = 3,
+		ForEach = 4
+	};
 };
