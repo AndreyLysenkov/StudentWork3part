@@ -1,4 +1,7 @@
-#include "stdafx.h"
+#include "event.h"
+#include "group.h"
+#include "stack.h"
+#include "objects.h"
 #include <string>
 #include <iostream>
 using namespace std;

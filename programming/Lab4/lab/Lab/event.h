@@ -1,5 +1,4 @@
 #pragma once
-#include "group.h"
 
 struct MethodList
 {

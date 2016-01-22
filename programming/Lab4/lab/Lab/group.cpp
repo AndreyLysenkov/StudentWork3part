@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "stack.h"
 #include "group.h"
 #include <iostream>

@@ -1,5 +1,6 @@
 #pragma once
-#include "stdafx.h"
+#include "event.h"
+#include "group.h"
 using namespace std;
 
 Event::Event()
