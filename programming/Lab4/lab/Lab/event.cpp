@@ -17,12 +17,12 @@ int Event::GetCommand()
 
 bool Event::IsValid()
 {
-	return isValid;
+	return (command != 0);
 }
 
 void Event::Clear()
 {
-	isValid = false;
+	command = 0;
 }
 
 void Event::Add(Method _method)
@@ -40,7 +40,7 @@ void Event::PrintMenu(int menu, char* message)
 
 bool Event::CheckGroupIndex(int index)
 {
-	return (index >= 0) && (index <= 4)
+	return ((index >= 0) && (index <= 4));
 }
 
 void Event::Get()
@@ -68,7 +68,7 @@ void Event::Get()
 				if (_command != cmExit)
 				{
 					cout << "   ---Group---" << endl;
-					PrintMenu(gTrial, "Trial\0");
+					PrintMenu(grTrial, "Trial\0");
 					PrintMenu(grExam, "Exam\0");
 					PrintMenu(grFinalExam, "FinalExam\0");
 					PrintMenu(grTest, "Test\0");
@@ -83,5 +83,4 @@ void Event::Get()
 		}
 
 	} while (_command != cmExit);
-
 }

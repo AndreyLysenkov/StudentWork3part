@@ -1,11 +1,11 @@
 #pragma once
 #include "stack.h"
-
-typedef void(*Method)(Trial*);
+#include "event.h"
 
 class TrialGroup
 {
 protected:
+	int index;
 	Stack stack;
 public:
 	TrialGroup();
@@ -16,6 +16,7 @@ public:
 	virtual void Add(Trial*);
 	virtual void Delete();
 	void Show();
+	void HandleEvent(Event*);
 };
 
 class TestGroup : public TrialGroup
@@ -38,7 +39,7 @@ public:
 	virtual void Delete();
 };
 
-class FinalExamGroup : public ExamGroup
+class FinalExamGroup : public TrialGroup
 {
 public:
 	FinalExamGroup();

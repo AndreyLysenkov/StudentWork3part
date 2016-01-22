@@ -1,6 +1,8 @@
 #pragma once
 #include "group.h"
 
+typedef void(*Method)(Trial*);
+
 class Event
 {
 	const int COMMAND_SHIFT = 8;
