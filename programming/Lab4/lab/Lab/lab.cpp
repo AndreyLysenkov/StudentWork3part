@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+
+
 int user = 0;
 
 void PrintPassed(Trial *obj)

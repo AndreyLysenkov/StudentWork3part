@@ -5,20 +5,23 @@ class Event
 {
 	int command;
 	bool isValid;
+	void PrintMenu(int, char*);
+	bool CheckGroupIndex(int);
 public:
 	struct MethodList
 	{
 		Method method;
 		MethodList *next;
 	};
-	enum Group
+	enum constGroup
 	{
-		grTrial = 0,
-		grExam = 1,
-		grFinalExam = 2,
-		grTest = 3
+		grExit = 0,
+		grTrial = 1,
+		grExam = 2,
+		grFinalExam = 3,
+		grTest = 4
 	};
-	enum Command
+	enum constCommand
 	{
 		cmExit = 0,
 		cmPrint = 1,

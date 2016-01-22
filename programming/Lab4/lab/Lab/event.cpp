@@ -1,6 +1,7 @@
 #pragma once
 #include "event.h"
 #include <stdlib.h>
+#include <iostream>
 using namespace std;
 
 Event::Event()
@@ -32,44 +33,59 @@ void Event::Add(Method _method)
 	methodList = tmp;
 }
 
+void Event::PrintMenu(int menu, char* message)
+{
+	cout << " >" << menu << " - " << message << endl;
+}
+
+bool Event::CheckGroupIndex(int index)
+{
+	return (index >= 0) && (index <= 4)
+}
+
 void Event::Get()
 {
-	int group = 0;
-	int command = Command.Exit;
+	int group = grTrial;
+	int command = cmExit;
 
 	do
 	{
+		cout << "   ---Action---" << endl;
+		PrintMenu(cmPrint, "Print\0");
+		PrintMenu(cmAdd, "Add\0");
+		PrintMenu(cmDelete, "Delete\0");
+		PrintMenu(cmForEach, "ForEach\0");
+		PrintMenu(cmExit, "Exit\0");
+		cout << endl;
+		cout << " >";
+		cin >> command;
 
-	} while (command != Command.Exit);
+		do
+		{
+			if (command != cmExit)
+			{
+				cout << "   ---Group---" << endl;
+				PrintMenu(gTrial, "Trial\0");
+				PrintMenu(grExam, "Exam\0");
+				PrintMenu(grFinalExam, "FinalExam\0");
+				PrintMenu(grTest, "Test\0");
+				PrintMenu(grExit, "Exit\0");
+				cout << endl;
+				cout << " >";
+				cin >> group;
+			}
+		} while (CheckGroupIndex(group));
+	
+
+
+	} while (command != cmExit);
 
 }
 
 //void Event::GetEvent()
 //{
-//	int gr;
-//	int cm;
-//	bool isBack = true;
-//
 //	do
 //	{
-//		cout << "\n\n Choose action:\n\n";
-//		cout << " " << cmAdd << " - Add\n";
-//		cout << " " << cmDelete << " - Delete\n";
-//		cout << " " << cmPrint << " - Print\n";
-//		cout << " " << cmForeach << " - Foreach\n";
-//		cout << " " << cmExit << " - Exit\n\n> ";
-//
-//		cin >> cm;
-//
-//		if (cm == cmAdd || cm == cmPrint || cm == cmDelete || cm == cmForeach)
-//		{
-//			cout << "\n\n Choose group: \n\n";
-//			cout << " " << grMonarchy << " - Monarchy\n";
-//			cout << " " << grKingdom << " - Kingdom\n";
-//			cout << " " << grRepublic << " - Republic\n";
-//			cout << " " << cmBack << " - Back\n\n> ";
-//
-//			cin >> gr;
 //			while (gr != grMonarchy && gr != grKingdom && gr != grRepublic && gr != cmBack)
 //			{
 //				cout << " incorrect number, enter number again\n> ";
