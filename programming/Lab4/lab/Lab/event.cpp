@@ -38,8 +38,6 @@ void Event::Get()
 	//Constant.Command command;
 }
 
-
-
 //void Event::GetEvent()
 //{
 //	int gr;
