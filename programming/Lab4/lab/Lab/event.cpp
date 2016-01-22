@@ -34,7 +34,7 @@ void Event::Add(Method *_method)
 void Event::Get()
 {
 	Constant.Group group;
-	//Constant.Command command;
+	Constant.Command command;
 }
 
 
