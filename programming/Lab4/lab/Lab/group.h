@@ -1,9 +1,11 @@
 #pragma once
 #include "stack.h"
-#include "event.h"
+
 using namespace std;
 
-class TrialGroup
+typedef void(*Method)(Trial*);
+
+class TrialGroup :: friend Event
 {
 protected:
 	int index;
