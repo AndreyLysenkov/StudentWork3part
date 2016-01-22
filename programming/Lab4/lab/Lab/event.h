@@ -3,8 +3,8 @@
 
 class Event
 {
+	const int COMMAND_SHIFT = 8;
 	int command;
-	bool isValid;
 	void PrintMenu(int, char*);
 	bool CheckGroupIndex(int);
 public:

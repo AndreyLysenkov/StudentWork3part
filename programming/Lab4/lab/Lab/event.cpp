@@ -6,7 +6,7 @@ using namespace std;
 
 Event::Event()
 {
-	isValid = false;
+	command = 0;
 	methodList = NULL;
 }
 
@@ -45,8 +45,8 @@ bool Event::CheckGroupIndex(int index)
 
 void Event::Get()
 {
-	int group = grTrial;
-	int command = cmExit;
+	int _group = grTrial;
+	int _command = cmExit;
 
 	do
 	{
@@ -58,52 +58,30 @@ void Event::Get()
 		PrintMenu(cmExit, "Exit\0");
 		cout << endl;
 		cout << " >";
-		cin >> command;
+		cin >> _command;
 
-		do
+		if (_command != cmExit)
 		{
-			if (command != cmExit)
+
+			do
 			{
-				cout << "   ---Group---" << endl;
-				PrintMenu(gTrial, "Trial\0");
-				PrintMenu(grExam, "Exam\0");
-				PrintMenu(grFinalExam, "FinalExam\0");
-				PrintMenu(grTest, "Test\0");
-				PrintMenu(grExit, "Exit\0");
-				cout << endl;
-				cout << " >";
-				cin >> group;
-			}
-		} while (CheckGroupIndex(group));
-	
+				if (_command != cmExit)
+				{
+					cout << "   ---Group---" << endl;
+					PrintMenu(gTrial, "Trial\0");
+					PrintMenu(grExam, "Exam\0");
+					PrintMenu(grFinalExam, "FinalExam\0");
+					PrintMenu(grTest, "Test\0");
+					PrintMenu(grExit, "Exit\0");
+					cout << endl;
+					cout << " >";
+					cin >> _group;
+				}
+			} while (CheckGroupIndex(_group));
 
+			command = _command * COMMAND_SHIFT + _group;
+		}
 
-	} while (command != cmExit);
+	} while (_command != cmExit);
 
 }
-
-//void Event::GetEvent()
-//{
-//	do
-//	{
-//			while (gr != grMonarchy && gr != grKingdom && gr != grRepublic && gr != cmBack)
-//			{
-//				cout << " incorrect number, enter number again\n> ";
-//				cin >> gr;
-//			}
-//			isBack = gr == cmBack;
-//			gr = gr * SHIFT + cm;
-//		}
-//		else
-//		{
-//			if (cm == cmExit)
-//			{
-//				isBack = false;
-//				gr = cmExit;
-//			}
-//		}
-//	} while (isBack);
-//
-//	isValid = true;
-//	command = gr;
-//}
