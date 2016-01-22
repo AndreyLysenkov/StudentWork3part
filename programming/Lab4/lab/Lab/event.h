@@ -1,8 +1,9 @@
 #pragma once
+#include "group.h"
 
 struct MethodList
 {
-	Method *method;
+	Method method;
 	MethodList *next;
 };
 
@@ -16,7 +17,7 @@ public:
 	int GetCommand();
 	bool IsValid();
 	void Clear();
-	void Add(Method*);
+	void Add(Method);
 	void Get();
 };
 

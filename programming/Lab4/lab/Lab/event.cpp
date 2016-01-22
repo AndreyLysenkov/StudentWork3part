@@ -1,6 +1,6 @@
 #pragma once
 #include "event.h"
-#include "group.h"
+#include <stdlib.h>
 using namespace std;
 
 Event::Event()
@@ -24,7 +24,7 @@ void Event::Clear()
 	isValid = false;
 }
 
-void Event::Add(Method *_method)
+void Event::Add(Method _method)
 {
 	MethodList *tmp = new MethodList;
 	tmp->method = _method;
@@ -34,8 +34,8 @@ void Event::Add(Method *_method)
 
 void Event::Get()
 {
-	Constant.Group group;
-	Constant.Command command;
+	//Constant.Group group = Constant.Group.Trial;
+	//Constant.Command command;
 }
 
 
