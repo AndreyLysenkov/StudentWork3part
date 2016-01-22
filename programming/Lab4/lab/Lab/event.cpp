@@ -5,7 +5,7 @@ using namespace std;
 Event::Event()
 {
 	isValid = false;
-	//methodList = NULL;
+	methodList = NULL;
 }
 
 int Event::GetCommand()
@@ -33,7 +33,7 @@ void Event::Add(Method *_method)
 
 void Event::Get()
 {
-	//Constant.Group group;
+	Constant.Group group;
 	//Constant.Command command;
 }
 
