@@ -1,6 +1,7 @@
 #pragma once
 #include "stack.h"
 #include "event.h"
+using namespace std;
 
 class TrialGroup
 {
