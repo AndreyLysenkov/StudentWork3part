@@ -34,8 +34,14 @@ void Event::Add(Method _method)
 
 void Event::Get()
 {
-	//Constant.Group group = Constant.Group.Trial;
-	//Constant.Command command;
+	int group = 0;
+	int command = Command.Exit;
+
+	do
+	{
+
+	} while (command != Command.Exit);
+
 }
 
 //void Event::GetEvent()
