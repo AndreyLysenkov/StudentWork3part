@@ -6,9 +6,6 @@ using namespace std;
 
 int MAX_CHAR_SIZE = 100;
 
-
-/* Trial */
-
 Trial::Trial()
 {
 	this->name = new char[MAX_CHAR_SIZE];
