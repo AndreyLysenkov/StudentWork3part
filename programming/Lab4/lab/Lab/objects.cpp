@@ -8,52 +8,43 @@ int MAX_CHAR_SIZE = 100;
 
 Trial::Trial()
 {
-	this->name = new char[MAX_CHAR_SIZE];
-	strcpy(name, "none");
-	this->subject = new char[MAX_CHAR_SIZE];
-	strcpy(subject, "none");
+	this->name = "";
+	this->subject = "";
 }
 
-Trial::Trial(char *_name, char *_subject)
+Trial::Trial(string _name, string _subject)
 {
-	this->name = new char[MAX_CHAR_SIZE];
-	strcpy(name, _name);
-	this->subject = new char[MAX_CHAR_SIZE];
-	strcpy(subject, _subject);
+	this->name = _name;
+	this->subject = _subject;
 }
 
 Trial::Trial(Trial &obj)
 {
-	this->name = new char[MAX_CHAR_SIZE];
-	strcpy(name, obj.GetName());
-	this->subject = new char[MAX_CHAR_SIZE];
-	strcpy(subject, obj.GetSubject());
+	this->name = obj.GetName();
+	this->subject = obj.GetSubject();
 }
 
 Trial::~Trial()
 {
-	delete name;
-	delete subject;
+
 }
 
-void Trial::SetSubject(char *_subject)
+void Trial::SetSubject(string _subject)
 {
-	this->subject = new char[MAX_CHAR_SIZE];
-	strcpy(subject, _subject);
+	this->subject = _subject;
 }
 
-void Trial::SetName(char *_name)
+void Trial::SetName(string _name)
 {
-	this->name = new char[MAX_CHAR_SIZE];
-	strcpy(name, _name);
+	this->name = _name;
 }
 
-char *Trial::GetSubject()
+string Trial::GetSubject()
 {
 	return this->subject;
 }
 
-char *Trial::GetName()
+string Trial::GetName()
 {
 	return this->name;
 }
@@ -67,8 +58,8 @@ void Trial::Print()
 
 void Trial::Enter()
 {
-	char *name;
-	char *subject;
+	string name;
+	string subject;
 	cout << "Enter Trial: " << endl;
 	cout << " Subject > ";
 	cin >> subject;
@@ -86,7 +77,7 @@ Test::Test() : Trial()
 	this->minScore = 0;
 }
 
-Test::Test(char *_name, char *_subject,
+Test::Test(string _name, string _subject,
 	int _score = 0, int _maxScore = 100, int _minScore = 0)
 	: Trial(_name, _subject)
 {
@@ -177,7 +168,7 @@ Exam::Exam()
 	this->mark = 0;
 }
 
-Exam::Exam(char *_name, char *_subject)
+Exam::Exam(string _name, string _subject)
 	: Trial(_name, _subject)
 {
 	this->mark = 0;
@@ -240,7 +231,7 @@ FinalExam::FinalExam()
 	this->finalMark = 0;
 }
 
-FinalExam::FinalExam(char *_name, char *_subject)
+FinalExam::FinalExam(string _name, string _subject)
 	: Exam(_name, _subject)
 {
 	this->isAccessed = false;

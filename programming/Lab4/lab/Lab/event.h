@@ -1,5 +1,8 @@
 #pragma once
-#include "group.h"
+#include "objects.h"
+using namespace std;
+
+typedef void(*Method)(Trial*);
 
 class Event
 {
@@ -17,11 +20,11 @@ public:
 	int GetCommand();
 	bool IsValid();
 	void Clear();
-	void Add(Method);
+	void Add(Method*);
 	void Get();
 };
 
-static class Constant {
+class Constant {
 private:
 	static int COMMAND_SHIFT;
 public:

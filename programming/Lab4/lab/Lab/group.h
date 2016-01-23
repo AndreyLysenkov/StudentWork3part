@@ -1,7 +1,6 @@
 #pragma once
 #include "stack.h"
 #include "event.h"
-using namespace std;
 
 typedef void(*Method)(Trial*);
 

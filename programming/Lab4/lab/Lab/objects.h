@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 using namespace std;
 
 class Trial
@@ -11,10 +12,10 @@ public:
 	Trial(Trial&);
 	Trial(string, string);
 	~Trial();
-	void SetSubject(char*);
-	void SetName(char*);
-	char *GetSubject();
-	char *GetName();
+	void SetSubject(string);
+	void SetName(string);
+	string GetSubject();
+	string GetName();
 	virtual void Print();
 	virtual void Enter();
 };

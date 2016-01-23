@@ -91,7 +91,7 @@ void TrialGroup::HandleEvent(Event *_event)
 			{
 				this->ForEach(list->method);
 				list = list->next;
-			}		
+			}
 			_event->Clear();
 		}
 		if (command == cmDelete)
