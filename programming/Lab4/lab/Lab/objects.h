@@ -1,14 +1,15 @@
 #pragma once
+using namespace std;
 
 class Trial
 {
 protected:
-	char *subject;
-	char *name;
+	string subject;
+	string name;
 public:
 	Trial();
 	Trial(Trial&);
-	Trial(char*, char*);
+	Trial(string, string);
 	~Trial();
 	void SetSubject(char*);
 	void SetName(char*);
@@ -27,7 +28,7 @@ protected:
 public:
 	Test();
 	Test(Test&);
-	Test(char *, char*, int, int, int);
+	Test(string, string, int, int, int);
 	~Test();
 	void SetScore(int);
 	int GetScore();
@@ -48,7 +49,7 @@ protected:
 public:
 	Exam();
 	Exam(Exam&);
-	Exam(char*, char*);
+	Exam(string, string);
 	~Exam();
 	int GetMark();
 	bool SetMark(int);
@@ -65,7 +66,7 @@ private:
 public:
 	FinalExam();
 	FinalExam(FinalExam&);
-	FinalExam(char*, char*);
+	FinalExam(string, string);
 	~FinalExam();
 	bool IsAccessed();
 	void GainAccess();

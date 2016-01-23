@@ -46,7 +46,7 @@ bool Event::CheckGroupIndex(int index)
 void Event::Get()
 {
 	int _group = Constant::Group::Trial;
-	int _command = Constant::Command::Exit;
+	int _command = Constant::Command::cmExit;
 
 	do
 	{
@@ -55,24 +55,24 @@ void Event::Get()
 		PrintMenu(Constant::Command::Add, "Add\0");
 		PrintMenu(Constant::Command::Delete, "Delete\0");
 		PrintMenu(Constant::Command::ForEach, "ForEach\0");
-		PrintMenu(Constant::Command::Exit, "Exit\0");
+		PrintMenu(Constant::Command::cmExit, "Exit\0");
 		cout << endl;
 		cout << " >";
 		cin >> _command;
 
-		if (_command != Constant::Command::Exit)
+		if (_command != Constant::Command::cmExit)
 		{
 
 			do
 			{
-				if (_command != Constant::Command::Exit)
+				if (_command != Constant::Command::cmExit)
 				{
 					cout << "   ---Group---" << endl;
 					PrintMenu(Constant::Group::Trial, "Trial\0");
 					PrintMenu(Constant::Group::Exam, "Exam\0");
 					PrintMenu(Constant::Group::FinalExam, "FinalExam\0");
 					PrintMenu(Constant::Group::Test, "Test\0");
-					PrintMenu(Constant::Group::Exit, "Exit\0");
+					PrintMenu(Constant::Group::grExit, "Exit\0");
 					cout << endl;
 					cout << " >";
 					cin >> _group;
@@ -82,7 +82,7 @@ void Event::Get()
 			command = Constant::BuildCommand(_command, _group);
 		}
 
-	} while (_command != Constant::Command::Exit);
+	} while (_command != Constant::Command::cmExit);
 }
 
 int Constant::COMMAND_SHIFT = 8;
