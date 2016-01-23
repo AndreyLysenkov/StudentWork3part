@@ -77,7 +77,7 @@ void Event::Get()
 					cout << " >";
 					cin >> _group;
 				}
-			} while (CheckGroupIndex(_group));
+			} while (!CheckGroupIndex(_group));
 
 			command = Constant::BuildCommand(_command, _group);
 		}
