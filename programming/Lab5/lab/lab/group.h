@@ -1,6 +1,7 @@
 #pragma once
 #include "list.h"
 #include "event.h"
+#include "exception.h"
 
 class Group
 {
@@ -11,6 +12,8 @@ private:
 		ListGroup *next;
 	};
 	ListGroup *last;
+	int CountList();
+	bool CheckIndex(int);
 public:
 	Group();
 	~Group();

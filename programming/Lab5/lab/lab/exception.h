@@ -9,9 +9,8 @@ public:
 	{
 		NoError,
 		EmptyList,
-		WrongTemplate,
-		WrongUFO,
-		Wron404
+		WrongListIndex,
+		NoListFounded
 	};
 	Exception(Code, int index = -1);
 	Code GetCode() const;
