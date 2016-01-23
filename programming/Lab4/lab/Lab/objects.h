@@ -1,6 +1,4 @@
-#ifndef objects
-
-#define objects
+#pragma once
 
 class Trial
 {
@@ -72,5 +70,3 @@ public:
 	int GetFinalMark();
 	virtual void Print();
 };
-
-#endif
