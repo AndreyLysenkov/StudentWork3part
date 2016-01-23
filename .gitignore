@@ -230,3 +230,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 programming/Lab4/lab/lab.VC.opendb
+*.opendb
