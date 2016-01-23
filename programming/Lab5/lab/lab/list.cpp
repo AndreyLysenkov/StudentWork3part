@@ -70,28 +70,46 @@ bool List::operator!=(List list)
 
 void List::Print()
 {
+	cout << this;
 }
 
 void List::Input()
 {
+	char* temp = new char[255];
+	cin.get();
+	cin.getline(temp, 255);
+	for (int i = 0; i <= strlen(temp); i++)
+	{
+		*this + temp[i];
+	}
 }
 
 Element * List::GetLast()
 {
-	return nullptr;
+	return this->last;
 }
-
 
 List::~List()
 {
 }
 
-ostream & operator<<(ostream &, List &)
+ostream & operator<<(ostream &stream, List &list)
 {
-	// TODO: вставьте здесь оператор return
+	Element *temp = list.last;
+	if (temp == NULL)
+		stream << "Empty List";
+	while (temp != NULL)
+	{
+		stream << " > " << temp->symbol << endl;
+		temp = temp->next;
+	}
+	return stream;
 }
 
-istream & operator<<(istream &, List &)
+istream & operator<<(istream &stream, List &list)
 {
-	// TODO: вставьте здесь оператор return
+	char temp;
+	stream >> temp;
+	list + temp;
+	return stream;
 }
