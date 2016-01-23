@@ -1,7 +1,5 @@
 #include "event.h"
 #include "group.h"
-#include "stack.h"
-#include "objects.h"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -32,14 +30,23 @@ int main()
 	group.Add(new Test("Prog", "13 test", 75, 100, 20));
 	group.Add(new Test("Math", "27 test", 30, 100, 20));
 	group.Add(new Test("Phisics", "0 test", 10, 100, 20));
-	group.Show();
-	cout << "-- All who passed: " << endl;
-	Method method = PrintPassed;
-	group.ForEach(method);
+		
+	Method action1 = PrintPassed;
+	Method action2 = PrintGreater;
 	cout << endl << "-- Enter min one:";
 	cin >> user;
-	cout << endl;
-	Method method0 = PrintGreater;
-	group.ForEach(method0);
+	Event *_event = new Event();
+	_event->Add(*action1);
+	_event->Add(*action2);
+
+	int cmd = Constant::Command::cmExit;
+	do
+	{
+		_event->Get();
+		cmd = _event->GetCommand();
+		group.HandleEvent(_event);
+	} while (cmd != Constant::Command::cmExit);
+
+	cout << " --- Press Enter ---";
 	system("pause");
 }

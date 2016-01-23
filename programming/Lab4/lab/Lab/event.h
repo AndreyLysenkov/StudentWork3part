@@ -20,7 +20,7 @@ public:
 	int GetCommand();
 	bool IsValid();
 	void Clear();
-	void Add(Method*);
+	void Add(Method);
 	void Get();
 };
 

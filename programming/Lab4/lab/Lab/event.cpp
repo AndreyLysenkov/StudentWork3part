@@ -25,10 +25,10 @@ void Event::Clear()
 	command = 0;
 }
 
-void Event::Add(Method *_method)
+void Event::Add(Method _method)
 {
 	MethodList *tmp = new MethodList;
-	tmp->method = *_method;
+	tmp->method = _method;
 	tmp->next = methodList;
 	methodList = tmp;
 }
