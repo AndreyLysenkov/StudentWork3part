@@ -45,42 +45,55 @@ bool Event::CheckGroupIndex(int index)
 
 void Event::Get()
 {
-	int _group = grTrial;
-	int _command = cmExit;
+	int _group = Constant::Group::Trial;
+	int _command = Constant::Command::Exit;
 
 	do
 	{
 		cout << "   ---Action---" << endl;
-		PrintMenu(cmPrint, "Print\0");
-		PrintMenu(cmAdd, "Add\0");
-		PrintMenu(cmDelete, "Delete\0");
-		PrintMenu(cmForEach, "ForEach\0");
-		PrintMenu(cmExit, "Exit\0");
+		PrintMenu(Constant::Command::Print, "Print\0");
+		PrintMenu(Constant::Command::Add, "Add\0");
+		PrintMenu(Constant::Command::Delete, "Delete\0");
+		PrintMenu(Constant::Command::ForEach, "ForEach\0");
+		PrintMenu(Constant::Command::Exit, "Exit\0");
 		cout << endl;
 		cout << " >";
 		cin >> _command;
 
-		if (_command != cmExit)
+		if (_command != Constant::Command::Exit)
 		{
 
 			do
 			{
-				if (_command != cmExit)
+				if (_command != Constant::Command::Exit)
 				{
 					cout << "   ---Group---" << endl;
-					PrintMenu(grTrial, "Trial\0");
-					PrintMenu(grExam, "Exam\0");
-					PrintMenu(grFinalExam, "FinalExam\0");
-					PrintMenu(grTest, "Test\0");
-					PrintMenu(grExit, "Exit\0");
+					PrintMenu(Constant::Group::Trial, "Trial\0");
+					PrintMenu(Constant::Group::Exam, "Exam\0");
+					PrintMenu(Constant::Group::FinalExam, "FinalExam\0");
+					PrintMenu(Constant::Group::Test, "Test\0");
+					PrintMenu(Constant::Group::Exit, "Exit\0");
 					cout << endl;
 					cout << " >";
 					cin >> _group;
 				}
 			} while (CheckGroupIndex(_group));
 
-			command = _command * COMMAND_SHIFT + _group;
+			command = Constant::BuildCommand(_command, _group);
 		}
 
-	} while (_command != cmExit);
+	} while (_command != Constant::Command::Exit);
+}
+
+int Constant::COMMAND_SHIFT = 8;
+
+int Constant::BuildCommand(int menu, int group)
+{
+	return menu * COMMAND_SHIFT + group;
+}
+
+void Constant::UnbuildCommand(int command, int &menu, int &group)
+{
+	menu = command / COMMAND_SHIFT;
+	group = command % COMMAND_SHIFT;
 }

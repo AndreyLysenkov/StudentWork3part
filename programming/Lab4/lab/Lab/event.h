@@ -3,11 +3,11 @@
 
 class Event
 {
-	const int COMMAND_SHIFT = 8;
 	int command;
 	void PrintMenu(int, char*);
 	bool CheckGroupIndex(int);
 public:
+	static Constant constant;
 	struct MethodList
 	{
 		Method method;
@@ -22,23 +22,31 @@ public:
 	void Get();
 };
 
-class Constant
-{
+static class Constant {
+private:
+	static int COMMAND_SHIFT;
 public:
-	enum constGroup
+	
+	static int BuildCommand(int, int);
+
+	static void UnbuildCommand(int, int&, int&);
+	
+	enum Group
 	{
-		grExit = 0,
-		grTrial = 1,
-		grExam = 2,
-		grFinalExam = 3,
-		grTest = 4
+		Exit = 0,
+		Trial = 1,
+		Exam = 2,
+		FinalExam = 3,
+		Test = 4
 	};
-	enum constCommand
+	
+	enum Command
 	{
-		cmExit = 0,
-		cmPrint = 1,
-		cmAdd = 2,
-		cmDelete = 3,
-		cmForEach = 4
+		Exit = 0,
+		Print = 1,
+		Add = 2,
+		Delete = 3,
+		ForEach = 4
 	};
+
 };

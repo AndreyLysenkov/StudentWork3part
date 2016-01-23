@@ -6,12 +6,12 @@ using namespace std;
 
 TrialGroup::TrialGroup()
 {
-	index = Constant.Group.Trial;
+	index = Constant::Group::Trial;
 }
 
 TrialGroup::TrialGroup(Trial *obj)
 {
-	index = grTrial;
+	index = Constant::Group::Trial;
 	Add(obj);
 }
 
@@ -26,6 +26,12 @@ void TrialGroup::Add(Trial *obj)
 	{
 		stack.Add(obj);
 	}
+}
+
+void TrialGroup::AddNew()
+{
+	Trial *obj = new Trial();
+
 }
 
 void TrialGroup::ForEach(Method method)
@@ -64,7 +70,15 @@ void TrialGroup::HandleEvent(Event *_event)
 {
 	if (_event->IsValid())
 	{
-
+		int command = _event -> GetCommand();
+		int cmAdd = Constant::BuildCommand(Constant::Command::Add, index);
+		int cmPrint = Constant::BuildCommand(Constant::Command::Print, index);
+		int cmForEach = Constant::BuildCommand(Constant::Command::ForEach, index);
+		int cmDelete = Constant::BuildCommand(Constant::Command::Delete, index);
+		if (command == cmAdd)
+		{
+			
+		}
 	}
 }
 //
@@ -132,12 +146,12 @@ void TrialGroup::HandleEvent(Event *_event)
 
 TestGroup::TestGroup()
 {
-	index = grTest;
+	index = Constant::Group::Test;
 }
 
 TestGroup::TestGroup(Test *obj)
 {
-	index = grTest;
+	index = Constant::Group::Test;
 	Add(obj);
 }
 
@@ -154,6 +168,10 @@ void TestGroup::Add(Test *obj)
 	}
 }
 
+void TestGroup::AddNew()
+{
+}
+
 void TestGroup::Delete()
 {
 	if (typeid(stack.top) == typeid(Test))
@@ -165,12 +183,12 @@ void TestGroup::Delete()
 
 ExamGroup::ExamGroup()
 {
-	index = grExam;
+	index = Constant::Group::Exam;
 }
 
 ExamGroup::ExamGroup(Exam *obj)
 {
-	index = grExam;
+	index = Constant::Group::Exam;
 	Add(obj);
 }
 
@@ -187,6 +205,10 @@ void ExamGroup::Add(Exam *obj)
 	}
 }
 
+void ExamGroup::AddNew()
+{
+}
+
 void ExamGroup::Delete()
 {
 	if (typeid(stack.top) == typeid(Exam))
@@ -198,12 +220,12 @@ void ExamGroup::Delete()
 
 FinalExamGroup::FinalExamGroup()
 {
-	index = grFinalExam;
+	index = Constant::Group::FinalExam;
 }
 
 FinalExamGroup::FinalExamGroup(FinalExam *obj)
 {
-	index = grFinalExam;
+	index = Constant::Group::FinalExam;
 	Add(obj);
 }
 
@@ -218,6 +240,10 @@ void FinalExamGroup::Add(FinalExam *obj)
 	{
 		stack.Add(obj);
 	}
+}
+
+void FinalExamGroup::AddNew()
+{
 }
 
 void FinalExamGroup::Delete()
