@@ -15,6 +15,7 @@ public:
 	char *GetSubject();
 	char *GetName();
 	virtual void Print();
+	virtual void Enter();
 };
 
 class Test : public Trial
@@ -36,6 +37,7 @@ public:
 	int GainScore(int);
 	double GetMinRating();
 	virtual void Print();
+	virtual void Enter();
 };
 
 class Exam : public Trial
@@ -52,6 +54,7 @@ public:
 	bool SetMark(int);
 	bool IsPassed();
 	virtual void Print();
+	virtual void Enter();
 };
 
 class FinalExam : public Exam
@@ -69,4 +72,5 @@ public:
 	void SetFinalMark(int, int[], int);
 	int GetFinalMark();
 	virtual void Print();
+	virtual void Enter();
 };

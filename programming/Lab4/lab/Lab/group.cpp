@@ -28,12 +28,6 @@ void TrialGroup::Add(Trial *obj)
 	}
 }
 
-void TrialGroup::AddNew()
-{
-	Trial *obj = new Trial();
-
-}
-
 void TrialGroup::ForEach(Method method)
 {
 	Element *tmp = stack.top;
@@ -168,10 +162,6 @@ void TestGroup::Add(Test *obj)
 	}
 }
 
-void TestGroup::AddNew()
-{
-}
-
 void TestGroup::Delete()
 {
 	if (typeid(stack.top) == typeid(Test))
@@ -205,10 +195,6 @@ void ExamGroup::Add(Exam *obj)
 	}
 }
 
-void ExamGroup::AddNew()
-{
-}
-
 void ExamGroup::Delete()
 {
 	if (typeid(stack.top) == typeid(Exam))
@@ -240,10 +226,6 @@ void FinalExamGroup::Add(FinalExam *obj)
 	{
 		stack.Add(obj);
 	}
-}
-
-void FinalExamGroup::AddNew()
-{
 }
 
 void FinalExamGroup::Delete()

@@ -16,7 +16,6 @@ public:
 	Trial *GetTop();
 	void ForEach(Method);
 	virtual void Add(Trial*);
-	virtual void AddNew();
 	virtual void Delete();
 	void Show();
 	void HandleEvent(Event*);
@@ -29,7 +28,6 @@ public:
 	TestGroup(Test*);
 	~TestGroup();
 	virtual void Add(Test*);
-	virtual void AddNew();
 	virtual void Delete();
 };
 
@@ -40,7 +38,6 @@ public:
 	ExamGroup(Exam*);
 	~ExamGroup();
 	virtual void Add(Exam*);
-	virtual void AddNew();
 	virtual void Delete();
 };
 
@@ -51,6 +48,5 @@ public:
 	FinalExamGroup(FinalExam*);
 	~FinalExamGroup();
 	virtual void Add(FinalExam*);
-	virtual void AddNew();
 	virtual void Delete();
 };

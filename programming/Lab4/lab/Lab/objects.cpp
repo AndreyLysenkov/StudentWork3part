@@ -68,6 +68,19 @@ void Trial::Print()
 	cout << " Name : " << this->GetName() << endl;
 }
 
+void Trial::Enter()
+{
+	char *name;
+	char *subject;
+	cout << "Enter Trial: " << endl;
+	cout << " Subject > ";
+	cin >> subject;
+	cout << " Name > ";
+	cin >> name;
+	SetName(name);
+	SetSubject(subject);
+}
+
 
 Test::Test() : Trial()
 {
@@ -141,6 +154,24 @@ void Test::Print()
 		<< "(min : " << this->GetMinScore() << ")" << endl;
 }
 
+void Test::Enter()
+{
+	((Trial)(*this)).Enter();
+	int score;
+	int minScore;
+	int maxScore;
+	cout << "Enter Trial: " << endl;
+	cout << " Score > ";
+	cin >> score;
+	SetScore(score);
+	cout << " MaxScore > ";
+	cin >> maxScore;
+	SetScore(maxScore);
+	cout << " MinScore > ";
+	cin >> minScore;
+	SetScore(minScore);
+}
+
 
 Exam::Exam()
 	: Trial()
@@ -195,6 +226,16 @@ void Exam::Print()
 	cout << " Mark : " << this->GetMark() << endl;
 }
 
+void Exam::Enter()
+{
+	((Trial)(*this)).Enter();
+	bool isPassed;
+	int mark;
+	cout << " Mark > ";
+	cin >> mark;
+	SetMark(mark);
+}
+
 
 FinalExam::FinalExam()
 	: Exam()
@@ -234,13 +275,20 @@ void FinalExam::GainAccess()
 
 void FinalExam::SetFinalMark(int _finalMark, int prevMark[], int marksCount)
 {
-	double average = 0;
-	for (int i = 0; i < marksCount; i++)
+	if (marksCount == 0)
 	{
-		average += prevMark[i];
+		this->finalMark = _finalMark;
 	}
-	average = (average / marksCount + this->mark) / 2;
-	this->finalMark = (int)average;
+	else
+	{
+		double average = 0;
+		for (int i = 0; i < marksCount; i++)
+		{
+			average += prevMark[i];
+		}
+		average = (average / marksCount + this->mark) / 2;
+		this->finalMark = (int)average;
+	}
 }
 
 int FinalExam::GetFinalMark()
@@ -253,4 +301,20 @@ void FinalExam::Print()
 	((Exam)*this).Print();
 	cout << " Access: " << this->IsAccessed() << endl;
 	cout << " FinalMark: " << this->GetFinalMark() << endl;
+}
+
+void FinalExam::Enter()
+{
+	((Exam)(*this)).Enter();
+	cout << " FinalMark > ";
+	int finalMark;
+	cin >> finalMark;
+	SetFinalMark(finalMark, NULL, 0);
+	cout << " Access > ";
+	bool Access;
+	cin >> Access;
+	if (Access)
+	{
+		this -> GainAccess();
+	}
 }
