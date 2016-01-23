@@ -2,7 +2,6 @@
 #include <iostream>
 using namespace std;
 
-
 struct Element
 {
 	Element *next;
@@ -23,4 +22,5 @@ public:
 	friend istream& operator<<(istream&, List&);
 	void Print();
 	void Input();
+	Element *GetLast();
 };

@@ -7,6 +7,8 @@ class Exception
 public:
 	enum Code
 	{
+		NoError,
+		EmptyList,
 		WrongTemplate,
 		WrongUFO,
 		Wron404
