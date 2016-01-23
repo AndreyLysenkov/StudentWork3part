@@ -16,6 +16,11 @@ string Menu::Input::String()
 	return string();
 }
 
+char Menu::Input::Char()
+{
+	return 0;
+}
+
 void Menu::PrintMenu()
 {
 }

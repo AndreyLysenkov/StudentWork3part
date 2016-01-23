@@ -1,6 +1,7 @@
 #pragma once
 #include "list.h"
 #include "event.h"
+#include "menu.h"
 #include "exception.h"
 
 class Group
@@ -22,5 +23,5 @@ public:
 	List* Get(int);
 	void Print();
 	void Delete(int);
-	void HandleEvent(Event*);
+	void HandleEvent(Event);
 };

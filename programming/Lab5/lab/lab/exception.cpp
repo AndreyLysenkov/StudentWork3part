@@ -7,10 +7,10 @@ Exception::Exception(Code code, int index)
 
 Exception::Code Exception::GetCode() const
 {
-	return Exception::Code::Wron404;
+	return Exception::Code::WrongCommandIndex;
 }
 
-const string Exception::GetMessage() const
+const char *Exception::GetMessage() const
 {
 	return nullptr;
 }

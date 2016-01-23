@@ -10,11 +10,12 @@ public:
 		NoError,
 		EmptyList,
 		WrongListIndex,
+		WrongCommandIndex,
 		NoListFounded
 	};
 	Exception(Code, int index = -1);
 	Code GetCode() const;
-	const string GetMessage() const;
+	const char *GetMessage() const;
 	~Exception();
 private:
 	Code code;

@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-using namespace std;
 
 class Menu
 {
@@ -11,6 +10,7 @@ public:
 		static bool Boolean();
 		static int Number();
 		static string String();
+		static char Char();
 	};
 	static void PrintMenu();
 };
