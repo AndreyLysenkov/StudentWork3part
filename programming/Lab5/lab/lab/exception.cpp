@@ -1,22 +1,16 @@
 #include "exception.h"
 
 
-
-Exception::Exception()
+Exception::Exception(Code code, int index)
 {
 }
 
-
-Exception::Exception(Code, int index)
+Exception::Code Exception::GetCode() const
 {
+	return Exception::Code::Wron404;
 }
 
-Code Exception::GetCode() const
-{
-	return Code();
-}
-
-const char * Exception::GetMessage() const
+const string Exception::GetMessage() const
 {
 	return nullptr;
 }
