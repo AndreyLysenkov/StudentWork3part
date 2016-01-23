@@ -5,7 +5,7 @@ using namespace std;
 
 typedef void(*Method)(Trial*);
 
-class TrialGroup :: friend Event
+class TrialGroup
 {
 protected:
 	int index;

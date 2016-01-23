@@ -1,7 +1,8 @@
 #include "stack.h"
 #include "group.h"
+#include "event.h"
 #include <iostream>
-using namespace Event;
+using namespace std;
 
 TrialGroup::TrialGroup()
 {
