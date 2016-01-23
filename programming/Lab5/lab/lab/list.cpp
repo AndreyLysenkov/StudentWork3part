@@ -11,7 +11,7 @@ List & List::operator=(List &)
 	// TODO: вставьте здесь оператор return
 }
 
-void List::operator+(List, char)
+void List::operator+(char)
 {
 }
 
@@ -22,6 +22,14 @@ void List::operator--()
 bool List::operator!=(List)
 {
 	return false;
+}
+
+void List::Print()
+{
+}
+
+void List::Input()
+{
 }
 
 
