@@ -1,8 +1,6 @@
 #pragma once
 #include "group.h"
 
-typedef void(*Method)(Trial*);
-
 class Event
 {
 	const int COMMAND_SHIFT = 8;
@@ -15,6 +13,18 @@ public:
 		Method method;
 		MethodList *next;
 	};
+	MethodList *methodList;
+	Event();
+	int GetCommand();
+	bool IsValid();
+	void Clear();
+	void Add(Method);
+	void Get();
+};
+
+class Constant
+{
+public:
 	enum constGroup
 	{
 		grExit = 0,
@@ -31,11 +41,4 @@ public:
 		cmDelete = 3,
 		cmForEach = 4
 	};
-	MethodList *methodList;
-	Event();
-	int GetCommand();
-	bool IsValid();
-	void Clear();
-	void Add(Method);
-	void Get();
 };

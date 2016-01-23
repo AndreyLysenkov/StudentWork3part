@@ -6,7 +6,7 @@ using namespace std;
 
 TrialGroup::TrialGroup()
 {
-	index = grTrial;
+	index = Constant.Group.Trial;
 }
 
 TrialGroup::TrialGroup(Trial *obj)

@@ -1,6 +1,5 @@
 #pragma once
 #include "stack.h"
-
 using namespace std;
 
 typedef void(*Method)(Trial*);
