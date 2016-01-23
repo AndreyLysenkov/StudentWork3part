@@ -1,6 +1,4 @@
-#include "stack.h"
 #include "group.h"
-#include "event.h"
 #include <iostream>
 using namespace std;
 
@@ -78,71 +76,31 @@ void TrialGroup::HandleEvent(Event *_event)
 		int cmDelete = Constant::BuildCommand(Constant::Command::Delete, index);
 		if (command == cmAdd)
 		{
-			
+			this->AddNew();
+			_event->Clear();
+		}
+		if (command == cmPrint)
+		{
+			this->Show();
+			_event->Clear();
+		}
+		if (command == cmForEach)
+		{
+			Event::MethodList *list = _event->methodList;
+			while (list != NULL)
+			{
+				this->ForEach(list->method);
+				list = list->next;
+			}		
+			_event->Clear();
+		}
+		if (command == cmDelete)
+		{
+			this->Delete();
+			_event->Clear();
 		}
 	}
 }
-//
-//void MonarchyGroup::HandleEvent(Event *ev)
-//{
-//	if (ev->IsValid())
-//	{
-//		switch (ev->GetCommand())
-//		{
-//		case (grMonarchy * SHIFT + cmAdd) :
-//		{
-//			cout << "\n\n Enter country name:\n> ";
-//			char *name = new char[LNAME];
-//			cin.get();
-//			cin.getline(name, LNAME);
-//			cout << "\n Enter population:\n> ";
-//			int population;
-//			cin >> population;
-//			cout << "\n Enter country area:\n> ";
-//			double area;
-//			cin >> area;
-//			cout << "\n Enter monarchy type:\n> ";
-//			char *type = new char[LNAME];
-//			cin.get();
-//			cin.getline(type, LNAME);
-//
-//			Monarchy *item = new Monarchy(name, population, area, type);
-//			AddToGroup(item);
-//			ev->ClearEvent();
-//			break;
-//		}
-//		case (grMonarchy * SHIFT + cmPrint) :
-//		{
-//			Print();
-//			ev->ClearEvent();
-//			break;
-//		}
-//		case (grMonarchy * SHIFT + cmDelete) :
-//		{
-//			DeleteLast();
-//			cout << " last element was deleted\n";
-//			ev->ClearEvent();
-//			break;
-//		}
-//		case (grMonarchy * SHIFT + cmForeach) :
-//		{
-//			pfList *temp = ev->pfLast;
-//			while (temp)
-//			{
-//				ForEach(temp->pf);
-//				temp = temp->next;
-//			}
-//			ev->ClearEvent();
-//			break;
-//		}
-//		case (cmExit) :
-//		{
-//			ev->ClearEvent();
-//			break;
-//		}
-//		}
-//	}
-//}
 
 
 TestGroup::TestGroup()

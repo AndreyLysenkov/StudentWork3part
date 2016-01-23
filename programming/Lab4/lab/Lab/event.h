@@ -7,7 +7,6 @@ class Event
 	void PrintMenu(int, char*);
 	bool CheckGroupIndex(int);
 public:
-	static Constant constant;
 	struct MethodList
 	{
 		Method method;
@@ -33,7 +32,7 @@ public:
 	
 	enum Group
 	{
-		Exit = 0,
+		grExit = 0,
 		Trial = 1,
 		Exam = 2,
 		FinalExam = 3,
@@ -42,7 +41,7 @@ public:
 	
 	enum Command
 	{
-		Exit = 0,
+		cmExit = 0,
 		Print = 1,
 		Add = 2,
 		Delete = 3,

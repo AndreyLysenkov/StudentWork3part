@@ -226,7 +226,6 @@ void Exam::Print()
 void Exam::Enter()
 {
 	((Trial)(*this)).Enter();
-	bool isPassed;
 	int mark;
 	cout << " Mark > ";
 	cin >> mark;
