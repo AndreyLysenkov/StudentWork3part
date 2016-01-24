@@ -21,6 +21,7 @@ public:
 	bool operator <= (const Set<Value>&);
 	const bool IsBelong(Value);
 	const Item GetLast();
+	const bool IsSubSet(Set<Value>);
 	void Print();
 private:
 	Item *last;

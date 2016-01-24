@@ -22,33 +22,17 @@ Set<Value>::~Set()
 {
 }
 
-//template <class T>
-//Set<T>& Set<T>::operator=(const Set<T>& p_other)
-//{
-//	Item<T> *p_temp = p_other.last;
-//	if (p_temp)
-//	{
-//		this->last = new Item<T>;
-//		this->last->data = p_temp->data;
-//		this->last->next = NULL;
-//		p_temp = p_temp->next;
-//		Item<T> *temp = this->last;
-//		while (p_temp)
-//		{
-//			temp->next = new Item<T>;
-//			temp = temp->next;
-//			temp->data = p_temp->data;
-//			temp->next = NULL;
-//			p_temp = p_temp->next;
-//		}
-//	}
-//	return *this;
-//}
-
 template<class Value>
 Set<Value>& Set<Value>::operator=(const Set<Value>& set)
 {
-	
+	this->last = NULL;
+	Item *temp = set.GetLast();
+	while (temp != NULL)
+	{
+		*this + temp->value;
+		temp = temp->next;
+	}
+	return *this;
 }
 
 template<class Value>
@@ -89,9 +73,9 @@ Set<Value>* Set<Value>::operator*(Set<Value> set)
 }
 
 template<class Value>
-bool Set<Value>::operator<=(const Set<Value>&)
+bool Set<Value>::operator<=(const Set<Value>& set)
 {
-	return false;
+	return (set.IsSubSet(this));
 }
 
 template<class Value>
@@ -125,17 +109,17 @@ void Set<Value>::Print()
 	}
 }
 
-
-
-//template <class T>
-//Set<T>::operator int()
-//{
-//	int count = 0;
-//	Item<T> *temp = last;
-//	while (temp)
-//	{
-//		count++;
-//		temp = temp->next;
-//	}
-//	return count;
-//}
+template<class Value>
+const bool Set<Value>::IsSubSet(const Set<Value> set)
+{
+	Item *temp = set.GetLast();
+	while (temp != NULL)
+	{
+		if (!IsBelong(temp->value))
+		{
+			return false;
+		}
+		temp = temp->next;
+	}
+	return true;
+}
