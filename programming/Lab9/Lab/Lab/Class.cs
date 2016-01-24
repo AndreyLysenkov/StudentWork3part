@@ -8,6 +8,7 @@ namespace Lab
 {
     public class Book
     {
+        public const string No_Author = "Undefinded";
 
         public class Isbn
         {
@@ -75,96 +76,93 @@ namespace Lab
             private set;
         }
 
+        public Isbn ISBN
+        {
+            get;
+            private set;
+        }
+
+        public double Price
+        {
+            get;
+            private set;
+        }
+
+        public int Quantity
+        {
+            get;
+            private set;
+        }
+
+        DateTime Published
+        {
+            get;
+            public set;
+        }
+
+        public bool IsAvailible
+        {
+            get
+            {
+                return (this.Quantity != 0);
+            }
+        }
+
+        public Book(Isbn isbn, double price, DateTime published, string title, string author = No_Author, int quantity = 0)
+        {
+            this.ISBN = isbn;
+            this.Price = price;
+            this.Title = title;
+            this.Author = author;
+            this.Quantity = quantity;
+            this.Published = published;
+        }
+
+        public Book()
+            : this(new Isbn(), 0, DateTime.Today, "Undefined")
+        {   }
+
+        public override string ToString()
+        {
+            return 
+                String.Format(
+                    " > ISBN: {0} \n" +
+                    " > Title: {1} \n" +
+                    " > Author: {2} \n" +
+                    " > Availble: " + (this.IsAvailible ? ("no") : ("yes")) + "\n" +
+                    " > " + (this.IsAvailible ? (" --- ") : ("Price: {3}")) + "\n" +
+                    " > Published: {4}",
+                this.ISBN,
+                this.Title,
+                this.Author,
+                this.Price,
+                this.Published                
+                );
+        }
+
+        /// <summary>
+        /// Take one book from store
+        /// </summary>
+        /// <returns>success of operation</returns>
+        public bool Buy()
+        {
+            if (this.IsAvailible)
+            {
+                this.Quantity--;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
 
 
 
     }
 }
 
-//public class Ticket
-//{
-//    private string _name;
-
-//    private double _totalBill;
-
-//    private string _destination;
-
-//    private DateTime _date;
-
-
-//    public string Destination
-//    {
-//        get
-//        {
-//            return _destination;
-//        }
-//        protected set
-//        {
-//            _destination = value;
-//        }
-//    }
-
-//    public DateTime Date
-//    {
-//        get
-//        {
-//            return _date;
-//        }
-//        protected set
-//        {
-//            _date = value;
-//        }
-//    }
-
-//    public double TotalBill
-//    {
-//        get
-//        {
-//            return _totalBill;
-//        }
-//        protected set
-//        {
-//            if (value >= 0)
-//            {
-//                _totalBill = value;
-//            }
-//        }
-//    }
-
-//    public bool IsPaid { get; protected set; }
-
-//    public Ticket(string p_name, DateTime p_date, double p_totalBill, string p_destination)
-//    {
-//        Name = p_name;
-//        Destination = p_destination;
-//        Date = p_date;
-//        TotalBill = p_totalBill;
-//        IsPaid = false;
-//    }
-
-//    public Ticket()
-//        : this("", DateTime.Today, 0, "")
-//    {
-//    }
-
-//    public Ticket(Ticket p_other)
-//        : this(p_other.Name, p_other.Date, p_other.TotalBill, p_other.Destination)
-//    {
-//    }
-
-//    public override string ToString()
-//    {
-//        string result = string.Format("\n {0}\n {1}\n Destination: {2}\n Total= {3} $\n ", Name, Date, Destination, TotalBill);
-//        if (IsPaid)
-//        {
-//            result = string.Concat(result, "Status: paid\n");
-//        }
-//        else
-//        {
-//            result = string.Concat(result, "Status: open\n");
-//        }
-//        return result;
-//    }
 
 //    public virtual double PayResult(double p_money)
 //    {
