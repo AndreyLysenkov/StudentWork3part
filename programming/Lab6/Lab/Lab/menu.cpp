@@ -1,5 +1,14 @@
 #include "menu.h"
 
+double Menu::Input::NumberReal(char *message)
+{
+	double number = 0;
+	cout << " > " << message << ":";
+	cout << " > ";
+	cin >> number;
+	return number;
+}
+
 int Menu::Input::Number(char *message)
 {
 	int number = 0;

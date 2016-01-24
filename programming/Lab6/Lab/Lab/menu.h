@@ -18,7 +18,8 @@ public:
 	class Input
 	{
 	public:
-		static int Number(char* = "Enter number");
+		static double NumberReal(char* = "Enter double");
+		static int Number(char* = "Enter integer");
 		static char *String(char* = "Enter string");
 	};
 	class Output
