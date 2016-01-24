@@ -21,6 +21,7 @@ public:
 		static double NumberReal(char* = "Enter double");
 		static int Number(char* = "Enter integer");
 		static char *String(char* = "Enter string");
+		static char Symbol(char* = "Enter char");
 	};
 	class Output
 	{

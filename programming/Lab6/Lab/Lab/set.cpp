@@ -36,14 +36,16 @@ Set<Value>& Set<Value>::operator=(const Set<Value>& set)
 }
 
 template<class Value>
-void Set<Value>::operator+(Set<Value> set)
+Set<Value> Set<Value>::operator+(Set<Value> set)
 {
+	Set<Value> result = new Set<Value>(this);
 	Item temp = set.GetLast();
 	for (; temp != NULL; )
 	{
-		*this + temp->value;
+		*result + temp->value;
 		temp = temp->next;
 	}
+	return result;
 }
 
 template<class Value>

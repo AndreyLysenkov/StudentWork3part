@@ -16,7 +16,7 @@ public:
 	Set(Value, ...);
 	~Set();
 	Set<Value>& operator = (const Set<Value>&);
-	void operator + (Set<Value>);
+	Set<Value> operator + (Set<Value>);
 	void operator + (Value);
 	Set<Value>* operator * (Set<Value>);
 	bool operator <= (const Set<Value>&);

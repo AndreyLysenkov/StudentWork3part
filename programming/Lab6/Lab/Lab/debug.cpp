@@ -22,37 +22,36 @@ void Debug::HandleEvent(Event _event)
 {
 	if (_event.IsValid())
 	{
-		CommandMenu *holder = new CommandMenu(_event);
 		switch (_event.GetCommand())
 		{
 		case(Command::Add) :
 		{
-			holder->Add();
+			Add(_event);
 			break;
 		}
 		case(Command::Add1) :
 		{
-			holder->Add1();
+			Add1(_event);
 			break;
 		}
 		case(Command::Add2) :
 		{
-			holder->Add2();
+			Add2(_event);
 			break;
 		}
 		case(Command::Compare) :
 		{
-			holder->Compare();
+			Compare(_event);
 			break;
 		}
 		case(Command::Multy) :
 		{
-			holder->Multiply();
+			Multiply(_event);
 			break;
 		}
 		case(Command::Print) :
 		{
-			holder->Print();
+			Print(_event);
 			break;
 		}
 		}
@@ -69,19 +68,108 @@ void Debug::Add1(Event _event)
 			int1 + Menu::Input::Number("Enter integer for adding");
 			break;
 		}
+	case (Types::Real) :
+	{
+		real1 + Menu::Input::NumberReal("Enter double for adding");
+		break;
+	}
+	case (Types::Symbol) :
+	{
+		real1 + Menu::Input::Symbol("Enter integer for adding");
+		break;
+	}
+	case (Types::User) :
+	{
+		user1 + 
+			*(new Test(
+				Menu::Input::String("Enter subject"), 
+				Menu::Input::Number("Enter pounts"))
+			);
+		break;
+	}
 	}
 }
 
 void Debug::Add2(Event _event)
 {
+	Menu::Output::ClrScr();
+	switch (_event.GetType())
+	{
+	case (Types::Integer) :
+	{
+		int2 + Menu::Input::Number("Enter integer for adding");
+		break;
+	}
+	case (Types::Real) :
+	{
+		real2 + Menu::Input::NumberReal("Enter double for adding");
+		break;
+	}
+	case (Types::Symbol) :
+	{
+		real2 + Menu::Input::Symbol("Enter integer for adding");
+		break;
+	}
+	case (Types::User) :
+	{
+		user2 +
+			*(new Test(
+				Menu::Input::String("Enter subject"),
+				Menu::Input::Number("Enter pounts"))
+			);
+		break;
+	}
+	}
 }
 
 void Debug::Add(Event _event)
 {
+	Menu::Output::ClrScr();
+	switch (_event.GetType())
+	{
+	case (Types::Integer) :
+	{
+		(int1 + int2)->Print();
+	}
+	case (Types::Real) :
+	{
+		(real1 + real2)->Print();
+	}
+	case (Types::Symbol) :
+	{
+		(char1 + char2)->Print();
+	}
+	case (Types::User) :
+	{
+		(user1 + user2)->Print();
+	}
+	}
+	system("pause");
 }
 
 void Debug::Multiply(Event _event)
 {
+	Menu::Output::ClrScr();
+	switch (_event.GetType())
+	{
+	case (Types::Integer):
+	{
+		(int1 * int2)->Print();
+	}
+	case (Types::Real) :
+	{
+		(real1 * real2)->Print();
+	}
+	case (Types::Symbol) :
+	{
+		(char1 * char2)->Print();
+	}
+	case (Types::User) :
+	{
+		(user1 * user2)->Print();
+	}
+	}
+	system("pause");
 }
 
 void Debug::Compare(Event _event)
@@ -92,128 +180,5 @@ void Debug::Print(Event _event)
 {
 }
 
-//
-//void Demo::AddFirst(Event ev)
-//{
-//	system("cls");
-//	switch (ev.GetType())
-//	{
-//	case Event::T_int:
-//	{
-//		firstI.Print();
-//		int I;
-//		cin >> i;
-//		firstI + i;
-//		break;
-//	}
-//	case Event::T_char:
-//	{
-//		firstC.Print();
-//		char ch;
-//		cin >> ch;
-//		firstC + ch;
-//		break;
-//	}
-//	case Event::T_double:
-//	{
-//		firstC.Print();
-//		double db;
-//		cin >> db;
-//		firstD + db;
-//		break;
-//	}
-//	case Event::T_State:
-//	{
-//		firstS.Print();
-//		State state;
-//		state.SetAll();
-//		firstS + state;
-//		break;
-//	}
-//	}
-//}
-//
-//
-//void Demo::GetSize(Event ev)
-//{
-//	system("cls");
-//	switch (ev.GetType())
-//	{
-//	case Event::T_int:
-//	{
-//		firstI.Print();
-//		cout << firstI;
-//		secondI.Print();
-//		cout << secondI;
-//		break;
-//	}
-//	case Event::T_char:
-//	{
-//		firstC.Print();
-//		cout << firstC;
-//		secondC.Print();
-//		cout << secondC;
-//		break;
-//	}
-//	case Event::T_double:
-//	{
-//		firstD.Print();
-//		cout << firstD;
-//		secondD.Print();
-//		cout << secondD;
-//		break;
-//	}
-//	case Event::T_State:
-//	{
-//		firstS.Print();
-//		cout << firstS;
-//		secondS.Print();
-//		cout << secondS;
-//		break;
-//	}
-//	}
-//	system("pause");
-//}
 
 
-//
-//void Demo::Intersection(Event ev)
-//{
-//	system("cls");
-//	switch (ev.GetType())
-//	{
-//	case Event::T_int:
-//	{
-//		firstI.Print();
-//		secondI.Print();
-//		cout << " Intersection resut:\n";
-//		(firstI * secondI)->Print();
-//		break;
-//	}
-//	case Event::T_char:
-//	{
-//		firstC.Print();
-//		secondC.Print();
-//		cout << " Intersection resut:\n";
-//		(firstC * secondC)->Print();
-//		break;
-//	}
-//	case Event::T_double:
-//	{
-//		firstD.Print();
-//		secondD.Print();
-//		cout << " Intersection resut:\n";
-//		(firstD * secondD)->Print();
-//		break;
-//	}
-//	case Event::T_State:
-//	{
-//		firstS.Print();
-//		secondS.Print();
-//		cout << " Intersection resut:\n";
-//		(firstS * secondS)->Print();
-//		break;
-//	}
-//	}
-//	system("pause");
-//}

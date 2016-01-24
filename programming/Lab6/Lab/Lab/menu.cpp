@@ -31,6 +31,15 @@ char *Menu::Input::String(char *message)
 	return str;
 }
 
+char Menu::Input::Symbol(char *message)
+{
+	cout << " > " << message << ":";
+	char ch;
+	cout << " > ";
+	cin >> ch;
+	return ch;
+}
+
 void Menu::Output::MenuItem(char* actionName, int actionIndex)
 {
 	cout << endl << actionIndex << " > " << actionName;
