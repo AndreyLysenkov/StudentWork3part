@@ -39,9 +39,10 @@ template<class Value>
 void Set<Value>::operator+(Set<Value> set)
 {
 	Item temp = set.GetLast();
-	for (; temp != NULL; temp = temp->next)
+	for (; temp != NULL; )
 	{
 		*this + temp->value;
+		temp = temp->next;
 	}
 }
 
@@ -62,12 +63,13 @@ Set<Value>* Set<Value>::operator*(Set<Value> set)
 {
 	Set<value> result = new Set<Value>();
 	Item *temp = set.GetLast();
-	for (; temp != NULL; temp = temp -> next)
+	for (; temp != NULL; )
 	{
 		if (this->IsBelong(temp->value))
 		{
 			*result + temp->value;
 		}
+		temp = temp->next;
 	}
 	return result;
 }
@@ -82,12 +84,13 @@ template<class Value>
 const bool Set<Value>::IsBelong(Value value)
 {
 	Item *temp = this->last;
-	for (; temp != NULL; temp = temp->next)
+	for (; temp != NULL; )
 	{
 		if (temp->value == value)
 		{
 			return true;
 		}
+		temp = temp->next;
 	}
 	return false;
 }
@@ -103,9 +106,10 @@ void Set<Value>::Print()
 {
 	Item *temp = last;
 	cout << "\n >> Set of " << typeid(Value).name() << " ";
-	for (; temp != NULL; temp = temp->next)
+	for (; temp != NULL; )
 	{
 		cout << "; " << temp->value;
+		temp = temp->next;
 	}
 }
 
