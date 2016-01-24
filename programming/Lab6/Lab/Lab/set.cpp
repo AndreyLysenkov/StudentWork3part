@@ -96,12 +96,6 @@ const bool Set<Value>::IsBelong(Value value)
 }
 
 template<class Value>
-const Item Set<Value>::GetLast()
-{
-	return this->last;
-}
-
-template<class Value>
 void Set<Value>::Print()
 {
 	Item *temp = last;
@@ -126,4 +120,10 @@ const bool Set<Value>::IsSubSet(const Set<Value> set)
 		temp = temp->next;
 	}
 	return true;
+}
+
+template<class Value>
+const typename Set<Value>::Item Set<Value>::GetLast()
+{
+	return this->last;
 }

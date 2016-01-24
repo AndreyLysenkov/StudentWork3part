@@ -1,22 +1,25 @@
 #include "menu.h"
 
-int Menu::Input::Number()
+int Menu::Input::Number(char *message)
 {
 	int number = 0;
 	do
 	{
+		cout << " > " << message << ":";
 		cout << " > ";
 		cin >> number;
 	} while (!(cin.fail()));
 	return number;
 }
 
-char Menu::Input::Char()
+char *Menu::Input::String(char *message)
 {
-	char ch;
+	char *str = new char[255];
+	cout << " > " << message << ":";
 	cout << " > ";
-	cin >> ch;
-	return ch;
+	cin.get();
+	cin.getline(str, 255);
+	return str;
 }
 
 void Menu::Output::MenuItem(char* actionName, int actionIndex)

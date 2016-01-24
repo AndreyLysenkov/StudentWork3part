@@ -10,6 +10,6 @@ Debug::Debug()
 {
 }
 
-void Debug::HandleEvent(Event)
+void Debug::HandleEvent(Event ev)
 {
 }

@@ -12,6 +12,7 @@ Test::Test()
 Test::Test(Test &obj)
 {
 	this->point = obj.GetPoints();
+	this->subject = new char[100];
 	strcpy(this->subject, obj.GetSubject());
 }
 
@@ -38,7 +39,7 @@ const int Test::GetPoints()
 
 const char * Test::GetSubject()
 {
-	return this->GetSubject();
+	return this->subject;
 }
 
 const bool Test::IsPassed()
@@ -53,48 +54,26 @@ const double Test::GetRating()
 
 void Test::Set()
 {
-
+	this->subject = Menu::Input::String("");
 }
 
-bool Test::operator==(Test)
+bool Test::operator==(Test obj)
 {
-	// TODO: вставьте здесь оператор return
+	bool result;
+	result = strcmp(this->GetSubject(), obj.GetSubject());
+	result &= (this->GetPoints() == obj.GetPoints());
+	return result;
 }
 
-std::ostream & operator<<(ostream &, Test &)
+std::ostream & operator<<(ostream &stream, Test &obj)
 {
-	// TODO: вставьте здесь оператор return
+	stream << "[ Test on " << obj.GetSubject() << " : "
+		<< obj.GetPoints() << " out of " << Test::maxPoint << ", "
+		<< " minimum: " << Test::minPoint << " "
+		<< "(Rating: " << obj.GetRating() << ")]";
+	return stream;
 }
 
-//State::State(State &country)
-//{
-//	name = new char[LNAME];
-//	strcpy(name, country.GetName());
-//	population = country.GetPopulation();
-//	area = country.GetArea();
-//}
-//
-//
-//
-//void State::SetName(char *_name)
-//{
-//	strcpy(name, _name);
-//}
-//
-//
-//void State::SetPopulation(int _population)
-//{
-//	population = _population;
-//}
-//
-//
-//
-//void State::SetArea(double _area)
-//{
-//	area = _area;
-//}
-//
-//
 //void State::SetAll()
 //{
 //	cout << "\n Enter state name:  ";
@@ -105,50 +84,3 @@ std::ostream & operator<<(ostream &, Test &)
 //	cout << "\n Enter state area:  ";
 //	cin >> area;
 //}
-//
-//
-//const char* State::GetName()
-//{
-//	return name;
-//}
-//
-//
-//int State::GetPopulation()
-//{
-//	return population;
-//}
-//
-//
-//double State::GetArea()
-//{
-//	return area;
-//}
-//
-//
-//
-//
-//
-//bool State::operator==(State other)
-//{
-//	bool result = strcmp(this->GetName(), other.GetName()) == 0;
-//	result = result && this->GetPopulation() == other.GetPopulation();
-//	return result && this->GetArea() == other.GetArea();
-//}
-//
-//State& State::operator=(const State &state)
-//{
-//	name = new char[LNAME];
-//	strcpy(name, state.name);
-//	population = state.population;
-//	area = state.area;
-//	return *this;
-//}
-//
-//std::ostream& operator<<(ostream &stream, State &state)
-//{
-//	stream << " (" << state.GetName();
-//	stream << ": population - " << state.GetPopulation();
-//	stream << ", area - " << state.GetArea() << ") ";
-//	return stream;
-//}
-//
