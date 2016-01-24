@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="debug.cpp" />
     <ClCompile Include="event.cpp" />
     <ClCompile Include="exception.cpp" />
     <ClCompile Include="lab.cpp" />
@@ -118,6 +119,7 @@
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="debug.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="menu.h" />
