@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+using namespace std;
 
 template <class Value>
 class Set
@@ -14,9 +16,11 @@ public:
 	~Set();
 	Set<Value>& operator = (const Set<Value>&);
 	void operator + (Set<Value>);
+	void operator + (Value);
 	Set<Value>* operator * (Set<Value>);
 	bool operator <= (const Set<Value>&);
-	bool IsBelong(Value);
+	const bool IsBelong(Value);
+	const Item GetLast();
 	void Print();
 private:
 	Item *last;

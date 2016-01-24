@@ -1,31 +1,20 @@
 #include "set.h"
 
-//template <class T>
-//Set<T>::Set()
-//{
-//	last = NULL;
-//}
-//double f(double n, ...)    //--заголовок с переменным числом параметров
-//{
-//	double *p = &n;        //--установились на начало списка параметров
-//	double sum = 0, count = 0;
-//	while (*p)         //--пока аргумент не равен нулю
-//	{
-//		sum += (*p);         //--суммируем аргумент
-//		p++;             //--«перемещаемся на следующий аргумент
-//		count++;         //--считаем  количество аргументов
-//	}
-//	return ((sum) ? sum / count : 0);    //--вычисляем среднее
-//}
-
 template<class Value>
 Set<Value>::Set()
 {
+	last = NULL;
 }
 
 template<class Value>
-Set<Value>::Set(Value, ...)
+Set<Value>::Set(Value item1, ...)
 {
+	Value *item = &item1;
+	while (item != NULL)
+	{
+		*this + item;
+		item++;
+	}
 }
 
 template<class Value>
@@ -33,113 +22,6 @@ Set<Value>::~Set()
 {
 }
 
-template<class Value>
-Set<Value>& Set<Value>::operator=(const Set<Value>&)
-{
-	// TODO: вставьте здесь оператор return
-}
-
-template<class Value>
-void Set<Value>::operator+(Set<Value>)
-{
-}
-
-template<class Value>
-Set<Value>* Set<Value>::operator*(Set<Value>)
-{
-	return nullptr;
-}
-
-template<class Value>
-bool Set<Value>::operator<=(const Set<Value>&)
-{
-	return false;
-}
-
-template<class Value>
-bool Set<Value>::IsBelong(Value)
-{
-	return false;
-}
-
-template<class Value>
-void Set<Value>::Print()
-{
-}
-
-
-
-//
-
-//
-//
-//template <class T>
-//void Set<T>::Print()
-//{
-//	Item<T> *temp = last;
-//	cout << "\n Set of " << typeid(T).name() << ":  {";
-//	while (temp)
-//	{
-//		cout << temp->data;
-//		temp = temp->next;
-//		if (temp)
-//		{
-//			cout << ", ";
-//		}
-//	}
-//	cout << "}\n\n";
-//}
-//
-//
-//template <class T>
-//bool Set<T>::IsInSet(T p_value)
-//{
-//	bool result = false;
-//	Item<T> *temp = last;
-//	while (temp)
-//	{
-//		if (p_value == temp->data)
-//		{
-//			result = true;
-//		}
-//		temp = temp->next;
-//	}
-//	return result;
-//}
-//
-//
-//template <class T>
-//void Set<T>::operator+(T p_value)
-//{
-//	if (!IsInSet(p_value))
-//	{
-//		Item<T> *temp = new Item<T>;
-//		temp->data = p_value;
-//		temp->next = last;
-//		last = temp;
-//	}
-//}
-//
-//
-//
-//
-//template <class T>
-//Set<T>* Set<T>::operator*(Set<T> p_other)
-//{
-//	Set<T> *result = new Set<T>;
-//	Item<T> *temp = this->last;
-//	while (temp)
-//	{
-//		if (p_other.IsInSet(temp->data))
-//		{
-//			*result + temp->data;
-//		}
-//		temp = temp->next;
-//	}
-//	return result;
-//}
-//
-//
 //template <class T>
 //Set<T>& Set<T>::operator=(const Set<T>& p_other)
 //{
@@ -151,7 +33,6 @@ void Set<Value>::Print()
 //		this->last->next = NULL;
 //		p_temp = p_temp->next;
 //		Item<T> *temp = this->last;
-//
 //		while (p_temp)
 //		{
 //			temp->next = new Item<T>;
@@ -163,8 +44,89 @@ void Set<Value>::Print()
 //	}
 //	return *this;
 //}
-//
-//
+
+template<class Value>
+Set<Value>& Set<Value>::operator=(const Set<Value>& set)
+{
+	
+}
+
+template<class Value>
+void Set<Value>::operator+(Set<Value> set)
+{
+	Item temp = set.GetLast();
+	for (; temp != NULL; temp = temp->next)
+	{
+		*this + temp->value;
+	}
+}
+
+template<class Value>
+void Set<Value>::operator+(Value _value)
+{
+	if (!IsBelong(_value))
+	{
+		Item *temp = new Item();
+		temp->value = _value;
+		temp->next = last;
+		last = temp;
+	}
+}
+
+template<class Value>
+Set<Value>* Set<Value>::operator*(Set<Value> set)
+{
+	Set<value> result = new Set<Value>();
+	Item *temp = set.GetLast();
+	for (; temp != NULL; temp = temp -> next)
+	{
+		if (this->IsBelong(temp->value))
+		{
+			*result + temp->value;
+		}
+	}
+	return result;
+}
+
+template<class Value>
+bool Set<Value>::operator<=(const Set<Value>&)
+{
+	return false;
+}
+
+template<class Value>
+const bool Set<Value>::IsBelong(Value value)
+{
+	Item *temp = this->last;
+	for (; temp != NULL; temp = temp->next)
+	{
+		if (temp->value == value)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+template<class Value>
+const Item Set<Value>::GetLast()
+{
+	return this->last;
+}
+
+template<class Value>
+void Set<Value>::Print()
+{
+	Item *temp = last;
+	cout << "\n >> Set of " << typeid(Value).name() << " ";
+	for (; temp != NULL; temp = temp->next)
+	{
+		cout << "; " << temp->value;
+	}
+}
+
+
+
 //template <class T>
 //Set<T>::operator int()
 //{
