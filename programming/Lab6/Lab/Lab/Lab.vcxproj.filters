@@ -30,9 +30,6 @@
     <ClCompile Include="event.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="exception.cpp">
-      <Filter>Файлы исходного кода</Filter>
-    </ClCompile>
     <ClCompile Include="debug.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
@@ -48,9 +45,6 @@
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="event.h">
-      <Filter>Заголовочные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="exception.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
     <ClInclude Include="debug.h">

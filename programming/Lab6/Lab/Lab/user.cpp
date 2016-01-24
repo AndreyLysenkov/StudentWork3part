@@ -54,7 +54,8 @@ const double Test::GetRating()
 
 void Test::Set()
 {
-	this->subject = Menu::Input::String("");
+	this->subject = Menu::Input::String("Enter subject name");
+	this->point = Menu::Input::Number("Enter gain points (max = 100)");
 }
 
 bool Test::operator==(Test obj)
@@ -73,14 +74,3 @@ std::ostream & operator<<(ostream &stream, Test &obj)
 		<< "(Rating: " << obj.GetRating() << ")]";
 	return stream;
 }
-
-//void State::SetAll()
-//{
-//	cout << "\n Enter state name:  ";
-//	cin.get();
-//	cin.getline(name, LNAME);
-//	cout << "\n Enter state population: ";
-//	cin >> population;
-//	cout << "\n Enter state area:  ";
-//	cin >> area;
-//}

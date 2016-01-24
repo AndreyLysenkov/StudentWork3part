@@ -112,7 +112,6 @@
   <ItemGroup>
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="event.cpp" />
-    <ClCompile Include="exception.cpp" />
     <ClCompile Include="lab.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="set.cpp" />
@@ -121,7 +120,6 @@
   <ItemGroup>
     <ClInclude Include="debug.h" />
     <ClInclude Include="event.h" />
-    <ClInclude Include="exception.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="set.h" />
     <ClInclude Include="user.h" />
