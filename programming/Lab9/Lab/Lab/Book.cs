@@ -108,7 +108,7 @@ namespace Lab
             private set;
         }
 
-        public virtual bool IsAvailible
+        public bool IsAvailible
         {
             get
             {
