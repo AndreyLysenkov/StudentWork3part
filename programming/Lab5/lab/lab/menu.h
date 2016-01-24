@@ -1,5 +1,8 @@
 #pragma once
+#include "event.h"
+#include "group.h"
 #include <iostream>
+using namespace std;
 
 class Menu
 {
@@ -9,8 +12,16 @@ public:
 	public:
 		static bool Boolean();
 		static int Number();
-		static string String();
+		static char *String();
 		static char Char();
 	};
-	static void PrintMenu();
+	class Output
+	{
+	private:
+		static void MenuItem(char*, int);
+		static int Menu();
+	public:
+		static void ClrScr();
+		static void RunMenu();
+	};
 };

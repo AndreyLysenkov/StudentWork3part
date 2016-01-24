@@ -28,6 +28,7 @@ List & List::operator=(List &obj)
 			temp = temp->next;
 		}
 	}
+	return *this;
 }
 
 void List::operator+(char ch)
