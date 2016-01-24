@@ -17,6 +17,7 @@ public:
 	~Test();
 	void GainPoints(int);
 	const int GetPoints();
+	const char *GetSubject();
 	const bool IsPassed();
 	const double GetRating();
 	void Set();
