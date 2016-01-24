@@ -27,6 +27,11 @@ void Menu::Output::MenuItem(char* actionName, int actionIndex)
 	cout << endl << actionIndex << " > " << actionName;
 }
 
+bool Menu::Output::CheckTypeIndex(int index)
+{
+	return (index >= 0) && (index <= 4);
+}
+
 int Menu::Output::Menu()
 {
 	cout << " --- Action ---";
@@ -41,57 +46,24 @@ int Menu::Output::Menu()
 	return Menu::Input::Number();
 }
 
+int Menu::Output::TypeChoose()
+{
+	cout << " --- Type ---";
+	MenuItem("Integer", Types::Integer);
+	MenuItem("Double", Types::Real);
+	MenuItem("Char", Types::Symbol);
+	MenuItem("User", Types::User);
+	cout << endl;
+	return Menu::Input::Number();
+}
+
 void Menu::Output::ClrScr()
 {
 	system("cls");
 }
 
-void Menu::Output::RunMenu()
-{
-	//Group group;
-	//Event _event;
-	//int menuIndex = Command::Exit;
-	//do
-	//{
-	//	Menu::Output::ClrScr();
-	//	menuIndex = Menu::Output::Menu();
-	//	_event.Create(menuIndex);
-	//	group.HandleEvent(_event);
-	//} while (menuIndex != Command::Exit);
-}
 
 
-//
-//void Menu::PrintMenu()
-//{
-//	cout << "\n " << Event::Cmd_AddFirst << " - Add to first";
-//	cout << "\n " << Event::Cmd_AddSecond << " - Add to second";
-//	cout << "\n " << Event::Cmd_Intersection << " - Get intersection of sets";
-//	cout << "\n " << Event::Cmd_Print << " - Print all sets";
-//	cout << "\n " << Event::Cmd_GetSize << " - Get size of set";
-//	cout << "\n " << Event::Cmd_Exit << " - Exit\n\n> ";
-//}
-//
-//void Menu::PrintTypeSelection()
-//{
-//	cout << "\n " << Event::T_int << " - int";
-//	cout << "\n " << Event::T_char << " - char";
-//	cout << "\n " << Event::T_double << " - double";
-//	cout << "\n " << Event::T_State << " - State\n\n> ";
-//}
-//
-//int Menu::SelectType()
-//{
-//	int selector;
-//	do
-//	{
-//		system("cls");
-//		PrintTypeSelection();
-//		selector = ReadNumber();
-//	} while (selector <= Event::T_Back || selector > Event::T_State);
-//	return selector;
-//}
-//
 //void Menu::Execute()
 //{
 //	Demo demo;

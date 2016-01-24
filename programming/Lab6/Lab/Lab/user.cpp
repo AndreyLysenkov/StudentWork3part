@@ -60,8 +60,7 @@ void Test::Set()
 
 bool Test::operator==(Test obj)
 {
-	bool result;
-	result = strcmp(this->GetSubject(), obj.GetSubject());
+	bool result = strcmp(this->GetSubject(), obj.GetSubject());
 	result &= (this->GetPoints() == obj.GetPoints());
 	return result;
 }

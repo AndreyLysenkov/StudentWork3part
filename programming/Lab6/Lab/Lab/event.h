@@ -1,5 +1,5 @@
 #pragma once
-//include "exception.h"
+#include "menu.h"
 
 enum Command
 {
@@ -9,7 +9,8 @@ enum Command
 	Multy = 4,
 	Compare = 5,
 	Print = 6,
-	Exit = 0
+	Exit = 0,
+	Undefinded = 0
 };
 
 
@@ -17,6 +18,7 @@ class Event
 {
 private:
 	int command;
+	static int COMMAND_SHIFT;
 	void SetCommand(int);
 	static bool CheckCommand(int);
 public:
@@ -25,5 +27,6 @@ public:
 	void Clear();
 	bool IsValid();
 	int GetCommand();
-	void Create(int);
+	int GetType();
+	void Create(int, int = 0);
 };

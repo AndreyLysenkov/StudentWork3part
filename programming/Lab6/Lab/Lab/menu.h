@@ -3,6 +3,15 @@
 #include <iostream>
 using namespace std;
 
+enum Types
+{
+	Integer = 1,
+	Real = 2,
+	Symbol = 3,
+	User = 4,
+	Undefinded = 0
+};
+
 class Menu
 {
 public:
@@ -16,9 +25,10 @@ public:
 	{
 	private:
 		static void MenuItem(char*, int);
-		static int Menu();
 	public:
+		static bool CheckTypeIndex(int);
+		static int Menu();
+		static int TypeChoose();
 		static void ClrScr();
-		static void RunMenu();
 	};
 };
