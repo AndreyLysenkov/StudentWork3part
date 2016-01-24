@@ -110,11 +110,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="event.cpp" />
+    <ClCompile Include="exception.cpp" />
     <ClCompile Include="lab.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="set.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="event.h" />
+    <ClInclude Include="exception.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="set.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
