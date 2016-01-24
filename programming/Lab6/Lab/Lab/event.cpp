@@ -33,25 +33,25 @@ void Event::SetCommand(int _command)
 	}
 	else
 	{
-		throw Exception(Exception::Code::WrongCommandIndex);
+		//throw Exception(Exception::Code::WrongCommandIndex);
 	}
 }
 
 bool Event::CheckCommand(int _command)
 {
-	return (_command >= 0) && (_command <= 7);
+	return (_command >= 0) && (_command <= 6);
 }
 
 void Event::Create(int _command)
 {
-	try
-	{
+	//try
+	//{
 		this->SetCommand(_command);
-	}
-	catch (Exception myException)
-	{
-		cout << myException.GetMessage() << endl;
-		SetCommand(Command::Print);
-		system("pause");
-	}
+	//}
+	//catch (Exception myException)
+	//{
+	//	cout << myException.GetMessage() << endl;
+	//	SetCommand(Command::Print);
+	//	system("pause");
+	//}
 }

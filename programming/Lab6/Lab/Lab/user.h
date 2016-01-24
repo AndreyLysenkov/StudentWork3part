@@ -14,8 +14,7 @@ private:
 public:
 	Test();
 	Test(Test&);
-	Test(char*, int);
-	Test(char*);
+	Test(char*, int = 0);
 	~Test();
 	void GainPoints(int);
 	const int GetPoints();

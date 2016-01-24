@@ -1,18 +1,17 @@
 #pragma once
-#include "exception.h"
+//include "exception.h"
 
 enum Command
 {
-	Create = 1,
-	Add = 2,
-	Remove = 3,
-	Copy = 4,
-	Delete = 5,
-	Compare = 6,
-	Print = 7,
-	Exit = 0,
-	Undefinded = 0
+	Add1 = 1,
+	Add2 = 2,
+	Add = 3,
+	Multy = 4,
+	Compare = 5,
+	Print = 6,
+	Exit = 0
 };
+
 
 class Event
 {

@@ -16,7 +16,7 @@ Test::Test(Test &obj)
 	strcpy(this->subject, obj.GetSubject());
 }
 
-Test::Test(char * _subject, int _point = 0)
+Test::Test(char * _subject, int _point)
 {
 	this->subject = _subject;
 	this->point = _point;
