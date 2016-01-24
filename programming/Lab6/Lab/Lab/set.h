@@ -4,18 +4,19 @@
 using namespace std;
 
 template <class Value>
+struct Item
+{
+	Value value;
+	Item *next;
+};
+
+template <class Value>
 class Set
 {
 public:
-	template <class Value>
-	struct Item
-	{
-		Value value;
-		Item *next;
-	};
 	Set();
 	Set(Value, ...);
-	virtual ~Set();
+	~Set();
 	Set<Value>& operator = (const Set<Value>&);
 	Set<Value>* operator + (Set<Value>);
 	void operator + (Value);

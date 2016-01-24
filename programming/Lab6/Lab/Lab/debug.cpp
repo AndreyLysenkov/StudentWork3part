@@ -3,13 +3,13 @@
 Debug::Debug()
 {
 	//int1 = Set<int>(5, 6, 9);
-	//int2 = Set<int>(1, 5, 6, 9);
-	//real1 = Set<double>(0.5, 27.13);
-	//real2 = Set<double>(real1);
-	//char1 = Set<char>(254, 'a', 'b');
-	//char2 = Set<char>();
-	//user1 = Set<Test>(Test("Programming"), Test("Math", 69));
-	//user2 = Set<Test>(Test(), Test("Assembly", 42));
+	/*int2 = new Set<int>(1, 5, 6, 9);*/
+	//real1 = new Set<double>(0.5, 27.13);
+	//real2 = new Set<double>(*real1);
+	//char1 = new Set<char>(254, 'a', 'b');
+	//char2 = new Set<char>();
+	//user1 = new Set<Test>(Test("Programming"), Test("Math", 69));
+	//user2 = new Set<Test>(Test(), Test("Assembly", 42));
 }
 
 void Debug::Print()

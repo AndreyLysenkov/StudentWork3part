@@ -125,7 +125,7 @@ const bool Set<Value>::IsSubSet(const Set<Value> set)
 }
 
 template<class Value>
-const typename Set<Value>::Item<Value> Set<Value>::GetLast()
+const Item<Value> Set<Value>::GetLast()
 {
 	return this->last;
 }
