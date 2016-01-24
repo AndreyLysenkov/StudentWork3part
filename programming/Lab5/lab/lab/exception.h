@@ -19,6 +19,5 @@ public:
 	~Exception();
 private:
 	Code code;
-	string message;
 	int index;
 };

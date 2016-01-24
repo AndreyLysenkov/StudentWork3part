@@ -1,3 +1,4 @@
+#include "menu.h"
 #include <stdlib.h>
 #include <iostream>
 using namespace std;
@@ -15,7 +16,6 @@ using namespace std;
 
 int main()
 {
-
-	system("pause");
+	Menu::Output::RunMenu();
 	return 0;
 }

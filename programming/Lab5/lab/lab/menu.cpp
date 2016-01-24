@@ -1,10 +1,5 @@
 #include "menu.h"
 
-bool Menu::Input::Boolean()
-{
-	return false;
-}
-
 int Menu::Input::Number()
 {
 	int number = 0;
@@ -16,14 +11,12 @@ int Menu::Input::Number()
 	return number;
 }
 
-char *Menu::Input::String()
-{
-	return NULL;
-}
-
 char Menu::Input::Char()
 {
-	return 0;
+	char ch;
+	cout << " > ";
+	cin >> ch;
+	return ch;
 }
 
 void Menu::Output::MenuItem(char* actionName, int actionIndex)
@@ -64,17 +57,3 @@ void Menu::Output::RunMenu()
 		group.HandleEvent(_event);
 	} while (menuIndex != Command::Exit);
 }
-//int Menu::ReadNumber()
-//{
-//	int x;
-//	cin >> x;
-//	while (cin.fail())
-//	{
-//		char fail;
-//		cin.clear();
-//		cin >> fail;
-//		cin >> x;
-//	}
-//	return x;
-//}
-

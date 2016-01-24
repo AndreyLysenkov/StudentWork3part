@@ -39,7 +39,7 @@ void Event::SetCommand(int _command)
 
 bool Event::CheckCommand(int _command)
 {
-	return (_command >= 0) && (_command <= 6);
+	return (_command >= 0) && (_command <= 7);
 }
 
 void Event::Create(int _command)
