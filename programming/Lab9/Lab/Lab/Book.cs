@@ -145,7 +145,7 @@ namespace Lab
                     " > Title: {1} \n" +
                     " > Author: {2} \n" +
                     " > Published: {3} \n" +
-                    " > Availble: " + (this.IsAvailible ? ("yes") : ("no")),
+                    " > Availble: " + (this.IsAvailible ? ("yes") : ("no")) + "\n",
                 this.ISBN,
                 this.Title,
                 this.Author,

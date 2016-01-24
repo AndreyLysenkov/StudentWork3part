@@ -14,7 +14,6 @@ namespace Lab
             private set;
         }
 
-
         public ShopBook(Isbn isbn, DateTime published, string title, string author, int quantity, string content, double price)
             : base (
                   isbn: isbn, 
@@ -58,7 +57,7 @@ namespace Lab
 
         public override string ToString()
         {
-            return base.ToString() + String.Format(" > Price : {0}", this.Price);
+            return base.ToString() + ((this.IsAvailible) ? String.Format(" > Price : {0} \n", this.Price) : " > No price\n");
         }
 
     }

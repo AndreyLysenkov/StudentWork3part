@@ -25,11 +25,12 @@ namespace Lab
                 published: date,
                 title: "My not so called Live",
                 author: "Allan Walpy",
+                content: " There was a boy. Just like any other. Except... He hated Christmas. \n So one day... he died... That's whole story, you know",
                 quantity: 4);
             Console.WriteLine(book);
             while (book.IsAvailible)
             {
-                if (random.Next(3) >= 1)
+                if (random.Next(4) >= 1)
                 {
                     Console.WriteLine("taking");
                     book.Take();
@@ -42,6 +43,8 @@ namespace Lab
                 Console.WriteLine("Left {0} book(s)", book.Quantity);
             }
             Console.WriteLine(book);
+            book.Read();
+            Console.WriteLine("------------------------");
 
             ShopBook book2 = new ShopBook(
                 isbn: new LibraryBook.Isbn(ean_ucc: 970, control_index: 9),
@@ -49,21 +52,21 @@ namespace Lab
                 title: "Alan Wake",
                 author: "Steven Spilberg",
                 price: 0.75,
-                quantity: 1,
-                content: "darkness followed his steps, until he falls"
+                quantity: 3,
+                content: " darkness followed his steps, until he falls"
                 );
             Console.WriteLine(book2);
             book2.Read();
             Console.WriteLine("-----");
             ((LibraryBook)book2).Read();
-            while (book.IsAvailible)
+            while (book2.IsAvailible)
             {
                 book2.Buy();
                 Console.WriteLine("Left {0} books", book2.Quantity);
             }
+            Console.WriteLine(book2);
 
             Console.ReadLine();
-
         }
     }
 }
