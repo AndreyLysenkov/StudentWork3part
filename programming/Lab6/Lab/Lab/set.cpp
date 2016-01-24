@@ -27,13 +27,13 @@ void Set<Value>::operator+(Set<Value>)
 }
 
 template<class Value>
-Set<Value>* Set<Value>::operator*(Set<value>)
+Set<Value>* Set<Value>::operator*(Set<Value>)
 {
 	return nullptr;
 }
 
 template<class Value>
-bool Set<Value>::operator<=(const Set<Value>&, const Set<Value>&)
+bool Set<Value>::operator<=(const Set<Value>&)
 {
 	return false;
 }

@@ -15,8 +15,7 @@ public:
 	Set<Value>& operator = (const Set<Value>&);
 	void operator + (Set<Value>);
 	Set<Value>* operator * (Set<Value>);
-	bool operator <= (const Set<Value>&, const Set<Value>&);
-
+	bool operator <= (const Set<Value>&);
 	bool IsBelong(Value);
 	void Print();
 private:
