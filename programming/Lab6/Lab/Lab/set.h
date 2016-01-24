@@ -10,16 +10,15 @@ public:
 		Item *next;
 	};
 	Set();
+	Set(Value, ...);
 	~Set();
 	Set<Value>& operator = (const Set<Value>&);
-	void operator + (Value);
-	Set<Value>* operator * (Set<value>);
+	void operator + (Set<Value>);
+	Set<Value>* operator * (Set<Value>);
+	bool operator <= (const Set<Value>&, const Set<Value>&);
+
 	bool IsBelong(Value);
 	void Print();
 private:
 	Item *last;
 };
-
-
-//	Set<T>* operator*(Set<T>);
-//	operator int();

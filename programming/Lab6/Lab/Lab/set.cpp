@@ -6,6 +6,11 @@ Set<Value>::Set()
 }
 
 template<class Value>
+Set<Value>::Set(Value, ...)
+{
+}
+
+template<class Value>
 Set<Value>::~Set()
 {
 }
@@ -17,7 +22,7 @@ Set<Value>& Set<Value>::operator=(const Set<Value>&)
 }
 
 template<class Value>
-void Set<Value>::operator+(Value)
+void Set<Value>::operator+(Set<Value>)
 {
 }
 
@@ -25,6 +30,12 @@ template<class Value>
 Set<Value>* Set<Value>::operator*(Set<value>)
 {
 	return nullptr;
+}
+
+template<class Value>
+bool Set<Value>::operator<=(const Set<Value>&, const Set<Value>&)
+{
+	return false;
 }
 
 template<class Value>
