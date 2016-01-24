@@ -123,6 +123,15 @@ void Group::HandleEvent(Event _event)
 				_event.Clear();
 				break;
 			}
+			case (Event::Command::Remove) :
+			{
+				this->Print();
+				cout << endl << " Enter index of list ";
+				int index = Menu::Input::Number();
+				--*Get(index);
+				_event.Clear();
+				break;
+			}
 			case (Event::Command::Copy) :
 			{
 				this->Print();
@@ -171,60 +180,27 @@ void Group::HandleEvent(Event _event)
 			{break;}
 			}
 		}
-		catch (Exception exc)
+		catch (Exception exception)
 		{
-			
+			switch (exception.GetCode())
+			{
+			case (Exception::Code::NoListFounded) :
+			{
+				cout << exception.GetMessage() << endl;
+				break;
+			}
+			case (Exception::Code::WrongListIndex) :
+			{
+				cout << exception.GetMessage() << endl;
+				break;
+			}
+			case (Exception::Code::EmptyList) :
+			{
+				cout << exception.GetMessage() << endl;
+				break;
+			}
+			}
+			system("pause");
 		}
 	}
 }
-
-//Exit = 0,
-//Undefinded = -1
-
-//
-//void ListGroup::HandleEvent(Event ev)
-//{
-//	if (ev.IsRelevant())
-//	{
-//		try
-//		{
-//			switch (ev.GetCommand())
-//			{
-
-
-//			case Event::Cmd_Remove:
-//			{
-//				cout << "\n Which one list to remove from?\n";
-//				Print();
-//				int index;
-//				index = Menu::ReadNumber();
-//				--*GetList(index);
-//				ev.ClearEvent();
-//				break;
-//			}
-
-//
-//		catch (Exception e)
-//		{
-//			switch (e.GetErrorCode())
-//			{
-//			case Exception::Err_WrongIndex:
-//			{
-//				cout << e.GetErrorMessage() << " (" << e.GetIndex() << ")";
-//				break;
-//			}
-//			case Exception::Err_NoLists:
-//			{
-//				cout << e.GetErrorMessage();
-//				break;
-//			}
-//			case Exception::Err_EmptyList:
-//			{
-//				cout << e.GetErrorMessage();
-//				break;
-//			}
-//			}
-//			system("pause");
-//		}
-//	}
-//}

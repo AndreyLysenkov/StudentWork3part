@@ -13,12 +13,12 @@ public:
 		Create = 1,
 		Add = 2,
 		Remove = 3,
-		Copy = 3,
-		Delete = 4,
+		Copy = 4,
+		Delete = 5,
 		Compare = 6,
 		Print = 7,
 		Exit = 0,
-		Undefinded = -1
+		Undefinded = 0
 	};
 	Event();
 	~Event();
