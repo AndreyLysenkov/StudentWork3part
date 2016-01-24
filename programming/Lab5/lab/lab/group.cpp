@@ -105,14 +105,14 @@ void Group::HandleEvent(Event _event)
 		try {
 			switch (_event.GetCommand())
 			{
-			case (Event::Command::Create) :
+			case (Command::Create) :
 			{
 				this->AddNew();
 				this->Get(1)->Input();
 				_event.Clear();
 				break;
 			}
-			case (Event::Command::Add) :
+			case (Command::Add) :
 			{
 				this->Print();
 				cout << endl << " Enter index of list ";
@@ -120,10 +120,13 @@ void Group::HandleEvent(Event _event)
 				cout << " Enter symbol (element) ";
 				char element = Menu::Input::Char();
 				this->Get(index) + element;
+				//List *tmp = this -> Get(index);
+				//cin >> *tmp;
 				_event.Clear();
 				break;
 			}
-			case (Event::Command::Remove) :
+
+			case (Command::Remove) :
 			{
 				this->Print();
 				cout << endl << " Enter index of list ";
@@ -132,7 +135,7 @@ void Group::HandleEvent(Event _event)
 				_event.Clear();
 				break;
 			}
-			case (Event::Command::Copy) :
+			case (Command::Copy) :
 			{
 				this->Print();
 				cout << endl << " Enter index of list ";
@@ -142,7 +145,7 @@ void Group::HandleEvent(Event _event)
 				_event.Clear();
 				break;
 			}
-			case (Event::Command::Delete) :
+			case (Command::Delete) :
 			{
 				this->Print();
 				cout << endl << " Enter index of list ";
@@ -151,7 +154,7 @@ void Group::HandleEvent(Event _event)
 				_event.Clear();
 				break;
 			}
-			case (Event::Command::Compare) :
+			case (Command::Compare) :
 			{
 
 				this->Print();
@@ -170,7 +173,7 @@ void Group::HandleEvent(Event _event)
 				_event.Clear();
 				break;
 			}
-			case (Event::Command::Print) :
+			case (Command::Print) :
 			{
 				this->Print();
 				_event.Clear();

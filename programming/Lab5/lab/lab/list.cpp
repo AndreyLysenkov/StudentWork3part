@@ -79,7 +79,7 @@ void List::Input()
 	char* temp = new char[255];
 	cin.get();
 	cin.getline(temp, 255);
-	for (int i = 0; i <= strlen(temp); i++)
+	for (int i = 0; i <= strlen(temp) - 1; i++)
 	{
 		*this + temp[i];
 	}
@@ -94,7 +94,7 @@ List::~List()
 {
 }
 
-ostream & operator<<(ostream &stream, List &list)
+std::ostream& operator<<(ostream &stream, List &list)
 {
 	Element *temp = list.last;
 	if (temp == NULL)
@@ -107,7 +107,7 @@ ostream & operator<<(ostream &stream, List &list)
 	return stream;
 }
 
-istream & operator<<(istream &stream, List &list)
+std::istream& operator<<(istream &stream, List &list)
 {
 	char temp;
 	stream >> temp;
