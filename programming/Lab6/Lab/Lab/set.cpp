@@ -36,9 +36,9 @@ Set<Value>& Set<Value>::operator=(const Set<Value>& set)
 }
 
 template<class Value>
-Set<Value> Set<Value>::operator+(Set<Value> set)
+Set<Value>* Set<Value>::operator+(Set<Value> set)
 {
-	Set<Value> result = new Set<Value>(this);
+	Set<Value> *result = new Set<Value>(this);
 	Item temp = set.GetLast();
 	for (; temp != NULL; )
 	{
@@ -125,7 +125,7 @@ const bool Set<Value>::IsSubSet(const Set<Value> set)
 }
 
 template<class Value>
-const typename Set<Value>::Item Set<Value>::GetLast()
+const typename Set<Value>::Item<Value> Set<Value>::GetLast()
 {
 	return this->last;
 }

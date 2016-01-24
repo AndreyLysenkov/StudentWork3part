@@ -8,8 +8,7 @@ enum Types
 	Integer = 1,
 	Real = 2,
 	Symbol = 3,
-	User = 4,
-	Undefinded = 0
+	User = 4
 };
 
 class Menu

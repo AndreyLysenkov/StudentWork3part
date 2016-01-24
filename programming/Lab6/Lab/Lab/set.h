@@ -3,10 +3,11 @@
 #include <iostream>
 using namespace std;
 
-template <typename Value>
+template <class Value>
 class Set
 {
 public:
+	template <class Value>
 	struct Item
 	{
 		Value value;
@@ -14,16 +15,16 @@ public:
 	};
 	Set();
 	Set(Value, ...);
-	~Set();
+	virtual ~Set();
 	Set<Value>& operator = (const Set<Value>&);
-	Set<Value> operator + (Set<Value>);
+	Set<Value>* operator + (Set<Value>);
 	void operator + (Value);
 	Set<Value>* operator * (Set<Value>);
 	bool operator <= (const Set<Value>&);
 	const bool IsBelong(Value);
-	const Item GetLast();
+	const Item<Value> GetLast();
 	const bool IsSubSet(Set<Value>);
 	void Print();
 private:
-	Item *last;
+	Item<Value> *last;
 };

@@ -13,7 +13,6 @@ enum Command
 	Undefinded = 0
 };
 
-
 class Event
 {
 private:
