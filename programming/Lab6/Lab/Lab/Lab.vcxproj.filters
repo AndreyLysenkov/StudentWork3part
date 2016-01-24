@@ -21,9 +21,15 @@
     <ClCompile Include="set.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
+    <ClCompile Include="user.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="set.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="user.h">
       <Filter>Заголовочные файлы</Filter>
     </ClInclude>
   </ItemGroup>
