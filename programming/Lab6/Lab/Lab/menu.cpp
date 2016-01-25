@@ -17,7 +17,7 @@ int Menu::Input::Number(char *message)
 		cout << " > " << message << ":";
 		cout << " > ";
 		cin >> number;
-	} while (!(cin.fail()));
+	} while ((cin.fail()));
 	return number;
 }
 

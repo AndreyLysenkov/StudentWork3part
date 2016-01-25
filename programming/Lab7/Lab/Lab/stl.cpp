@@ -2,6 +2,7 @@
 #include <set>
 #include <stack>
 #include <iterator>
+#include <time.h>
 using namespace std;
 
 template <class Value>
@@ -31,47 +32,3 @@ void PrintStack(stack<Value> *_stack)
 	}
 	cout << "]\n";
 }
-
-//
-//std::vector<int> v;
-//while (!s.empty())
-//{
-//	if (s.top() != 5)                // Это ключевой момент, в стек помещаются
-//		v.push_back(s.top());   // все элементы не равные 5
-//
-//	s.pop();
-//}
-//
-//// Для проверки выведем стек на экран
-//while (!s.empty()) {
-//	std::cout << s.top() << ' ';
-//	s.pop();
-//}
-
-
-//template <class TD>
-//void PrintDeque(TD p_deque)
-//{
-//	cout << "\n\n";
-//	for (int i = 0; i
-//< p_deque.size(); i++)
-//	{
-//		cout << p_deque[i]
-//<< endl;
-//	}
-//}
-//template <class TM>
-//void PrintMultimap(TM p_map)
-//{
-//	cout << "\n\n";
-//	TM::iterator i;
-//	for (i = p_map.begin();
-//i != p_map.end(); i++)
-//	{
-//		cout << "\tpair <"
-//<< (*i).first << " : " 
-//<< (*i).second << ">\n";
-//	}
-//	cout << endl;
-//}
-//
