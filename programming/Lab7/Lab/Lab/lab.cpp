@@ -1,4 +1,4 @@
-
+#include "stl.cpp"
 
 //Task
 //В программе № 1 выполнить следующее :
@@ -47,6 +47,16 @@
 
 int main()
 {
-
+	set<int> _tmp;
+	//_tmp.insert(1, 5);
+	/*_tmp.emplace(1);*/
+	_tmp.emplace(2);
+	//_tmp.insert(30);
+	PrintSet(_tmp);
+//fmap1.insert(pair<char, float>('c', 987.654));
+	system("pause");
 	return 0;
 }
+
+
+

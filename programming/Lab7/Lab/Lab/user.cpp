@@ -73,8 +73,9 @@ Test& Test::operator=(const Test &obj)
 
 ostream& operator<<(ostream &stream, Test &obj)
 {
-	stream << " Rating: " << obj.GetRating() <<
-		" (" << obj.GetPoints() << "/" << obj.GetMaxPoints() << "); ";
+	stream << "(" << obj.GetRating() <<
+		"=" << obj.GetPoints() <<
+		"/" << obj.GetMaxPoints() << ")";
 	return stream;
 }
 
