@@ -20,12 +20,12 @@ Test::Test(const Test &obj)
 
 int Test::GetPoints() const
 {
-	return 0;
+	return this->points;
 }
 
 int Test::GetMaxPoints() const
 {
-	return 0;
+	return this->maxPoints;
 }
 
 void Test::GainPoints(int _addPoints)
@@ -44,7 +44,7 @@ void Test::Set(int _points, int _maxPoints)
 	this->maxPoints = _maxPoints;
 }
 
-bool Test::operator<(const Test obj) const
+bool Test::operator<(const Test &obj) const
 {
 	return this->GetRating() < obj.GetRating();
 }
@@ -71,7 +71,7 @@ Test& Test::operator=(const Test &obj)
 	return *this;
 }
 
-ostream& operator<<(ostream &stream, Test &obj)
+ostream& operator<<(ostream &stream, const Test &obj)
 {
 	stream << "(" << obj.GetRating() <<
 		"=" << obj.GetPoints() <<

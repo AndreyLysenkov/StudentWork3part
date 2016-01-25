@@ -1,5 +1,7 @@
 #include "user.h"
 #include <set>
+//#include <iterator>
+using namespace std;
 
 template <class Value>
 void PrintSet(set<Value> *_set)
@@ -8,8 +10,9 @@ void PrintSet(set<Value> *_set)
 	set<Value>::iterator i = (*_set).begin();
 	for (; i != (*_set).end(); ++i)
 	{
-		cout << &(*i) << ", ";
+		cout << (*i) << ", ";
 	}
+	cout << endl << endl;
 	cout << "]\n";
 }
 

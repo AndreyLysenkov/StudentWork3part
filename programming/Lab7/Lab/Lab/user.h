@@ -16,11 +16,11 @@ public:
 	void GainPoints(int);
 	double GetRating() const;
 	void Set(int, int);
-	bool operator <(const Test) const;
+	bool operator <(const Test&) const;
 	bool operator >(Test);
 	bool operator ==(Test);
 	bool operator !=(Test);
 	Test& operator = (const Test&);
-	friend ostream& operator << (ostream&, Test&);
+	friend ostream& operator << (ostream&, const Test&);
 	friend istream& operator >> (istream&, Test&);
 };
