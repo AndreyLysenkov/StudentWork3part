@@ -1,63 +1,87 @@
 #include "user.h"
 
-ostream & operator<<(ostream &, Test &)
-{
-	// TODO: вставьте здесь оператор return
-}
-
-istream & operator>>(istream &, Test &)
-{
-	// TODO: вставьте здесь оператор return
-}
-
 Test::Test()
 {
+	this->points = 0;
+	this->maxPoints = 100;
 }
 
-Test::Test(char *, int)
+Test::Test(int _maxPoints, int _points)
 {
+	this->points = _points;
+	this->maxPoints = _maxPoints;
 }
 
-Test::Test(const Test &)
+Test::Test(const Test &obj)
 {
+	this->points = obj.GetPoints();
+	this->maxPoints = obj.GetMaxPoints();
 }
 
-char * Test::GetSubject()
-{
-	return nullptr;
-}
-
-int Test::GetPoints()
-{
-	return 0;
-}
-
-int Test::GainPoints(int)
+int Test::GetPoints() const
 {
 	return 0;
 }
 
-bool Test::operator<(Test)
+int Test::GetMaxPoints() const
 {
-	return false;
+	return 0;
 }
 
-bool Test::operator>(Test)
+void Test::GainPoints(int _addPoints)
 {
-	return false;
+	this->points += _addPoints;
 }
 
-bool Test::operator==(Test)
+double Test::GetRating() const
 {
-	return false;
+	return (double)(this->points) / this->maxPoints;
 }
 
-bool Test::operator!=(Test)
+void Test::Set(int _points, int _maxPoints)
 {
-	return false;
+	this->points = _points;
+	this->maxPoints = _maxPoints;
 }
 
-Test & Test::operator=(const Test &)
+bool Test::operator<(Test obj)
 {
-	// TODO: вставьте здесь оператор return
+	return this->GetRating() < obj.GetRating();
+}
+
+bool Test::operator>(Test obj)
+{
+	return this->GetRating() > obj.GetRating();
+}
+
+bool Test::operator==(Test obj)
+{
+	return this->GetRating() == obj.GetRating();
+}
+
+bool Test::operator!=(Test obj)
+{
+	return this->GetRating() != obj.GetRating();
+}
+
+Test& Test::operator=(const Test &obj)
+{
+	this->points = obj.GetPoints();
+	this->maxPoints = obj.GetMaxPoints();
+	return *this;
+}
+
+ostream& operator<<(ostream &stream, Test &obj)
+{
+	stream << " Rating: " << obj.GetRating() <<
+		" (" << obj.GetPoints() << "/" << obj.GetMaxPoints() << "); ";
+	return stream;
+}
+
+istream & operator>>(istream &stream, Test &obj)
+{
+	int _points, _maxPoints;
+	stream >> _points >> _maxPoints;
+	obj.Set(_points, _maxPoints);
+	return stream;
 }

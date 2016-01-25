@@ -5,15 +5,17 @@ using namespace std;
 class Test
 {
 private:
-	char *subject;
+	int maxPoints;
 	int points;
 public:
 	Test();
-	Test(char*, int);
+	Test(int, int);
 	Test(const Test&);
-	char *GetSubject();
-	int GetPoints();
-	int GainPoints(int);
+	int GetPoints() const;
+	int GetMaxPoints() const;
+	void GainPoints(int);
+	double GetRating() const;
+	void Set(int, int);
 	bool operator <(Test);
 	bool operator >(Test);
 	bool operator ==(Test);
