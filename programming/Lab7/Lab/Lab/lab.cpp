@@ -45,12 +45,12 @@ void Task1()
 	set1.emplace(2713);
 	set1.emplace(-5);
 	PrintSet(&set1);
-	cout << "enter number to erase (enter not number for exit): ";
+	cout << "enter number to erase (enter not number for exit): \n";
 	do
 	{
-		cout << "\n > ";
+		cout << " > ";
 		cin >> temp;
-		if (cin.fail())
+		if (!cin.fail())
 			set1.erase(temp);
 	} while (!cin.fail());
 	PrintSet(&set1);
