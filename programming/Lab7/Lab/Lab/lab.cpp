@@ -48,14 +48,26 @@
 int main()
 {
 	set<Test> _tmp;
-//	//_tmp.insert(1, 5);
-//	/*_tmp.emplace(1);*/
-//	//_tmp.emplace(2);
-//	//_tmp.insert(30);
 	for (int i = 0; i < 10; i++)
 	{
-		_tmp.emplace(Test(i, i * 3 + 3));
+		_tmp.emplace(Test(i + 5, 100 - i * 3));
 	}
+	set<int> op;
+	op.insert(5);
+	op.insert(6);
+	PrintSet(&_tmp);
+	PrintSet(&op);
+
+	stack<int> ch;
+	ch.push(5);
+	for (int i = 0; i < 10; i++)
+		ch.push(13 - i*2);
+	PrintStack(&ch);
+	
+	system("pause");
+	return 0;
+}
+
 //	Test x = Test(2, 2 * 3 + 3);
 //	Test y = Test(3, 3 * 3 + 3);
 //	_tmp.insert(x);
@@ -64,22 +76,6 @@ int main()
 //		_tmp.end(), 
 //		ostream_iterator<Test>(cout, " "));
 //
-	set<int> op;
-//
-	op.insert(5);
-	op.insert(6);
-//	copy(op.begin(),
-//		op.end(),
-//		ostream_iterator<int>(cout, " "));
-//
-//	set<Test>::iterator p = _tmp.begin();
-//	//while (p != _tmp.end())
-//	//{
-//	//	cout << *p << " ";
-//	//	p++;
-//	//}
-	PrintSet(&_tmp);
-	PrintSet(&op);
 //	/*
 //	vector<int>::iterator p=v.begin();
 //	while(p!=v.end())
@@ -93,10 +89,16 @@ int main()
 //	//	cout << *p << ” “;p++;
 //	//}
 //	//fmap1.insert(pair<char, float>('c', 987.654));
-	system("pause");
-	return 0;
-}
-
+//	copy(op.begin(),
+//		op.end(),
+//		ostream_iterator<int>(cout, " "));
+//
+//	set<Test>::iterator p = _tmp.begin();
+//	//while (p != _tmp.end())
+//	//{
+//	//	cout << *p << " ";
+//	//	p++;
+//	//}
 //#include <iostream>
 //#include <set>
 //

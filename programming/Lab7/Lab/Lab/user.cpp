@@ -6,7 +6,7 @@ Test::Test()
 	this->maxPoints = 100;
 }
 
-Test::Test(int _maxPoints, int _points)
+Test::Test(int _points, int _maxPoints)
 {
 	this->points = _points;
 	this->maxPoints = _maxPoints;
