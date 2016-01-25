@@ -44,7 +44,7 @@ void Test::Set(int _points, int _maxPoints)
 	this->maxPoints = _maxPoints;
 }
 
-bool Test::operator<(Test obj)
+bool Test::operator<(const Test obj) const
 {
 	return this->GetRating() < obj.GetRating();
 }

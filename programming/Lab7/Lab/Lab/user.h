@@ -16,7 +16,7 @@ public:
 	void GainPoints(int);
 	double GetRating() const;
 	void Set(int, int);
-	bool operator <(Test);
+	bool operator <(const Test) const;
 	bool operator >(Test);
 	bool operator ==(Test);
 	bool operator !=(Test);

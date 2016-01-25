@@ -47,13 +47,34 @@
 
 int main()
 {
-	set<int> _tmp;
+	set<Test> _tmp;
 	//_tmp.insert(1, 5);
 	/*_tmp.emplace(1);*/
-	_tmp.emplace(2);
+	//_tmp.emplace(2);
 	//_tmp.insert(30);
-	PrintSet(_tmp);
-//fmap1.insert(pair<char, float>('c', 987.654));
+	
+	for (int i = 0; i < 10; i++)
+		_tmp.insert(Test(i, i*3));
+	set<Test>::iterator p = _tmp.begin();
+	//while (p != _tmp.end())
+	//{
+	//	cout << *p << " ";
+	//	p++;
+	//}
+	PrintSet(&_tmp);
+	/*
+	vector<int>::iterator p=v.begin();
+	while(p!=v.end())
+	{cout<<*p<<” “;p++;}
+	}
+	for (i = 0;i<10;i++)v.push_back(i);
+	cout << “size = ” << v.size() << “\n”;
+	vector<int>::iterator p = v.begin();*/
+	//while (p != v.end())
+	//{
+	//	cout << *p << ” “;p++;
+	//}
+	//fmap1.insert(pair<char, float>('c', 987.654));
 	system("pause");
 	return 0;
 }

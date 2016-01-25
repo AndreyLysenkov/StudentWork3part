@@ -1,16 +1,17 @@
 #include "user.h"
 #include <set>
 
-//template <class Value>
-//void PrintSet(Value set)
-//{
-//	cout << "\nSet of " << typeid(Value).name() << "[";
-//	for (Value::iterator i = set.begin(); i != set.end(); i++)
-//	{
-//		cout << (*i).first;
-//	}
-//	cout << "]\n";
-//}
+template <class Value>
+void PrintSet(set<Value> *_set)
+{
+	cout << "\nSet of " << typeid(Value).name() << "[";
+	set<Value>::iterator i = (*_set).begin();
+	for (; i != (*_set).end(); ++i)
+	{
+		cout << &(*i) << ", ";
+	}
+	cout << "]\n";
+}
 
 //template <class TD>
 //void PrintDeque(TD p_deque)
@@ -23,8 +24,6 @@
 //<< endl;
 //	}
 //}
-
-
 //template <class TM>
 //void PrintMultimap(TM p_map)
 //{
