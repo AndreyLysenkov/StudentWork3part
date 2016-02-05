@@ -1,3 +1,6 @@
+waistland
+homeworld
+
 #include "menu.h"
 
 double Menu::Input::NumberReal(char *message)
@@ -31,7 +34,7 @@ char *Menu::Input::String(char *message)
 	return str;
 }
 
-char Menu::Input::Symbol(char *message)
+char Menicau::Input::Symbol(char *message)
 {
 	cout << " > " << message << ":";
 	char ch;
